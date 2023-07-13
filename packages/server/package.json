@@ -1,0 +1,9 @@
+{
+  "name": "@benqy/server",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@benqy/common": "0.1.0"
+  }
+}
