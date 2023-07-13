@@ -12,11 +12,11 @@ import SupportIcon from './icons/IconSupport.vue'
     <template #icon>
       <DocumentationIcon />
     </template>
-    <template #heading>Documentation</template>
+    <template #heading>大可们忒森</template>
 
     Vue’s
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.
+    <a href="https://vuejs.org/" target="_blank" rel="noopener">哦哈哈 </a>
+    你另外两个我老公另外几个零五公里我
   </WelcomeItem>
 
   <WelcomeItem>

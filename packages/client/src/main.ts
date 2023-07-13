@@ -6,4 +6,4 @@ import * as benqy from '@hapi/common'
 
 console.log(benqy.common)
 
-createApp(App).mount('#app')
+createApp(App).mount('#game')

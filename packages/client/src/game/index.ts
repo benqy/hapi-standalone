@@ -1,6 +1,6 @@
 import * as Colyseus from 'colyseus.js'
 
-const client = new Colyseus.Client('ws://10.5.15.97:2567')
+const client = new Colyseus.Client('ws://localhost:2567')
 
 client
   .joinOrCreate('my_room')
