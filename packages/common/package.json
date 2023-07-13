@@ -1,0 +1,9 @@
+{
+  "name": "@benqy/common",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./index.ts",
+  "dependencies": {
+      "rbush": "^3.0.1"
+  }
+}

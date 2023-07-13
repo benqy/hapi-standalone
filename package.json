@@ -1,0 +1,24 @@
+{
+  "name": "hapi",
+  "version": "0.1.0",
+  "description": "hapi idle ",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "client": "yarn workspace @benqy/client",
+    "common": "yarn workspace @benqy/common",
+    "server": "yarn workspace @benqy/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benqy/hapi-standalone.git"
+  },
+  "author": "hmjlr123@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benqy/hapi-standalone/issues"
+  },
+  "homepage": "https://github.com/benqy/hapi-standalone#readme"
+}
