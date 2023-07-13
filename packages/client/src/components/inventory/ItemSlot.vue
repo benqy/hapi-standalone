@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   name: string
-  item: string
+  item?: string
   // slot: {
   //     type: [Number, String]
   //   },
