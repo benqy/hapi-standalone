@@ -7,9 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "client": "yarn workspace @benqy/client",
-    "common": "yarn workspace @benqy/common",
-    "server": "yarn workspace @benqy/server"
+    "client": "yarn workspace @hapi/client",
+    "common": "yarn workspace @hapi/common",
+    "server": "yarn workspace @hapi/server"
   },
   "repository": {
     "type": "git",

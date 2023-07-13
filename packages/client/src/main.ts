@@ -2,7 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import * as benqy from '@benqy/common'
+import * as benqy from '@hapi/common'
 
 console.log(benqy)
 

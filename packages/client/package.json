@@ -1,5 +1,5 @@
 {
-  "name": "@benqy/client",
+  "name": "@hapi/client",
   "version": "0.1.0",
   "private": true,
   "main":"./src/main.ts",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "vue": "^3.3.4",
-    "@benqy/common": "0.1.0"
+    "@hapi/common": "0.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
