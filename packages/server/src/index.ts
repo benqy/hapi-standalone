@@ -11,7 +11,7 @@
 import { listen } from "@colyseus/tools";
 import * as hapi from "@hapi/common"
 
-console.log(hapi.common)
+console.log(hapi.world, 1)
 
 // Import Colyseus config
 import app from "./app.config";

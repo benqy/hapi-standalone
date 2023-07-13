@@ -4,6 +4,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import * as benqy from '@hapi/common'
 
-console.log(benqy.common)
+console.log(benqy.world, 1)
 
 createApp(App).mount('#game')
