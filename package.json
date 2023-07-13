@@ -9,7 +9,8 @@
   "scripts": {
     "client": "yarn workspace @hapi/client",
     "common": "yarn workspace @hapi/common",
-    "server": "yarn workspace @hapi/server"
+    "server": "yarn workspace @hapi/server",
+    "build-server": "ts-node ./scripts/build.ts"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/benqy/hapi-standalone/issues"
   },
-  "homepage": "https://github.com/benqy/hapi-standalone#readme"
+  "homepage": "https://github.com/benqy/hapi-standalone#readme",
+  "devDependencies": {
+    "esbuild": "^0.18.12",
+    "esbuild-plugin-svgr": "^2.0.0",
+    "ts-node": "^10.9.1"
+  }
 }
