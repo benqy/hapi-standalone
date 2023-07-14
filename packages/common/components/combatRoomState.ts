@@ -1,4 +1,4 @@
-import { Schema, Context, type } from '@colyseus/schema'
+import { Schema, type } from '@colyseus/schema'
 
 class World extends Schema {
   @type('number') width: number
@@ -6,7 +6,7 @@ class World extends Schema {
   @type('number') items: number = 10
 }
 
-export class MyRoomState extends Schema {
+export class CombatRoomState extends Schema {
   @type('string') mySynchronizedProperty: string = 'Hello world1'
   @type(World) world: World = new World()
 
