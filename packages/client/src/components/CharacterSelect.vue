@@ -6,12 +6,14 @@ import { uiState } from '@/state/ui'
 const login = async () => {
   const res = await loadUserInfo()
   if (res) {
-    alert('登录成功')
+    // console.log('登录成功')
     uiState.toggleCharacterSelect()
   }
 }
 
-onMounted(() => {})
+onMounted(() => {
+  login() //调试
+})
 </script>
 
 <template>

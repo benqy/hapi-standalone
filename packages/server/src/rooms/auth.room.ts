@@ -31,9 +31,10 @@ export class AuthRoom extends Room<RoomState.UserRoomState> {
 
   onJoin(client: Client, options: any, auth: any) {
     console.log(client.sessionId, '登录房间验证通过')
-    console.log('Auth data: ', auth,options)
+    console.log('Auth data: ',client, auth,options)
     this.state.userinfo.account = 'user_' + Math.random().toString(5)
     this.state.userinfo.nickname = '随机昵称' + Math.random().toString(5)
+    this.state.userinfo.sessionId = client.sessionId
   }
 
   onLeave(client: Client) {

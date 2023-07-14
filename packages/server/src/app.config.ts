@@ -27,7 +27,7 @@ export default config({
     })
 
     app.get('/login', (req, res) => {
-      server.define('combat_room', CombatRoom)
+      // server.define('combat_room', CombatRoom)
     })
     /**
      * Use @colyseus/playground

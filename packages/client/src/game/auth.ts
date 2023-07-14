@@ -8,6 +8,7 @@ export const loadUserInfo = async () => {
     const res = await client.joinOrCreate<RoomState.UserRoomState>('auth_room', {
       accessToken: getAccessToken()
     })
+    console.log('auth',res)
     return res
   } catch (ex:any) {
     if(ex.code === 4215){
