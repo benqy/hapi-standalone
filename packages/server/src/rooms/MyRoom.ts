@@ -1,11 +1,11 @@
 import { Room, Client } from '@colyseus/core'
-import { MyRoomState } from './schema/MyRoomState'
+import { CombatRoomState } from '@hapi/common'
 
-export class MyRoom extends Room<MyRoomState> {
+export class MyRoom extends Room<CombatRoomState> {
   maxClients = 4
 
   onCreate(options: any) {
-    this.setState(new MyRoomState())
+    this.setState(new CombatRoomState())
 
     this.onMessage('type', (client, message) => {
       console.log(client,message)
