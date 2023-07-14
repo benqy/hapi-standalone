@@ -1,16 +1,16 @@
 import { Room, Client } from '@colyseus/core'
-import { CombatRoomState } from '@hapi/common'
+import { RoomState } from '@hapi/common'
 
-export class CombatRoom extends Room<CombatRoomState> {
+export class CombatRoom extends Room<RoomState.CombatRoomState> {
   maxClients = 3
 
   onCreate(options: any) {
-    this.setState(new CombatRoomState())
+    this.setState(new RoomState.CombatRoomState())
     this.onMessage('type', (client, message) => {
-      console.log(client.sessionId,message)
-      
+      console.log(client.sessionId, message)
+
       this.clients.forEach((client) => {
-        client.send('begin battle',this.state.world)
+        client.send('begin battle', this.state.world)
       })
       this.broadcast('aaa', '1111')
       //
@@ -20,7 +20,7 @@ export class CombatRoom extends Room<CombatRoomState> {
   }
 
   onJoin(client: Client, options: any) {
-    console.log(client.sessionId, 'joined! combat')
+    console.log(client, 'joined! combat')
   }
 
   onLeave(client: Client, consented: boolean) {

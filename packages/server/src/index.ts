@@ -8,12 +8,9 @@
  *
  * See: https://docs.colyseus.io/server/api/#constructor-options
  */
-import { listen } from "@colyseus/tools";
-import * as hapi from "@hapi/common"
-
-console.log(hapi.world, 1)
+import { listen } from '@colyseus/tools'
 
 // Import Colyseus config
-import app from "./app.config";
+import app from './app.config'
 
-listen(app);
+listen(app)
