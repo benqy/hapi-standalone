@@ -1,6 +1,6 @@
 import { Room, Client } from 'colyseus'
 import { CONSTANTS, RoomState } from '@hapi/common'
-import { checkAuth, setUser } from '../auth'
+import { checkAuth, setUser, getUser, createUser } from '../auth'
 
 export class AuthRoom extends Room<RoomState.Player> {
   maxClients = 50
@@ -27,13 +27,11 @@ export class AuthRoom extends Room<RoomState.Player> {
 
   onJoin(client: Client, options: any, auth: any) {
     // console.log('Auth data: ',client, auth,options)
-    const userinfo = new RoomState.Userinfo()
-    const randomIndex = Math.floor(Math.random() * 100)
-    userinfo.accessToken = options.accessToken
-    userinfo.account = 'user_' + randomIndex
-    userinfo.nickname = '巴尔的老公' + randomIndex + '号'
-    userinfo.sessionId = client.sessionId
-    setUser(userinfo)
+    let userinfo = getUser(options.accessToken)
+    if (!userinfo) {
+      userinfo = createUser(options.accessToken)
+      setUser(userinfo)
+    }
     console.log('加入权限房间验证通过', userinfo)
     client.send(CONSTANTS.F.AUTH_JOIN, userinfo)
     // client.send()

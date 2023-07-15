@@ -32,7 +32,6 @@ export class GameRoom extends Room<RoomState.Game> {
     console.log(userinfo)
     if (userinfo) {
       console.log(`${userinfo.nickname}上线了`)
-      console.log(this)
       client.send(F.G_JOIN,userinfo)
     }
   }
@@ -45,8 +44,8 @@ export class GameRoom extends Room<RoomState.Game> {
     console.log('room', this.roomId, 'disposing... game')
   }
 
-  handleTick = () => {
-    console.log('tick')
-    this.state.update()
-  }
+  // handleTick = () => {
+  //   console.log('tick')
+  //   this.state.update()
+  // }
 }
