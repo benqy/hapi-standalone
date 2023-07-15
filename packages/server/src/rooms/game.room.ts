@@ -1,11 +1,16 @@
 import { Room, Client } from '@colyseus/core'
 import { RoomState } from '@hapi/common'
+import { checkAuth, getUser } from '../auth'
 
-export class CombatRoom extends Room<RoomState.CombatRoomState> {
-  maxClients = 3
+export class GameRoom extends Room<RoomState.Game> {
+  maxClients = 30
+
+  async onAuth(client: Client, options: any) {
+    return checkAuth(options.accessToken)
+  }
 
   onCreate(options: any) {
-    this.setState(new RoomState.CombatRoomState())
+    this.setState(new RoomState.Game())
     this.onMessage('type', (client, message) => {
       console.log(client.sessionId, message)
 
@@ -20,15 +25,17 @@ export class CombatRoom extends Room<RoomState.CombatRoomState> {
   }
 
   onJoin(client: Client, options: any) {
-    console.log(client, 'joined! combat')
+    console.log(options,444)
+    const userinfo = getUser(options.accessToken)
+    console.log(client.sessionId, 'joined! game', userinfo)
   }
 
   onLeave(client: Client, consented: boolean) {
-    console.log(client.sessionId, 'left! combat')
+    console.log(client.sessionId, 'left! game')
   }
 
   onDispose() {
-    console.log('room', this.roomId, 'disposing... combat')
+    console.log('room', this.roomId, 'disposing... game')
   }
 
   handleTick = () => {

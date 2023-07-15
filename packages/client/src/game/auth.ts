@@ -5,7 +5,7 @@ import { getAccessToken } from '@/utils'
 export const loadUserInfo = async () => {
   const client = new Client(CONSTANTS.SOCKET_URL)
   try {
-    const res = await client.joinOrCreate<RoomState.UserRoomState>('auth_room', {
+    const res = await client.joinOrCreate<RoomState.UserRoomState>(CONSTANTS.ROOM_AUTH, {
       accessToken: getAccessToken()
     })
     console.log('auth',res)

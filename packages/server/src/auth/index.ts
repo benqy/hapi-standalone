@@ -1,0 +1,14 @@
+import { cache } from '../db/cache'
+import { Userinfo } from '@hapi/common/state/userinfo.state'
+export const setUser = (userinfo: Userinfo) => {
+  cache.set(userinfo.accessToken, userinfo)
+}
+
+export const getUser = (accessToken: string) => {
+  return cache.get(accessToken)
+}
+
+//登录验证（临时）
+export const checkAuth = (accessToken: string) => {
+  return accessToken.length > 36
+}

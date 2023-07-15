@@ -2,21 +2,21 @@ import config from '@colyseus/tools'
 import { monitor } from '@colyseus/monitor'
 import { join } from 'path'
 import { playground } from '@colyseus/playground'
-import { CombatRoom } from './rooms/combat.room'
+import { GameRoom } from './rooms/game.room'
 import { AuthRoom } from './rooms/auth.room'
+import { CONSTANTS } from '@hapi/common'
 import express from 'express'
 
 const PUBLIC_DIR = join(__dirname, './public')
-let server: any
+
 
 export default config({
   initializeGameServer: (gameServer) => {
     /**
      * Define your room handlers:
      */
-    server = gameServer
-    server.define('combat_room', CombatRoom)
-    server.define('auth_room', AuthRoom)
+    gameServer.define(CONSTANTS.ROOM_GAME, GameRoom)
+    gameServer.define(CONSTANTS.ROOM_AUTH, AuthRoom)
   },
 
   initializeExpress: (app) => {

@@ -20,7 +20,7 @@ import { getAccessToken } from '@/utils'
 export const createCombatRoom = async () => {
   const client = new Client(CONSTANTS.SOCKET_URL)
   try {
-    const res = await client.joinOrCreate<RoomState.UserRoomState>('combat_room',{
+    const res = await client.joinOrCreate<RoomState.Game>(CONSTANTS.ROOM_GAME,{
       accessToken: getAccessToken()
     })
     console.log('combat', res)

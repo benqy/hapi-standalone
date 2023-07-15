@@ -7,7 +7,7 @@ class World extends Schema {
   @type('string') desc: string =`test`
 }
 
-export class CombatRoomState extends Schema {
+export class Game extends Schema {
   @type('string') mySynchronizedProperty: string = 'gwgwgwg'
   @type(World) world: World = new World()
 
