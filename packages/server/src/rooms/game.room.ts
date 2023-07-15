@@ -15,7 +15,6 @@ export class GameRoom extends Room<RoomState.Game> {
     // this.state.cards.push(new RoomState.Card())
     this.onMessage('type', (client, message) => {
       console.log(client.sessionId, message)
-      this.state.cards.push(new RoomState.Card())
 
       // this.clients.forEach((client) => {
       //   client.send('begin battle', this.state.world)
@@ -29,10 +28,9 @@ export class GameRoom extends Room<RoomState.Game> {
 
   onJoin(client: Client, options: any) {
     const userinfo = getUser(options.accessToken)    
-    console.log(userinfo)
     if (userinfo) {
       console.log(`${userinfo.nickname}上线了`)
-      client.send(F.G_JOIN,userinfo)
+      client.send(F.G_JOIN, userinfo)
     }
   }
 

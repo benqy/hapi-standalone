@@ -19,19 +19,21 @@ import { getAccessToken } from '@/utils'
 
 export const enterGame = async () => {
   const client = new Client(CONSTANTS.SOCKET_URL)
-  try {
-    const room = await client.joinOrCreate<RoomState.Game>(CONSTANTS.ROOM_GAME,{
-      accessToken: getAccessToken()
-    })
-    room.send('type', 'client to server message')
-    room.onStateChange((state) => {
-      console.log('onStateChange', state)
-    })
-    room.onMessage('*', (type, message) => {
-      console.log(type, message)
-    })
-    console.log('game', room)
-  } catch (ex: any) {
-    console.dir(ex)
-  }
+  const room = await client.joinOrCreate<RoomState.Game>(CONSTANTS.ROOM_GAME, {
+    accessToken: getAccessToken()
+  })
+  room.send('type', 'client to server message')
+  room.onStateChange((state) => {
+    console.log('onStateChange', state)
+  })
+  room.onMessage('*', (type, message) => {
+    switch (type) {
+      case CONSTANTS.F.G_JOIN:
+        console.log('加入游戏房间成功',message)
+        break
+      default:
+        break
+    }
+  })
+  console.log('game', room)
 }
