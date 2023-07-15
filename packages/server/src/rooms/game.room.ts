@@ -1,9 +1,10 @@
 import { Room, Client } from '@colyseus/core'
-import { RoomState } from '@hapi/common'
+import { RoomState, CONSTANTS } from '@hapi/common'
 import { checkAuth, getUser } from '../auth'
+const F = CONSTANTS.F
 
 export class GameRoom extends Room<RoomState.Game> {
-  maxClients = 30
+  maxClients = 50
 
   async onAuth(client: Client, options: any) {
     return checkAuth(options.accessToken)
@@ -11,13 +12,15 @@ export class GameRoom extends Room<RoomState.Game> {
 
   onCreate(options: any) {
     this.setState(new RoomState.Game())
+    // this.state.cards.push(new RoomState.Card())
     this.onMessage('type', (client, message) => {
       console.log(client.sessionId, message)
+      this.state.cards.push(new RoomState.Card())
 
-      this.clients.forEach((client) => {
-        client.send('begin battle', this.state.world)
-      })
-      this.broadcast('aaa', '1111')
+      // this.clients.forEach((client) => {
+      //   client.send('begin battle', this.state.world)
+      // })
+      // this.broadcast('aaa', '1111')
       //
       // handle "type" message
       //
@@ -25,9 +28,13 @@ export class GameRoom extends Room<RoomState.Game> {
   }
 
   onJoin(client: Client, options: any) {
-    console.log(options,444)
-    const userinfo = getUser(options.accessToken)
-    console.log(client.sessionId, 'joined! game', userinfo)
+    const userinfo = getUser(options.accessToken)    
+    console.log(userinfo)
+    if (userinfo) {
+      console.log(`${userinfo.nickname}上线了`)
+      console.log(this)
+      client.send(F.G_JOIN,userinfo)
+    }
   }
 
   onLeave(client: Client, consented: boolean) {

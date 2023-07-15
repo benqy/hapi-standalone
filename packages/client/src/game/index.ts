@@ -17,14 +17,20 @@ import { getAccessToken } from '@/utils'
 //     console.log('JOIN ERROR', e)
 //   })
 
-export const createCombatRoom = async () => {
+export const enterGame = async () => {
   const client = new Client(CONSTANTS.SOCKET_URL)
   try {
-    const res = await client.joinOrCreate<RoomState.Game>(CONSTANTS.ROOM_GAME,{
+    const room = await client.joinOrCreate<RoomState.Game>(CONSTANTS.ROOM_GAME,{
       accessToken: getAccessToken()
     })
-    console.log('combat', res)
-    return res
+    room.send('type', 'client to server message')
+    room.onStateChange((state) => {
+      console.log('onStateChange', state)
+    })
+    room.onMessage('*', (type, message) => {
+      console.log(type, message)
+    })
+    console.log('game', room)
   } catch (ex: any) {
     console.dir(ex)
   }

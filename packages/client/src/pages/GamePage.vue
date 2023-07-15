@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import CharacterInvertory from '../components/inventory/CharacterInvertory.vue'
-import { createCombatRoom } from '../game/index'
+import { enterGame } from '../game/index'
 
 onMounted(() => {
-  createCombatRoom()
+  enterGame()
 })
 </script>
 <template>
