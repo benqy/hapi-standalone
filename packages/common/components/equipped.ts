@@ -43,9 +43,9 @@ export class Equipped {
         if (oldEquipment) {
           this.affixProertys.remove(oldEquipment.affixProertys)
         }
-        this.equipments.set(equipSlot, equipment)
-        this.affixProertys.add(equipment.affixProertys)
       }
+      this.equipments.set(equipSlot, equipment)
+      this.affixProertys.add(equipment.affixProertys)
     }
     return this
   }

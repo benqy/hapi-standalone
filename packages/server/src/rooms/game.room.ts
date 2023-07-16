@@ -15,9 +15,6 @@ export class GameRoom extends Room<RoomState.Game> {
   onCreate(options: any) {
     this.setState(new RoomState.Game())
     // this.state.cards.push(new RoomState.Card())
-    
-    const character = getCharacter()
-    console.log(character)
     this.onMessage('type', (client, message) => {
       console.log(client.sessionId, message)
 
@@ -36,7 +33,10 @@ export class GameRoom extends Room<RoomState.Game> {
     if (userinfo) {
       userinfo.nickname = util.randomName()
       console.log(`${userinfo.nickname}上线了`)
+      const character = getCharacter()
+      console.log(character)
       client.send(F.G_JOIN, userinfo)
+      client.send(F.G_JOIN, character)
     }
   }
 

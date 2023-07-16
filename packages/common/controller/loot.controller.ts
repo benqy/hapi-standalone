@@ -196,7 +196,6 @@ class LootController {
     //   reqLevel: parseInt(reqLevel * 0.8),
     //   modifiers,
     // }
-    console.log(modifiers)
     const equipment = this.generateAffixValus(modifiers)
     equipment.itemType = equipType
     equipment.rarity = rarity
