@@ -9,6 +9,13 @@ export const randomName = () => {
 export const randomBetween = (min: number, max: number) => {
   return random.int(min, max)
 }
-export function choice<T>(arr: T[]){
+export function choice<T>(arr: T[]) {
   return random.choice(arr)
+}
+
+export function randomFromArrayNRemove<T>(array: T[]) {
+  const index = Math.floor(Math.random() * array.length)
+  const item = array[index]
+  array.splice(index, 1)
+  return item
 }

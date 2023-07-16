@@ -1,4 +1,6 @@
 export * as CONSTANTS from './constants'
 export * as RoomState from './state'
 export * as util from './util'
+export * as Entity from './entities'
+export * as Controller from './controller'
 // export * as entitty from './entities'

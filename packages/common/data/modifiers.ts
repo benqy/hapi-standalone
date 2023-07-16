@@ -3,21 +3,6 @@ export const modifiersTierByLevel = [
   101, 101, 101, 101, 85, 75, 51, 40, 25, 11, 1,
 ]
 
-export const MODIFIERS_SET_BY_EQUIP_TYPES = {
-  helment: 'helment',
-  shoulder: 'shoulder',
-  body: 'body',
-  glove: 'glove',
-  ring: 'ring',
-  weapon: 'weapon',
-  amulet: 'amulet',
-  belt: 'belt',
-  trousers: 'trousers',
-  boot: 'boot',
-  offhand: 'offhand',
-  jewel: 'jewel',
-}
-
 //id索引,用于快速查询.  implicit, prefix, suffix, unique, enchant, corrupted, crafted, special
 export const modifierKeyValues = {
   '0010010010': {

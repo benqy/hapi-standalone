@@ -1,3 +1,4 @@
+import { AffixProertys } from "./modifiers/affix-property"
 
 //每帧会进行行动的单位
 export interface IActor {

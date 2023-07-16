@@ -1,7 +1,8 @@
+import { ItemType } from '../enum'
 import { LootTableItem } from '../types'
 
 export class LootTable {
-  constructor(public list: LootTableItem[]) {}
+  constructor(public list: ItemType[]) {}
 
   choose({ num = 1 }) {
     return this.list[0]

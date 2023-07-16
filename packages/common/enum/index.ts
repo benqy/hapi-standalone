@@ -7,18 +7,18 @@ export enum ItemCategory {
 }
 
 export enum ItemType {
-  helment = '头盔',
-  shoulder = '肩甲',
-  body = '盔甲',
-  glove = '护手',
-  ring = '指环',
-  weapon = '武器',
-  amulet = '项链',
-  belt = '腰带',
-  trousers = '护腿',
-  boot = '拖鞋',
-  shield = '盾牌',
-  potions = '药水',
+  helment = 'helment',
+  shoulder = 'shoulder',
+  body = 'body',
+  glove = 'glove',
+  ring = 'ring',
+  weapon = 'weapon',
+  amulet = 'amulet',
+  belt = 'belt',
+  trousers = 'trousers',
+  boot = 'boot',
+  shield = 'shield',
+  potions = 'potions'
 }
 
 export enum Rarity {

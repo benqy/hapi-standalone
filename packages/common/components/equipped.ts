@@ -5,7 +5,7 @@ import { EquipSlot, ItemType } from '../enum'
 export class Equipped {
   readonly equipments: Map<EquipSlot, Equipment> = new Map()
 
-  private getEquipSlot(equipment: Equipment) : EquipSlot | null {
+  private getEquipSlot(equipment: Equipment): EquipSlot | null {
     switch (equipment.itemType) {
       case ItemType.helment:
         return EquipSlot.helment
@@ -34,10 +34,19 @@ export class Equipped {
 
   affixProertys = new AffixProertys()
 
-  addEquipment(equipment: Equipment, equipSlot?: EquipSlot) {
+  addEquipment(equipment: Equipment, equipSlot?: EquipSlot): Equipped {
     equipSlot = equipSlot ?? this.getEquipSlot(equipment)
-    if(equipSlot) {
-      this.equipments.set(equipSlot, equipment)
+    if (equipSlot) {
+      //移除装备前先移除装备的属性
+      if (this.equipments.has(equipSlot)) {
+        const oldEquipment = this.equipments.get(equipSlot)
+        if (oldEquipment) {
+          this.affixProertys.remove(oldEquipment.affixProertys)
+        }
+        this.equipments.set(equipSlot, equipment)
+        this.affixProertys.add(equipment.affixProertys)
+      }
     }
+    return this
   }
 }

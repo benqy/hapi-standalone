@@ -2,6 +2,7 @@ import { Room, Client } from '@colyseus/core'
 import { RoomState, CONSTANTS } from '@hapi/common'
 import { checkAuth, getUser } from '../auth'
 import { util } from '@hapi/common'
+import { getCharacter } from '../mock'
 const F = CONSTANTS.F
 
 export class GameRoom extends Room<RoomState.Game> {
@@ -14,6 +15,9 @@ export class GameRoom extends Room<RoomState.Game> {
   onCreate(options: any) {
     this.setState(new RoomState.Game())
     // this.state.cards.push(new RoomState.Card())
+    
+    const character = getCharacter()
+    console.log(character)
     this.onMessage('type', (client, message) => {
       console.log(client.sessionId, message)
 

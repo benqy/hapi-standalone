@@ -9,3 +9,20 @@ export enum F {
   AUTH_JOIN = 'AUTH_JOIN',
   G_JOIN = 'G_JOIN',
 }
+
+export const EQUIP_TYPES = {
+  helment: 'helment',
+  shoulder: 'shoulder',
+  body: 'body',
+  glove: 'glove',
+  ring: 'ring',
+  weapon: 'weapon',
+  amulet: 'amulet',
+  belt: 'belt',
+  trousers: 'trousers',
+  boot: 'boot',
+  offhand: 'offhand',
+  // jewel: 'jewel',
+}
+
+export const EQUIP_TYPE_LIST = Object.keys(EQUIP_TYPES)
