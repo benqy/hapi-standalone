@@ -3,7 +3,7 @@ import { CONSTANTS, RoomState } from '@hapi/common'
 import { checkAuth, setUser, getUser, createUser } from '../auth'
 
 export class AuthRoom extends Room<RoomState.Player> {
-  maxClients = 50
+  maxClients = 200
   onCreate(options: any) {
     console.log('创建权限验证房间')
     // const state = new RoomState.Player()

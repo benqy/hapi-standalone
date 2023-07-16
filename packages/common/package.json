@@ -4,6 +4,7 @@
   "private": true,
   "main": "./index.ts",
   "dependencies": {
+    "@lastolivegames/becsy": "^0.15.5",
     "colyseus": "^0.15.5"
   }
 }

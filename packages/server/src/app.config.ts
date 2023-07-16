@@ -12,10 +12,9 @@ const PUBLIC_DIR = join(__dirname, './public')
 
 export default config({
   initializeGameServer: (gameServer) => {
-    /**
-     * Define your room handlers:
-     */
-    gameServer.define(CONSTANTS.ROOM_GAME, GameRoom)
+    // const tempServer = gameServer as any; // force access to private property by casting to any
+    // tempServer.exposedMethods = []; // override property with empty array to not expose those methods anymore
+    gameServer.define(CONSTANTS.ROOM_GAME, GameRoom,)
     gameServer.define(CONSTANTS.ROOM_AUTH, AuthRoom)
   },
 
