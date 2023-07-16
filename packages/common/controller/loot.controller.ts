@@ -1,9 +1,8 @@
 /**
  *
- * TODO: reqLevel bug
+ * TODO: reqLevel, Itemtype整理, 词缀数据静态类型
  *
  */
-// import { modifiersTierByLevel, modifiersByGroupId } from '@hapi/common'
 
 import { LootTable } from '../components/loot-table'
 import { EQUIP_TYPE_LIST } from '../constants'
