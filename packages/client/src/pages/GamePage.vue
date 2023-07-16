@@ -9,5 +9,5 @@ onMounted(() => {
 </script>
 <template>
   <CharacterInvertory></CharacterInvertory>
-  <button>开始战斗</button>
+  <button>掉落装备</button>
 </template>

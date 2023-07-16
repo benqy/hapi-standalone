@@ -5,7 +5,7 @@ export const ACCESS_TOKEN_KEY: string = 'ACCESS_TOKEN'
 export const ROOM_GAME: string = 'game_room'
 export const ROOM_AUTH: string = 'auth_room'
 //消息类型
-export const F = {
-  AUTH_JOIN: 'AUTH_JOIN',
-  G_JOIN: 'G_JOIN',
+export enum F {
+  AUTH_JOIN = 'AUTH_JOIN',
+  G_JOIN = 'G_JOIN',
 }
