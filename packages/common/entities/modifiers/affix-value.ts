@@ -1,4 +1,4 @@
-import { getIntBetween } from '../../util'
+import { randomBetween } from '../../util'
 import { AffixSchema } from '../../types'
 
 export class AffixValue {
@@ -19,7 +19,7 @@ export class AffixValue {
 
   private generalValue(data: AffixSchema, value?: number) {
     //从词缀范围中随机固定一个值
-    this.value = value ?? getIntBetween(data.minValue, data.maxValue)
+    this.value = value ?? randomBetween(data.minValue, data.maxValue)
     this.desc = data.desc.replace('n', this.value.toString())
     this.tags = data.tags
     this.tier = data.tier

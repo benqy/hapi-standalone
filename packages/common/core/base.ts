@@ -1,10 +1,9 @@
-import { uuidV4 } from '../util'
-
+import { nanoid } from 'nanoid'
 /**
  * 所有带ID的类的基类
  */
-export default class O {
-  readonly id = uuidV4()
+export class O {
+  readonly id = nanoid()
 
   constructor() {}
 }

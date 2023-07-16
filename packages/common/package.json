@@ -5,6 +5,8 @@
   "main": "./index.ts",
   "dependencies": {
     "@lastolivegames/becsy": "^0.15.5",
-    "colyseus": "^0.15.5"
+    "colyseus": "^0.15.5",
+    "nanoid": "^4.0.2",
+    "random": "^4.1.0"
   }
 }

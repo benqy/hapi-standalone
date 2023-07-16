@@ -1,6 +1,6 @@
-import { uuidV4 } from '../../util'
-import { AffixValue } from '../modifiers'
-import O from '../../core/base'
+import { nanoid } from 'nanoid'
+import { AffixValue } from '.'
+import { O } from '../../core/base'
 
 /**
  * 词缀集合类
@@ -13,7 +13,7 @@ export class AffixProertys extends O {
     }
   }
 
-  readonly id = uuidV4()
+  readonly id = nanoid()
 
   private values: Map<string, number> = new Map()
 

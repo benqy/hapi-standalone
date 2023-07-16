@@ -1,6 +1,7 @@
 import { Room, Client } from '@colyseus/core'
 import { RoomState, CONSTANTS } from '@hapi/common'
 import { checkAuth, getUser } from '../auth'
+import { util } from '@hapi/common'
 const F = CONSTANTS.F
 
 export class GameRoom extends Room<RoomState.Game> {
@@ -29,6 +30,7 @@ export class GameRoom extends Room<RoomState.Game> {
   onJoin(client: Client, options: any) {
     const userinfo = getUser(options.accessToken)    
     if (userinfo) {
+      userinfo.nickname = util.randomName()
       console.log(`${userinfo.nickname}上线了`)
       client.send(F.G_JOIN, userinfo)
     }
