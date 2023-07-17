@@ -127,7 +127,6 @@ class LootController {
     const rarity = this.calcRarity(iir)
     const reqLevel = this.calcMaxTier(dropLevel)
     const modifiers = this.generateModifilers(category, rarity)
-    console.log('loot', rarity, reqLevel, modifiers)
     const equipment = this.affixSchemaToValue(modifiers)
     equipment.category1 = itemCategorys1.equipment
     equipment.category2 = category

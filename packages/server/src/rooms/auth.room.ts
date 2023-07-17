@@ -5,7 +5,7 @@ import { checkAuth, setUser, getUser, createUser } from '../auth'
 export class AuthRoom extends Room<RoomState.Player> {
   maxClients = 200
   onCreate(options: any) {
-    console.log('创建权限验证房间')
+    // console.log('创建权限验证房间')
     // const state = new RoomState.Player()
     // this.setState(state)
     // if (options.accessToken && typeof options.accessToken === 'string') {
@@ -32,7 +32,7 @@ export class AuthRoom extends Room<RoomState.Player> {
       userinfo = createUser(options.accessToken)
       setUser(userinfo)
     }
-    console.log('加入权限房间验证通过', userinfo)
+    // console.log('加入权限房间验证通过', userinfo)
     client.send(CONSTANTS.F.AUTH_JOIN, userinfo)
     // client.send()
   }
@@ -42,6 +42,6 @@ export class AuthRoom extends Room<RoomState.Player> {
   // }
 
   onDispose() {
-    console.log('Dispose AuthRoom')
+    // console.log('Dispose AuthRoom')
   }
 }

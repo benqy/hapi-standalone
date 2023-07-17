@@ -9,7 +9,6 @@ export const getCharacter = () => {
     1,
     100
   )
-  console.log(equipment[0])
   character.equipped.addEquipment(equipment[0])
   return character
 }
