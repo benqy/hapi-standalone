@@ -1,4 +1,4 @@
-import { IActor } from '../iactor'
+import { IActor } from '../interface'
 import { O } from '../../core/base'
 import { Equipped } from '../../components/equipped'
 import { AffixProertys } from '../modifiers/affix-property'

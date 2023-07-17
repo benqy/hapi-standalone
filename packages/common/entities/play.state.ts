@@ -1,6 +1,6 @@
 import { Schema, type } from '@colyseus/schema'
 
-import { Userinfo } from './userinfo.state'
+import { Userinfo } from '../state/userinfo.state'
 
 export class Player extends Schema {
   @type(Userinfo) userinfo: Userinfo = new Userinfo()

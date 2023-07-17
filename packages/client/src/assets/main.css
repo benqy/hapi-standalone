@@ -17,7 +17,7 @@ $blue-color: #226699; */
   display: grid;
   grid-template-rows: 100px repeat(2, 1fr) 100px;
   grid-template-columns: repeat(6, 1fr);
-  .being-dragged {
-    z-index: 10000;
-  }
+}
+.game .being-dragged {
+  z-index: 10000;
 }
