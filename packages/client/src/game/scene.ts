@@ -1,16 +1,19 @@
-import { Character, Player } from '@hapi/common/entities'
+import type { RoomState } from '@hapi/common'
+import { Character, Enemy, Player } from '@hapi/common/entities'
+import type { Room } from 'colyseus.js'
+import { ref } from 'vue'
 // import { SYSTEM_CONFIG } from './constant'
 
-export class Room {
-  constructor(public player:Player) {}
+export class Scene {
+  constructor() {}
 
+  owner: Player
   players: Player[] = []
   characters: Character[] = []
-  enemys = []
-
-  owner = null
+  enemys: Enemy[] = []
+  player = ref(new Player())
   level = 1
-
+  room: Room<RoomState.Game>
   // #combatTimer = null
 
   // #isPause = false

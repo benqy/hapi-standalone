@@ -3,12 +3,16 @@ import { Character } from '@hapi/common/entities'
 import { game } from './game'
 import { Userinfo } from '@hapi/common/entities'
 
-const player = game.room.value.player
 export const Actions = {
   [F.AUTH_JOIN]: (userinfo: Userinfo) => {
-    player.userinfo = userinfo
+    game.scene.player.value.userinfo = userinfo
   },
   [F.G_Character_Data]: (character: Character) => {
-    player.character = character
+    game.scene.player.value.character = character
+    console.log('G_Character_Data', game.scene.player.value.character.inventory)
   }
+}
+
+export const actionTypes = {
+  [F.AUTH_JOIN]: Userinfo,
 }

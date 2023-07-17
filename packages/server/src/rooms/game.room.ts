@@ -34,8 +34,8 @@ export class GameRoom extends Room<RoomState.Game> {
       userinfo.nickname = util.randomName()
       console.log(`${userinfo.nickname}上线了`)
       const character = getCharacter()
-      console.log(character)
-      client.send(F.G_JOIN, character)
+      character.name = userinfo.nickname
+      client.send(F.G_Character_Data, character)
     }
   }
 

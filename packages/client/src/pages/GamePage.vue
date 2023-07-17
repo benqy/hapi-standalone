@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import CharacterInvertory from '../components/inventory/CharacterInvertory.vue'
 import { enterGame, game } from '../game/index'
 
+const player = game.scene.player
 
 
 onMounted(() => {
@@ -12,6 +13,6 @@ onMounted(() => {
 </script>
 <template>
   <div class="game">
-    <CharacterInvertory></CharacterInvertory>
+    <CharacterInvertory v-if="player.character" :inventory="player.character.inventory"></CharacterInvertory>
   </div>
 </template>

@@ -1,25 +1,28 @@
 <script setup lang="ts">
+import type { Intenvory } from '@hapi/common/entities/inventory'
 import ItemSlot from './ItemSlot.vue'
+
 // import { ui } from '@/lib/ui'
-// defineProps<{
-//   // inventoryItems: new Array(40).fill('')
-// }>()
+const props = defineProps<{
+  inventory: Intenvory
+}>()
+console.log(Object.keys(props.inventory.items), 4)
 </script>
 
 <template>
   <div className="inventory">
-    <ItemSlot
-      v-for="(item, i) in ['1', '2', '3', '4']"
-      :key="i"
+    <!-- <ItemSlot
+      v-for="item in inventory.items"
+      :key="item.id"
       :item="item"
-      :name="`inventory-${i}`"
-    >
+      :name="`inventory-${index}`"
+    > -->
       <!-- <img
         v-if="item"
         class="slot-item"
         :src="`/static/game/items/${item.category}/${item.type}/${item.name}.webp`"
       /> -->
-    </ItemSlot>
+    <!-- </ItemSlot> -->
   </div>
 </template>
 
@@ -39,8 +42,9 @@ import ItemSlot from './ItemSlot.vue'
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
-  .being-moved img, .being-moved .itemContent {
-		display: none;
+  .being-moved img,
+  .being-moved .itemContent {
+    display: none;
   }
 }
 
@@ -54,7 +58,7 @@ import ItemSlot from './ItemSlot.vue'
   background: url('@/assets/img/ui/23.png') no-repeat;
   background-size: contain;
   padding: 2px;
-  &:hover .itemContent{
+  &:hover .itemContent {
     display: block;
   }
 }
@@ -88,5 +92,4 @@ import ItemSlot from './ItemSlot.vue'
   background-repeat: no-repeat;
   background-position: center center;
 }
-
 </style>

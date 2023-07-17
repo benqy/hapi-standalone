@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { Item } from '@hapi/common/entities'
+
 defineProps<{
   name: string
-  item?: string
+  item?: Item
   // slot: {
   //     type: [Number, String]
   //   },
@@ -22,7 +24,7 @@ defineProps<{
     :id="`item-slot-${name}`"
     :class="{ 'item-slot': true, empty: item === null }"
     :data-slot="name"
-    :data-type="item === null ? 'empty-slot' : 'item'"
+    :data-item="item === null ? 'empty-slot' : item.id"
   >
     <div class="content">
       <slot></slot>
@@ -62,27 +64,27 @@ defineProps<{
   border-color: saddlebrown;
 }
 .meta {
-    padding: 15px 5px 5px 15px;
-    p {
-      font-size: 12px;
-      text-align: right;
-    }
+  padding: 15px 5px 5px 15px;
+  p {
+    font-size: 12px;
+    text-align: right;
   }
+}
 .desc {
-    font-size: 10px;
-    color: #000;
-    opacity: 0.7;
-    line-height: 1.5;
-  }
+  font-size: 10px;
+  color: #000;
+  opacity: 0.7;
+  line-height: 1.5;
+}
 .attr {
-    line-height: 1.5;
-  }
+  line-height: 1.5;
+}
 .names {
-    line-height: 1.5;
-    :first-child {
-      font-size: 18px;
-      font-weight: bold;
-      color: saddlebrown;
-    }
+  line-height: 1.5;
+  :first-child {
+    font-size: 18px;
+    font-weight: bold;
+    color: saddlebrown;
   }
+}
 </style>

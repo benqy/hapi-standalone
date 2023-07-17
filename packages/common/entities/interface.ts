@@ -1,4 +1,3 @@
-import { ItemCategory1 } from "../enum"
 import { Category } from "../types"
 
 //每帧会进行行动的单位

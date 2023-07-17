@@ -9,6 +9,7 @@ export const loadUserInfo = async () => {
     const room = await client.joinOrCreate(CONSTANTS.ROOM_AUTH, {
       accessToken: getAccessToken()
     })
+    room.onMessage('*', () => {})
     room.onMessage<Userinfo>(CONSTANTS.F.AUTH_JOIN, (userinfo:Userinfo) => {
       console.log('登录成功:', userinfo.accessToken)
       Actions[CONSTANTS.F.AUTH_JOIN](userinfo)
