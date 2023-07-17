@@ -1,25 +1,32 @@
-//物品类型
-export enum ItemCategory {
-  equipment = 'equipment',
-  consumable = 'consumable',
-  material = 'material',
-  other = 'other',
-}
+//物品分类1
+// export enum ItemCategory1 {
+//   equipment = 'equipment',
+//   consumable = 'consumable',
+//   material = 'material',
+//   other = 'other',
+// }
 
-export enum ItemType {
-  helment = 'helment',
-  shoulder = 'shoulder',
-  body = 'body',
-  glove = 'glove',
-  ring = 'ring',
-  weapon = 'weapon',
-  amulet = 'amulet',
-  belt = 'belt',
-  trousers = 'trousers',
-  boot = 'boot',
-  shield = 'shield',
-  potions = 'potions'
-}
+
+
+// //物品分类2 头盔/药水/珠宝...
+// export enum ItemCategory2 {
+//   helment = 'helment',
+//   shoulder = 'shoulder',
+//   body = 'body',
+//   glove = 'glove',
+//   ring = 'ring',
+//   weapon = 'weapon',
+//   amulet = 'amulet',
+//   belt = 'belt',
+//   trousers = 'trousers',
+//   boot = 'boot',
+//   shield = 'shield',
+//   potions = 'potions'
+// }
+
+// export enum ItemCategory3 {
+//   other = 'other'
+// }
 
 export enum Rarity {
   common = 'common',
@@ -51,3 +58,4 @@ export enum EquipSlot {
   hand3 = 'hand3',
   hand4 = 'hand4',
 }
+

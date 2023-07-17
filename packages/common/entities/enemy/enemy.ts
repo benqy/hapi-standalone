@@ -1,4 +1,4 @@
-import { IActor } from '../iactor'
+import { IActor } from '../interface'
 import { O } from '../../core/base'
 import { Rarity } from '../../enum'
 import { Breed } from '../breed'

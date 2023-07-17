@@ -1,31 +1,32 @@
+import { itemCategorys2 } from '../data'
 import { Equipment } from '../entities/item/equipment'
 import { AffixProertys } from '../entities/modifiers/affix-property'
-import { EquipSlot, ItemType } from '../enum'
+import { EquipSlot } from '../enum'
 
 export class Equipped {
   readonly equipments: Map<EquipSlot, Equipment> = new Map()
 
   private getEquipSlot(equipment: Equipment): EquipSlot | null {
-    switch (equipment.itemType) {
-      case ItemType.helment:
+    switch (equipment.category2.name) {
+      case itemCategorys2.helment.name:
         return EquipSlot.helment
-      case ItemType.shoulder:
+      case itemCategorys2.shoulder.name:
         return EquipSlot.shoulder
-      case ItemType.body:
+      case itemCategorys2.body.name:
         return EquipSlot.body
-      case ItemType.ring:
+      case itemCategorys2.ring.name:
         return EquipSlot.ring1
-      case ItemType.amulet:
+      case itemCategorys2.amulet.name:
         return EquipSlot.amulet
-      case ItemType.belt:
+      case itemCategorys2.belt.name:
         return EquipSlot.belt
-      case ItemType.trousers:
+      case itemCategorys2.trousers.name:
         return EquipSlot.trousers
-      case ItemType.boot:
+      case itemCategorys2.boot.name:
         return EquipSlot.boot
-      case ItemType.weapon:
+      case itemCategorys2.weapon.name:
         return EquipSlot.hand1
-      case ItemType.shield:
+      case itemCategorys2.shield.name:
         return EquipSlot.hand2
       default:
         null

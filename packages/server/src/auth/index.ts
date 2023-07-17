@@ -21,5 +21,5 @@ export const getUser = (accessToken: string): Userinfo | undefined => {
 
 //登录验证（临时）
 export const checkAuth = (accessToken: string) => {
-  return accessToken.length > 36
+  return accessToken.length > 10
 }
