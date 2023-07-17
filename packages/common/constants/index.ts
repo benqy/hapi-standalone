@@ -10,6 +10,7 @@ export const BASE_DROP_CHANCE = 0.16
 export enum F {
   AUTH_JOIN = 'AUTH_JOIN',
   G_JOIN = 'G_JOIN',
+  //角色加载完毕
   G_Character_Data = 'G_Character_Data',
 }
 

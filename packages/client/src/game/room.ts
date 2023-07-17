@@ -1,15 +1,11 @@
 import { Character, Player } from '@hapi/common/entities'
 // import { SYSTEM_CONFIG } from './constant'
-import { ref } from 'vue'
 
 export class Room {
-  constructor() {}
+  constructor(public player:Player) {}
 
   players: Player[] = []
   characters: Character[] = []
-  selfPlayer?: Player
-  selfCharacter:any = null
-
   enemys = []
 
   owner = null

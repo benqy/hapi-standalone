@@ -1,2 +1,2 @@
 export * from './game.state'
-export * from './userinfo.state'
+export * from '../entities/userinfo'
