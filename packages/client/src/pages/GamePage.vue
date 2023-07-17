@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="game">
-    <CharacterInvertory v-if="game.room.selfCharacter.value"></CharacterInvertory>
-    <div v-if="game.room.selfCharacter">wgwglwlgjw</div>
+    <CharacterInvertory v-if="game.room.value.selfCharacter"></CharacterInvertory>
+    <div v-if="game.room.value.selfCharacter">wgwglwlgjw</div>
   </div>
 </template>

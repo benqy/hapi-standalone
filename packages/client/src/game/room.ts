@@ -8,7 +8,7 @@ export class Room {
   players: Player[] = []
   characters: Character[] = []
   selfPlayer?: Player
-  selfCharacter:any = ref(null)
+  selfCharacter:any = null
 
   enemys = []
 

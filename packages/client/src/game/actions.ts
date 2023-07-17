@@ -4,7 +4,7 @@ import { game } from './game'
 
 export const Actions = {
   [F.G_Character_Data]: (character: Character) => {
-    console.log(game.room.selfCharacter.value,444)
-    game.room.selfCharacter.value = character
+    // console.log(game.room.selfCharacter.value,444)
+    game.room.value.selfCharacter = character
   }
 }
