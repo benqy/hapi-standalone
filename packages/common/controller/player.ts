@@ -7,7 +7,9 @@ import { Userinfo } from '../state'
 // }
 
 export class PlayerController implements IController{
-  constructor() {}
+  constructor() {
+    console.log('PlayerController constructor')
+  }
 
   userDoAction(userinfo: Userinfo) {
     console.log(userinfo.account, userinfo.nickname, userinfo.accessToken)

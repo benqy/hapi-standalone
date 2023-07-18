@@ -7,10 +7,6 @@ import {
 export * from './base'
 
 const controllerFactory = new ControllerFactory()
-let sControllers = {
-  
-}
-let cControllers = {}
 export const getServerController = () => {
   return {
     play: controllerFactory.get<PlayerController>(PlayerController),
@@ -19,6 +15,6 @@ export const getServerController = () => {
   }
 }
 
-export const getClientController = ()=>{
+export const getClientController = () => {
   return getServerController()
 }

@@ -12,8 +12,7 @@ export const actions = {
   [F.AUTH_JOIN]: (userinfo: Userinfo) => {
     // const user = plainToClass(Userinfo, userinfo)
     game.player.userinfo = userinfo
-    const playerC = new PlayerController()
-    playerC.userDoAction(userinfo)
+    game.c.play.userDoAction(userinfo)
   },
   [F.G_Character_Data]: (character: Character) => {
     // const character = plainToClass(Character, message)
