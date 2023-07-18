@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import CharacterInvertory from '../components/inventory/CharacterInvertory.vue'
-import { enterGame, game } from '../game/index'
+import { game } from '../game/index'
 
 const player = game.scene.player
 
 
 onMounted(() => {
-  enterGame()
+  game.enterRoom()
 })
 
 </script>

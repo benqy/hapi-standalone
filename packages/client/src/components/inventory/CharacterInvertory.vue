@@ -6,16 +6,16 @@ import ItemSlot from './ItemSlot.vue'
 const props = defineProps<{
   inventory: Intenvory
 }>()
-console.log(Object.keys(props.inventory.items), 4)
+console.log(JSON.stringify(props.inventory), 4)
 </script>
 
 <template>
   <div className="inventory">
     <!-- <ItemSlot
-      v-for="item in inventory.items"
-      :key="item.id"
-      :item="item"
-      :name="`inventory-${index}`"
+      v-for="key in Object.keys(props.inventory.items)"
+      :key="key"
+      :item="inventory.items[key]"
+      :name="`inventory-${key}`"
     > -->
       <!-- <img
         v-if="item"

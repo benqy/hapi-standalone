@@ -2,17 +2,28 @@ import { F } from '@hapi/common/constants'
 import { Character } from '@hapi/common/entities'
 import { game } from './game'
 import { Userinfo } from '@hapi/common/entities'
+import { Room } from 'colyseus.js'
+import { Intenvory } from '@hapi/common/entities/inventory'
+import { PlayerController } from '@hapi/common/controller'
 
-export const Actions = {
+export type Action = (room: Room, data: any) => void
+
+export const actions = {
   [F.AUTH_JOIN]: (userinfo: Userinfo) => {
-    game.scene.player.value.userinfo = userinfo
+    // const user = plainToClass(Userinfo, userinfo)
+    game.player.userinfo = userinfo
+    const playerC = new PlayerController()
+    playerC.userDoAction(userinfo)
   },
   [F.G_Character_Data]: (character: Character) => {
-    game.scene.player.value.character = character
-    console.log('G_Character_Data', game.scene.player.value.character.inventory)
+    // const character = plainToClass(Character, message)
+    // const inventory = plainToClass(Intenvory, character.inventory)
+    // // console.log(inventory instanceof Intenvory, 111)
+    // console.log(character.equipped instanceof Intenvory, 222)
+    // game.scene.player.value.character = character
   }
 }
 
-export const actionTypes = {
-  [F.AUTH_JOIN]: Userinfo,
-}
+// export const actionTypes = {
+//   [F.AUTH_JOIN]: Userinfo
+// }

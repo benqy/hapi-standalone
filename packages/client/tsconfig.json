@@ -1,7 +1,6 @@
 {
   "files": [],
   "compilerOptions": {
-    "moduleResolution": "node",
   },
   "references": [
     {

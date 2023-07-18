@@ -12,6 +12,7 @@ import { DropRateByRarity, Rarity } from '../enum'
 import { Category } from '../types'
 import { choice, randomFromArrayNRemove } from '../util'
 import { equipmentFromCategorys2, itemCategorys1 } from '../data'
+import { getServerController } from '../core'
 
 class LootController {
   private globalIIR = 10
@@ -111,7 +112,7 @@ class LootController {
           ? `${modifiers[modifiers.length - 1].tierName}`
           : ''
       values = modifiers
-        .map((t) => new AffixValue(t))
+        .map((t) => getServerController().affix.schemaToValue(t))
         .sort((a, b) => a.position - b.position)
       // console.log(this)
       const equipment = new Equipment(values)

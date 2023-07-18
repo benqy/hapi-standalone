@@ -2,7 +2,7 @@ import { Client } from 'colyseus.js'
 import { CONSTANTS } from '@hapi/common'
 import { getAccessToken } from '@/utils'
 import type { Userinfo } from '@hapi/common/state'
-import { Actions } from './actions'
+import { actions } from './actions'
 export const loadUserInfo = async () => {
   const client = new Client(CONSTANTS.SOCKET_URL)
   try {
@@ -10,9 +10,9 @@ export const loadUserInfo = async () => {
       accessToken: getAccessToken()
     })
     room.onMessage('*', () => {})
-    room.onMessage<Userinfo>(CONSTANTS.F.AUTH_JOIN, (userinfo:Userinfo) => {
+    room.onMessage<Userinfo>(CONSTANTS.F.AUTH_JOIN, (userinfo: Userinfo) => {
       console.log('登录成功:', userinfo.accessToken)
-      Actions[CONSTANTS.F.AUTH_JOIN](userinfo)
+      actions.AUTH_JOIN(userinfo)
       room.leave()
       // uiState.toggleCharacterSelect()
     })

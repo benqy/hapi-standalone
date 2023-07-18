@@ -7,8 +7,9 @@
     "nightwatch.conf.*",
     "playwright.config.*"
   ],
-  "moduleResolution": "node",
   "compilerOptions": {
+    "moduleResolution": "node",
+    "strictNullChecks": false,
     "composite": true,
     "module": "ESNext",
     "types": ["node"]

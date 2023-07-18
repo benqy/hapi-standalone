@@ -12,11 +12,11 @@ export class AffixValue {
   public value: number
   public valuePath: string
 
-  constructor(data: AffixSchema, value?: number) {
-    this.id = data.id
-    this.name = data.name
-    this.generalValue(data, value)
-  }
+  // constructor() {
+  //   this.id = data.id
+  //   this.name = data.name
+  //   this.generalValue(data, value)
+  // }
 
   private generalValue(data: AffixSchema, value?: number) {
     //从词缀范围中随机固定一个值
