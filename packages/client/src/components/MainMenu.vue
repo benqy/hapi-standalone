@@ -26,9 +26,9 @@ const temp = () => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .game-display {
-  color: #3c3c44;
+  color: $main-color;
   grid-area: 1/1/2/7;
 }
 /*row-start/column-start/row-end/column-end:*/
