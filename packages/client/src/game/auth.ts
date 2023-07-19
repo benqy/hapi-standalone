@@ -14,7 +14,6 @@ export const loadUserInfo = async () => {
       console.log('登录成功:', userinfo.accessToken)
       actions.AUTH_JOIN(userinfo)
       room.leave()
-      // uiState.toggleCharacterSelect()
     })
   } catch (ex: any) {
     if (ex.code === 4215) {

@@ -6,12 +6,12 @@ export interface ItemKV {
 
 // export interface 
 
-export type PureJson = {
+export type JsObject = {
   [key: string]: any
 }
 //
 export interface DeserializeAble {
-  fromJson<T>(json: PureJson)
+  fromJson<T>(json: JsObject)
 }
 
 export interface IController {

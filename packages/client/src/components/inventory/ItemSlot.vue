@@ -3,7 +3,6 @@ const d = defineProps<{
   id: string
   item?: any
 }>()
-console.log(!!d.item)
 </script>
 <template>
   <div
