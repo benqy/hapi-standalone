@@ -15,8 +15,8 @@ export const actions = {
     game.c.play.userDoAction(userinfo)
   },
   [F.G_Character_Data]: (character: Character) => {
-    // const character = plainToClass(Character, message)
-    // const inventory = plainToClass(Intenvory, character.inventory)
+    game.player.character = character
+    console.log(character, 111)
     // // console.log(inventory instanceof Intenvory, 111)
     // console.log(character.equipped instanceof Intenvory, 222)
     // game.scene.player.value.character = character

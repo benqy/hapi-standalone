@@ -1,12 +1,14 @@
 import { Category } from "../types"
+import { AffixProertys } from "./modifiers/affix-property";
 
 //每帧会进行行动的单位
 export interface IActor {
   maxHealth: number,
   name: string,
   currentHealth: number,
-  doTick(): void
-  doAction(): void
+  affixProertys: AffixProertys,
+  // doTick(): void
+  // doAction(): void
 }
 
 export interface ItemCategory {

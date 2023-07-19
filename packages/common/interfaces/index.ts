@@ -14,3 +14,8 @@ export interface DeserializeAble {
 
 export interface IController {
 }
+
+export interface ISystem {
+  doTick(): void
+  doAction(): void
+}

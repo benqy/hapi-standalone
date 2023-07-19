@@ -8,10 +8,10 @@
     "playwright.config.*"
   ],
   "compilerOptions": {
+    "module": "ESNext",
     "moduleResolution": "node",
     "strictNullChecks": false,
     "composite": true,
-    "module": "ESNext",
     "types": ["node"]
   }
 }

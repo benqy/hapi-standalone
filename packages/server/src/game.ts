@@ -1,4 +1,4 @@
 import { core } from '@hapi/common'
 export const game = {
-  c: core.getServerController(),
+  c: core.getController(),
 }

@@ -12,7 +12,7 @@ console.log(JSON.stringify(props.inventory), 4)
 <template>
   <div className="inventory">
     <!-- <ItemSlot
-      v-for="key in Object.keys(props.inventory.items)"
+      v-for="(item,key) in inventory.items"
       :key="key"
       :item="inventory.items[key]"
       :name="`inventory-${key}`"

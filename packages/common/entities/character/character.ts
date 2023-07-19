@@ -15,19 +15,7 @@ export class Character extends O implements IActor {
   currentHealth: number
   inventory = new Intenvory(94)
 
-  readonly affixProertys = new AffixProertys()
-  readonly equipped: Equipped = new Equipped()
-
-  getProperties() {
-    return new AffixProertys()
-      .add(this.affixProertys)
-      .add(this.equipped.affixProertys)
-  }
-
-  doTick() {
-    console.log('character tick')
-  }
-  doAction() {
-    console.log('character action')
-  }
+  //角色基础战斗数据
+  affixProertys = new AffixProertys()
+  equipped: Equipped = new Equipped()
 }

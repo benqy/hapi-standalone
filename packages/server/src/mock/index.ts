@@ -1,5 +1,6 @@
 import { Entity, Controller } from '@hapi/common'
 import { LootTable } from '@hapi/common/components/loot-table'
+import { getController } from '@hapi/common/core'
 import { equipmentFromCategorys2, itemCategorys2 } from '@hapi/common/data'
 
 export const getCharacter = () => {
@@ -11,7 +12,7 @@ export const getCharacter = () => {
       1,
       100
     )
-    character.equipped.addEquipment(equipment[0])
+    getController().equipment.addEquipment(character.equipped, equipment[0])
   })
   return character
 }

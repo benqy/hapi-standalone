@@ -2,7 +2,7 @@
 import type { Item } from '@hapi/common/entities'
 
 defineProps<{
-  name: string
+  id: string
   item?: Item
   // slot: {
   //     type: [Number, String]
@@ -21,9 +21,9 @@ defineProps<{
 </script>
 <template>
   <div
-    :id="`item-slot-${name}`"
+    :id="`item-slot-${id}`"
     :class="{ 'item-slot': true, empty: item === null }"
-    :data-slot="name"
+    :data-slot="id"
     :data-item="item === null ? 'empty-slot' : item.id"
   >
     <div class="content">
