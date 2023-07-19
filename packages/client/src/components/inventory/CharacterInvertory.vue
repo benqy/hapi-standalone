@@ -43,44 +43,5 @@ defineProps<{
 }
 
 /*物品栏*/
-.item-slot {
-  display: inline-block;
-  height: 48px;
-  width: 48px;
-  box-sizing: border-box;
-  cursor: pointer;
-  background: url('@/assets/img/ui/23.png') no-repeat;
-  background-size: contain;
-  padding: 2px;
-}
 
-.item-slot.empty {
-  cursor: default;
-}
-
-.item-slot.being-dragged {
-  position: absolute;
-  cursor: grab;
-}
-
-.item-slot.being-dragged .content {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.item-slot .content {
-  background: rgba(255, 255, 255, 0.09);
-  border: solid 1px rgba(255, 255, 255, 0.03);
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
-  pointer-events: none;
-}
-
-.item-slot .content .slot-item {
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
 </style>

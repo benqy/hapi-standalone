@@ -55,7 +55,7 @@ export enum EquipSlot {
   boot = 'boot',
   hand1 = 'hand1',
   hand2 = 'hand2',
-  hand3 = 'hand3',
-  hand4 = 'hand4',
+  // hand3 = 'hand3',
+  // hand4 = 'hand4',
 }
 

@@ -1,14 +1,46 @@
 <script setup lang="ts">
 import { game } from '@/game'
+import {Enums} from  '@hapi/common'
 import ItemSlot from './inventory/ItemSlot.vue'
-const equippad = game.character.equipped
+const equippad: any = game.character.equipped
+const sorts: any = {
+  helment: 'left',
+  shoulder: 'left',
+  body: 'left',
+  glove: 'left',
+  ring1: 'left',
+  hand1: 'left',
+  amulet: 'right',
+  belt: 'right',
+  trousers: 'right',
+  boot: 'right',
+  ring2: 'right',
+  hand2: 'right'
+}
+const equipslots = Enums.EquipSlot
+
+console.log(Enums.EquipSlot,4)
 </script>
 <template>
   <div class="character-wrap">
+    <!-- <p v-for="(k,v) in equipslots" :key="k">
+      {{ k }}: {{ v }}
+        v-for="(item, key) in equippad.equipments"
+    </p> -->
     <div class="character-bg">
       <img src="/src/assets/img/enemy/23.jpg" alt="" />
     </div>
     <div className="character" ref="character">
+      <ItemSlot
+        v-for="k in equipslots"
+        :id="k"
+        :key="k"
+        :item="equippad.equipments[k]"
+        :class="`character-${k} character-item-${sorts[k]}`"
+        class="character-item"
+      >
+        <img v-if="equippad.equipments[k]" class="slot-item" :src="game.c.item.getMedia(equippad.equipments[k])" />
+      </ItemSlot>
       <!-- <ItemSlot
         v-for="(equipslot, item) in equippad.equipments"
         class="character-item"
@@ -17,11 +49,7 @@ const equippad = game.character.equipped
         :slot="i"
         :item="item"
       >
-        <img
-          v-if="item"
-          class="slot-item"
-          :src="`/src/assets/img/items/equipment/${item.type}/${item.name}.webp`"
-        />
+        <img v-if="item" class="slot-item" :src="game.c.item.getMedia(item)" />
       </ItemSlot> -->
     </div>
   </div>
@@ -96,9 +124,9 @@ const equippad = game.character.equipped
   background-image: url('/src/assets/img/ui/ring.png');
   background-repeat: no-repeat;
 }
-.character-weapon1 {
+.character-hand1 {
   grid-area: 6/4/7/2;
-  background-image: url('/src/assets/img/ui/weapon1.png');
+  background-image: url('/src/assets/img/ui/hand1.png');
   background-repeat: no-repeat;
 }
 
@@ -129,9 +157,9 @@ const equippad = game.character.equipped
   background-repeat: no-repeat;
 }
 
-.character-weapon2 {
+.character-hand2 {
   grid-area: 6/6/7/7;
-  background-image: url('/src/assets/img/ui/weapon2.png');
+  background-image: url('/src/assets/img/ui/hand2.png');
   background-repeat: no-repeat;
 }
 </style>

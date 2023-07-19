@@ -17,6 +17,8 @@ export class EquipmentController implements IController {
         return EquipSlot.shoulder
       case itemCategorys2.body.name:
         return EquipSlot.body
+      case itemCategorys2.glove.name:
+        return EquipSlot.glove
       case itemCategorys2.ring.name:
         return EquipSlot.ring1
       case itemCategorys2.amulet.name:

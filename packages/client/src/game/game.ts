@@ -19,7 +19,7 @@ export const game = {
   },
   c: core.getClientController(),
   //引用的scene.player.value.character
-  get character() {
+  get character(): Character {
     return this.scene.player.value.character
   },
   //引用的scene.player.value.character.inventory

@@ -1,6 +1,5 @@
 import { O } from '../../core/base'
 import { ItemKV } from '../../interfaces'
-import { Item } from '../item'
 
 //背包
 export class Intenvory extends O {

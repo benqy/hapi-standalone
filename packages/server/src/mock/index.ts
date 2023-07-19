@@ -21,7 +21,6 @@ export const getCharacter = () => {
       100
     )
     getController().inventory.addItem(character.inventory, equipment[0])
-    getController().equipment.addEquipment(character.equipped, equipment[0])
   })
   return character
 }

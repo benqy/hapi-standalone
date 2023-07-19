@@ -1,15 +1,16 @@
 <script setup lang="ts">
-defineProps<{
+const d = defineProps<{
   id: string
   item?: any
 }>()
+console.log(!!d.item)
 </script>
 <template>
   <div
     :id="`item-slot-${id}`"
     :class="{ 'item-slot': true, empty: item === null }"
     :data-slot="id"
-    :data-item="item === null ? 'empty-slot' : item.id"
+    :data-item="!!item ? item.id : 'empty-slot'"
   >
     <div class="content">
       <slot></slot>
