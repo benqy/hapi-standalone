@@ -3,6 +3,7 @@ import { O } from '../../core/base'
 import { Rarity } from '../../enum'
 import { Breed } from '../../components/breed'
 import { AffixProertys } from '../modifiers/affix-property'
+import { IMG_DIR } from '../../constants'
 
 export class Enemy extends O implements IActor {
   constructor() {
@@ -21,11 +22,11 @@ export class Enemy extends O implements IActor {
   affixProertys = new AffixProertys()
 
 
-  media = `/static/game/enemy/${this.name}.webp`
+  media = `${IMG_DIR}/enemy/${this.name}.webp`
 
   //掉落稀有度倍率
   get iir() {
-    switch (this.Rarity) {
+    switch (this.rarity) {
       case Rarity.common:
         return 1
       case Rarity.magic:
@@ -41,7 +42,7 @@ export class Enemy extends O implements IActor {
 
   //掉落数量倍率
   get iiq() {
-    switch (this.Rarity) {
+    switch (this.rarity) {
       case Rarity.common:
         return 1
       case Rarity.magic:
@@ -58,9 +59,9 @@ export class Enemy extends O implements IActor {
   //怪物掉落等级,魔法+1,稀有+2,传奇+3
   get dropLevel() {
     let dropLevel = this.level
-    if (this.Rarity === Rarity.magic) dropLevel++
-    else if (this.Rarity === Rarity.rare) dropLevel += 2
-    else if (this.Rarity === Rarity.unique) dropLevel += 3
+    if (this.rarity === Rarity.magic) dropLevel++
+    else if (this.rarity === Rarity.rare) dropLevel += 2
+    else if (this.rarity === Rarity.unique) dropLevel += 3
     if (dropLevel > 100) {
       dropLevel === 100
     }

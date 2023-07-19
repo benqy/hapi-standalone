@@ -10,9 +10,11 @@ export class Scene {
   owner: Player
   players: Player[] = []
   characters: Character[] = []
+  mainEnemy: Enemy
   enemys: Enemy[] = []
   player = ref(new Player())
   level = 1
+  inCombat = false
   room: Room<RoomState.Game>
   // #combatTimer = null
 

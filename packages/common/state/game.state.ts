@@ -1,5 +1,6 @@
 import { Schema, type, filter, ArraySchema } from '@colyseus/schema'
 import { Client } from 'colyseus'
+import { Player } from '../entities'
 
 // export class Card extends Schema {
 //   @type('string') owner: string // contains the sessionId of Card owner
@@ -23,14 +24,9 @@ import { Client } from 'colyseus'
 // }
 
 export class Game extends Schema {
+  //当前用户
+  player: Player
+
   @type('string') playerId: string
-
-  // @filter<Game, any, Schema>(function (this: Game, client: Client) {
-  //   console.log(this, client, 444)
-  //   return true
-  // })
-
-  @type('string') ownerId: string
-
-
+  
 }

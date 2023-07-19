@@ -7,6 +7,7 @@ export interface IActor {
   name: string,
   currentHealth: number,
   affixProertys: AffixProertys,
+  media: string,
   // doTick(): void
   // doAction(): void
 }

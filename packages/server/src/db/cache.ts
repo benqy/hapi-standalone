@@ -1,3 +1,4 @@
+import { RoomState } from '@hapi/common'
 import { LRUCache } from 'lru-cache'
 const options = {
   max: 500,
@@ -30,24 +31,23 @@ const options = {
 const lruCache = new LRUCache(options)
 const CACHE_KEY = 'CACHE_KEY'
 
-
-
-const roooState = {
-
+export type GameRoomStates = {
+  [x: string]: RoomState.Game
 }
 
+//根据房间用户id缓存房间
+// export const roomCache: Map<string, RoomState.Game> = new Map()
+
 export const cache = {
-  get<T>(key: string) : T | undefined {
+  get<T>(key: string): T | undefined {
     const v = lruCache.get(`${CACHE_KEY}:${key}`)
-    if(v){
+    if (v) {
       return v as T
     } else {
       return undefined
     }
-    
   },
   set(key: string, value: any) {
     return lruCache.set(`${CACHE_KEY}:${key}`, value)
   },
 }
-

@@ -5,6 +5,7 @@ export const ACCESS_TOKEN_KEY: string = 'ACCESS_TOKEN'
 export const ROOM_GAME: string = 'game_room'
 export const ROOM_AUTH: string = 'auth_room'
 export const BASE_DROP_CHANCE = 0.16
+export const IMG_DIR = '/src/assets/img'
 
 //消息类型
 export enum F {

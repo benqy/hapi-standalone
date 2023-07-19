@@ -2,7 +2,7 @@ import { Enemy } from '../entities/enemy/enemy'
 import { Rarity } from '../enum'
 import { Breed, Orc } from '../components'
 
-export class EnemySpawner {
+export class EnemyFactory {
   constructor(public config = {}) {}
 
   create({ level = 1, baseName = '无名', rarity = Rarity.common }) {

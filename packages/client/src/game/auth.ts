@@ -11,7 +11,7 @@ export const loadUserInfo = async () => {
     })
     room.onMessage('*', () => {})
     room.onMessage<Userinfo>(CONSTANTS.F.AUTH_JOIN, (userinfo: Userinfo) => {
-      console.log('登录成功:', userinfo.accessToken)
+      console.log('登录成功:', userinfo)
       actions.AUTH_JOIN(userinfo)
       room.leave()
     })

@@ -12,14 +12,17 @@ export const actions = {
   [F.AUTH_JOIN]: (userinfo: Userinfo) => {
     // const user = plainToClass(Userinfo, userinfo)
     game.player.userinfo = userinfo
-    game.c.play.userDoAction(userinfo)
+    // game.c.play.userDoAction(userinfo)
   },
   [F.G_Character_Data]: (character: Character) => {
-    game.player.character = character
     console.log(character, 111)
-    // // console.log(inventory instanceof Intenvory, 111)
-    // console.log(character.equipped instanceof Intenvory, 222)
-    // game.scene.player.value.character = character
+    game.player.character = character
+  },
+  [F.G_Start_Combat]: (data:any) => {
+    game.scene.mainEnemy = data.mainEnemy
+    game.scene.enemys = data.enemys
+    game.scene.inCombat = true
+    console.log(game.scene.mainEnemy,game.scene.enemys,5)
   }
 }
 

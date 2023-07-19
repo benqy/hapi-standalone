@@ -6,8 +6,6 @@
 //   other = 'other',
 // }
 
-
-
 // //物品分类2 头盔/药水/珠宝...
 // export enum ItemCategory2 {
 //   helment = 'helment',
@@ -35,6 +33,10 @@ export enum Rarity {
   unique = 'unique',
 }
 
+export namespace Rarity {
+  export function getRarityByDropRate(dropRate: number) {}
+}
+
 export enum DropRateByRarity {
   // [RARITY.common] 0.8,
   magic = 0.15,
@@ -58,4 +60,3 @@ export enum EquipSlot {
   // hand3 = 'hand3',
   // hand4 = 'hand4',
 }
-

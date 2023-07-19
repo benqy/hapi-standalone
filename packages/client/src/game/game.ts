@@ -10,7 +10,6 @@ import { core } from '@hapi/common'
 export * from './game'
 const F = CONSTANTS.F
 
-
 export const game = {
   scene: new Scene(),
   //引用的scene.player.value
@@ -28,22 +27,33 @@ export const game = {
   },
   room: null as Room<RoomState.Game> | null,
   async enterRoom() {
-    const room = await client.create<RoomState.Game>(CONSTANTS.ROOM_GAME, {
-      accessToken: getAccessToken()
-    })
-    game.room = room
-    this.bindMessage(room)
+    try {
+      const room = await client.create<RoomState.Game>(CONSTANTS.ROOM_GAME, {
+        accessToken: getAccessToken()
+      })
+      game.room = room
+      this.bindMessage(room)
+    } catch (ex) {
+      console.log('创建游戏失败,请重试')
+    }
+    this.startCombat()
   },
   bindMessage(room: Room<RoomState.Game>) {
-    room.onMessage('*', () => {})
-    room.onMessage<Character>(F.G_Character_Data, (character) => {
-      // console.log(JSON.stringify(character),123)
-      actions.G_Character_Data(character)
+    room.onStateChange(() => {
+      // console.log(JSON.stringify(state), 123)
     })
+    room.onMessage('*', () => {})
+    room.onMessage<Character>(F.G_Character_Data, (character) =>
+      actions.G_Character_Data(character)
+    )
+    room.onMessage(F.G_Start_Combat, (data) => actions.G_Start_Combat(data))
     // room.onMessage<Userinfo>(F.G_JOIN, (userinfo) => {
     //   console.log('加入游戏房间成功', userinfo)
     //   // userinfo.doAction()
     // })
     // console.log('game', room)
+  },
+  startCombat() {
+    this.room?.send(F.G_Start_Combat)
   }
 }
