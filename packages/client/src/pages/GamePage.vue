@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import CharacterPad from '@/components/CharacterPad.vue';
 import CharacterInvertory from '../components/inventory/CharacterInvertory.vue'
 import { game } from '../game/index'
 
@@ -12,7 +13,8 @@ onMounted(() => {
 
 </script>
 <template>
-  <div class="game">
-    <CharacterInvertory v-if="player.character" :inventory="player.character.inventory"></CharacterInvertory>
+  <div class="game" v-if="player.character">
+    <CharacterPad></CharacterPad>
+    <CharacterInvertory :inventory="player.character.inventory"></CharacterInvertory>
   </div>
 </template>
