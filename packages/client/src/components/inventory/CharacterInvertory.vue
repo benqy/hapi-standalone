@@ -1,28 +1,30 @@
 <script setup lang="ts">
 import type { Intenvory } from '@hapi/common/entities/inventory'
 import ItemSlot from './ItemSlot.vue'
-
+import {game} from '@/game/index'
 // import { ui } from '@/lib/ui'
 const props = defineProps<{
   inventory: Intenvory
 }>()
-console.log(JSON.stringify(props.inventory), 4)
+
+// console.log(JSON.stringify(props.inventory), 4)
 </script>
 
 <template>
   <div className="inventory">
-    <!-- <ItemSlot
+    <ItemSlot
       v-for="(item,key) in inventory.items"
+      :id="key.toString()"
       :key="key"
       :item="inventory.items[key]"
-      :name="`inventory-${key}`"
-    > -->
-      <!-- <img
+    >
+    <div v-if="item">{{  }}</div>
+      <img
         v-if="item"
         class="slot-item"
-        :src="`/static/game/items/${item.category}/${item.type}/${item.name}.webp`"
-      /> -->
-    <!-- </ItemSlot> -->
+        :src="game.c.item.getMedia(item)"
+      />
+    </ItemSlot>
   </div>
 </template>
 
@@ -32,8 +34,8 @@ console.log(JSON.stringify(props.inventory), 4)
   grid-area: 2/5/4/7;
   justify-self: stretch;
   align-self: end;
-  height: 676px;
-  width: 578px;
+  height: 682px;
+  width: 586px;
   background: rgba(255, 255, 255, 0.03);
   border: solid 1px rgba(255, 255, 255, 0.09);
   border-radius: 6px;

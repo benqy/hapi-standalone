@@ -1,7 +1,7 @@
 import { Category } from '../types'
 export const itemCategorys1 = {
   equipment: <Category>{
-    name: '装备',
+    name: 'equipment',
     code: '01',
     parent: null,
   },
@@ -88,6 +88,7 @@ export const itemCategorys3 = {
   },
 }
 
+//装备的类型列表(不包含二级分类,如锤子,单手剑都统一为武器)
 export const equipmentFromCategorys2 = Object.values(itemCategorys2).filter(
   (item) => item.parent === '01'
 )

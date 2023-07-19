@@ -13,7 +13,7 @@ export class Character extends O implements IActor {
   maxHealth = 100
   health = 100
   currentHealth: number
-  inventory = new Intenvory(94)
+  inventory = new Intenvory(168)
 
   //角色基础战斗数据
   affixProertys = new AffixProertys()

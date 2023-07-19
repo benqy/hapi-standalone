@@ -26,43 +26,34 @@ export class AffixController implements IController {
     return affixProertys.properties.get(key) ?? 0
   }
 
-  add(baseProertys: AffixProertys, affixValue: AffixValue): AffixProertys
-  add(baseProertys: AffixProertys, affixProertys: AffixProertys): AffixProertys
-  add(
-    baseProertys: AffixProertys,
-    affix: AffixValue | AffixProertys
-  ): AffixProertys {
+  add(bp: AffixProertys, affixValue: AffixValue): AffixProertys
+  add(bp: AffixProertys, affixProertys: AffixProertys): AffixProertys
+  add(bp: AffixProertys, affix: AffixValue | AffixProertys): AffixProertys {
     if (affix instanceof AffixValue) {
-      baseProertys.properties.set(
+      bp.properties.set(
         affix.valuePath,
-        this.getProerty(baseProertys, affix.valuePath) + affix.value
+        this.getProerty(bp, affix.valuePath) + affix.value
       )
     } else {
       affix.properties.forEach((value, key) => {
-        if (baseProertys.properties.has(key)) {
-          baseProertys.properties.set(
-            key,
-            baseProertys.properties.get(key) + value
-          )
+        if (bp.properties.has(key)) {
+          bp.properties.set(key, bp.properties.get(key) + value)
         } else {
-          baseProertys.properties.set(key, value)
+          bp.properties.set(key, value)
         }
       })
     }
-    return baseProertys
+    return bp
   }
 
-  remove(baseProertys: AffixProertys, affixProertys: AffixProertys) {
+  remove(bp: AffixProertys, affixProertys: AffixProertys) {
     affixProertys.properties.forEach((value, key) => {
-      if (baseProertys.properties.has(key)) {
-        const targetValue = baseProertys.properties.get(key) - value
+      if (bp.properties.has(key)) {
+        const targetValue = bp.properties.get(key) - value
         if (targetValue < 0) {
-          baseProertys.properties.delete(key)
+          bp.properties.delete(key)
         } else {
-          baseProertys.properties.set(
-            key,
-            baseProertys.properties.get(key) - value
-          )
+          bp.properties.set(key, bp.properties.get(key) - value)
         }
       }
     })

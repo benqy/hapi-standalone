@@ -1,4 +1,3 @@
-import { Type } from 'class-transformer'
 import { O } from '../../core/base'
 import { ItemKV } from '../../interfaces'
 import { Item } from '../item'
@@ -13,24 +12,4 @@ export class Intenvory extends O {
   }
 
   items: ItemKV = {}
-
-  getItem(slot: string) {
-    return this.items[slot]
-  }
-
-  addItemToSlot(item: Item | null, slot: string): Item | null {
-    const temItem = this.getItem(slot)
-    this.items[slot] = item
-    return temItem
-  }
-
-  addItem(item: Item | null) {
-    for (let i = 0; i < this.maxSlot; i++) {
-      if (!this.items[i.toString()]) {
-        this.addItemToSlot(item, i.toString())
-        return true
-      }
-    }
-    return false
-  }
 }

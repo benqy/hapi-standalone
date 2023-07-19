@@ -4,6 +4,8 @@ import {
   PlayerController,
   AffixController,
   EquipmentController,
+  InventoryController,
+  ItemController,
 } from '../controller'
 export * from './base'
 
@@ -14,6 +16,8 @@ export const getController = () => {
     character: controllerFactory.get<CharacterController>(CharacterController),
     affix: controllerFactory.get<AffixController>(AffixController),
     equipment: controllerFactory.get<EquipmentController>(EquipmentController),
+    inventory: controllerFactory.get<InventoryController>(InventoryController),
+    item: controllerFactory.get<ItemController>(ItemController),
   }
 }
 

@@ -14,5 +14,14 @@ export const getCharacter = () => {
     )
     getController().equipment.addEquipment(character.equipped, equipment[0])
   })
+  equipmentFromCategorys2.forEach((item) => {
+    const equipment = Controller.lootController.lootFromTable(
+      new LootTable([item]),
+      1,
+      100
+    )
+    getController().inventory.addItem(character.inventory, equipment[0])
+    getController().equipment.addEquipment(character.equipped, equipment[0])
+  })
   return character
 }

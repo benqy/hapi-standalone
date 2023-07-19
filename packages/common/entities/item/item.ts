@@ -14,10 +14,4 @@ export abstract class Item extends O implements ItemCategory {
   category3: Category = itemCategorys3.other
 
   desc = ''
-
-  //sprite地址,
-  get media() {
-    //分类3不作为路径
-    return `/static/game/items/${this.category1.name}/${this.category2.name}/${this.name}.webp`
-  }
 }
