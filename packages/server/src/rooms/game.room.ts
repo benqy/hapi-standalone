@@ -3,7 +3,9 @@ import { RoomState, CONSTANTS } from '@hapi/common'
 import { checkAuth, getUser } from '../auth'
 import { util } from '@hapi/common'
 import { getCharacter } from '../mock'
+import { actions } from '../action'
 const F = CONSTANTS.F
+
 
 export class GameRoom extends Room<RoomState.Game> {
   maxClients = 50
@@ -15,16 +17,8 @@ export class GameRoom extends Room<RoomState.Game> {
   onCreate(options: any) {
     this.setState(new RoomState.Game())
     // this.state.cards.push(new RoomState.Card())
-    this.onMessage('type', (client, message) => {
-      console.log(client.sessionId, message)
-
-      // this.clients.forEach((client) => {
-      //   client.send('begin battle', this.state.world)
-      // })
-      // this.broadcast('aaa', '1111')
-      //
-      // handle "type" message
-      //
+    this.onMessage(F.G_Start_Combat, (client, message) => {
+      // console.log(, message)
     })
   }
 

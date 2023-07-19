@@ -12,6 +12,9 @@ export enum F {
   G_JOIN = 'G_JOIN',
   //角色加载完毕
   G_Character_Data = 'G_Character_Data',
+  G_Start_Combat = 'G_Start_Combat',
+  G_Do_Tick = 'G_Do_Tick',
+  G_Do_Action = 'G_Do_Action',
 }
 
 // export const EQUIP_TYPES = {

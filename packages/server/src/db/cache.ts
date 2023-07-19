@@ -29,6 +29,13 @@ const options = {
 }
 const lruCache = new LRUCache(options)
 const CACHE_KEY = 'CACHE_KEY'
+
+
+
+const roooState = {
+
+}
+
 export const cache = {
   get<T>(key: string) : T | undefined {
     const v = lruCache.get(`${CACHE_KEY}:${key}`)
@@ -43,3 +50,4 @@ export const cache = {
     return lruCache.set(`${CACHE_KEY}:${key}`, value)
   },
 }
+

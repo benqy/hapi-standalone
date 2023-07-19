@@ -1,6 +1,6 @@
 import { RoomState, util } from '@hapi/common'
 import { cache } from '../db/cache'
-import { Userinfo } from '@hapi/common/state/userinfo.state'
+import { Userinfo } from '@hapi/common/state'
 export const setUser = (userinfo: Userinfo) => {
   cache.set(userinfo.accessToken, userinfo)
 }

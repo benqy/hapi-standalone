@@ -44,6 +44,6 @@ export const game = {
     //   console.log('加入游戏房间成功', userinfo)
     //   // userinfo.doAction()
     // })
-    console.log('game', room)
+    // console.log('game', room)
   }
 }

@@ -1,4 +1,4 @@
-import { Player } from '../entities'
+import { O } from '../core'
 import { IController } from '../interfaces'
 import { Userinfo } from '../state'
 
@@ -6,12 +6,12 @@ import { Userinfo } from '../state'
 //   console.log(this.account, this.nickname, this.accessToken)
 // }
 
-export class PlayerController implements IController{
+export class PlayerController extends O implements IController{
   constructor() {
-    console.log('PlayerController constructor')
+    super()
   }
 
   userDoAction(userinfo: Userinfo) {
-    console.log(userinfo.account, userinfo.nickname, userinfo.accessToken)
+    // console.log(userinfo.account, userinfo.nickname, userinfo.accessToken)
   }
 }

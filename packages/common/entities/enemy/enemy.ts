@@ -1,13 +1,14 @@
 import { IActor } from '../interface'
 import { O } from '../../core/base'
 import { Rarity } from '../../enum'
-import { Breed } from '../breed'
+import { Breed } from '../../components/breed'
+import { AffixProertys } from '../modifiers/affix-property'
 
 export class Enemy extends O implements IActor {
   constructor() {
     super()
   }
-  public Rarity: Rarity = Rarity.common
+  public rarity: Rarity = Rarity.common
   public attack: number = 5
   public evasion = 67
   public maxHealth: number = 22
@@ -17,13 +18,8 @@ export class Enemy extends O implements IActor {
   name: string = 'BUG'
   currentHealth: number
   breed: Breed
+  affixProertys = new AffixProertys()
 
-  doTick(): void {
-    console.log('enemy tick')
-  }
-  doAction(): void {
-    console.log('enemy action')
-  }
 
   media = `/static/game/enemy/${this.name}.webp`
 

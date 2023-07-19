@@ -23,13 +23,14 @@ import { Client } from 'colyseus'
 // }
 
 export class Game extends Schema {
-  @type('string') owner: string
+  @type('string') playerId: string
 
   // @filter<Game, any, Schema>(function (this: Game, client: Client) {
   //   console.log(this, client, 444)
   //   return true
   // })
-  update() {
-    console.log('update')
-  }
+
+  @type('string') ownerId: string
+
+
 }

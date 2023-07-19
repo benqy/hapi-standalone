@@ -6,6 +6,7 @@ import {
   EquipmentController,
   InventoryController,
   ItemController,
+  EnemyController,
 } from '../controller'
 export * from './base'
 
@@ -18,6 +19,7 @@ export const getController = () => {
     equipment: controllerFactory.get<EquipmentController>(EquipmentController),
     inventory: controllerFactory.get<InventoryController>(InventoryController),
     item: controllerFactory.get<ItemController>(ItemController),
+    enemy: controllerFactory.get<EnemyController>(EnemyController),
   }
 }
 
