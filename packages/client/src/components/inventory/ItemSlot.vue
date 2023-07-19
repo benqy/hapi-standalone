@@ -1,22 +1,7 @@
 <script setup lang="ts">
-import type { Item } from '@hapi/common/entities'
-
 defineProps<{
   id: string
-  item?: Item
-  // slot: {
-  //     type: [Number, String]
-  //   },
-  //   type: {
-  //     type: String,
-  //     default: 'item'
-  //   },
-  //   item: {
-  //     type: Object,
-  //     default() {
-  //       return null
-  //     }
-  //   }
+  item?: any
 }>()
 </script>
 <template>
@@ -28,10 +13,10 @@ defineProps<{
   >
     <div class="content">
       <slot></slot>
-      <!-- <div v-if="item" class="itemContent" ref="contentEl">
+      <div v-if="item" class="itemContent" ref="contentEl">
         <div class="names">
-          <p>{{ item.text }}</p>
-          <p>{{ $t(item.rarity) }} {{ $t(`equipbase.${item.type}`) }}</p>
+          <p>{{ item.name }}</p>
+          <p>{{ $t(item.rarity) }} {{ $t(`category2.${item.category2.name}`) }}</p>
           <p>物品等级:{{ item.itLevel }}</p>
         </div>
         ----
@@ -48,7 +33,7 @@ defineProps<{
           <p>可交易</p>
           <p>装备唯一</p>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -63,12 +48,15 @@ defineProps<{
   border: 3px solid;
   border-color: saddlebrown;
 }
+.item-slot:hover .itemContent {
+  display: block;
+}
 .meta {
   padding: 15px 5px 5px 15px;
-  p {
-    font-size: 12px;
-    text-align: right;
-  }
+}
+.meta p {
+  font-size: 12px;
+  text-align: right;
 }
 .desc {
   font-size: 10px;
@@ -81,10 +69,10 @@ defineProps<{
 }
 .names {
   line-height: 1.5;
-  :first-child {
-    font-size: 18px;
-    font-weight: bold;
-    color: saddlebrown;
-  }
+}
+.names :first-child {
+  font-size: 18px;
+  font-weight: bold;
+  color: saddlebrown;
 }
 </style>

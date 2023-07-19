@@ -1,29 +1,21 @@
 <script setup lang="ts">
 import type { Intenvory } from '@hapi/common/entities/inventory'
 import ItemSlot from './ItemSlot.vue'
-import {game} from '@/game/index'
-// import { ui } from '@/lib/ui'
-const props = defineProps<{
+import { game } from '@/game/index'
+defineProps<{
   inventory: Intenvory
 }>()
-
-// console.log(JSON.stringify(props.inventory), 4)
 </script>
 
 <template>
   <div className="inventory">
     <ItemSlot
-      v-for="(item,key) in inventory.items"
+      v-for="(item, key) in inventory.items"
       :id="key.toString()"
       :key="key"
       :item="inventory.items[key]"
     >
-    <div v-if="item">{{  }}</div>
-      <img
-        v-if="item"
-        class="slot-item"
-        :src="game.c.item.getMedia(item)"
-      />
+      <img v-if="item" class="slot-item" :src="game.c.item.getMedia(item)" />
     </ItemSlot>
   </div>
 </template>
@@ -44,10 +36,10 @@ const props = defineProps<{
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
-  .being-moved img,
-  .being-moved .itemContent {
-    display: none;
-  }
+}
+.being-moved img,
+.being-moved .itemContent {
+  display: none;
 }
 
 /*物品栏*/
@@ -60,9 +52,6 @@ const props = defineProps<{
   background: url('@/assets/img/ui/23.png') no-repeat;
   background-size: contain;
   padding: 2px;
-  &:hover .itemContent {
-    display: block;
-  }
 }
 
 .item-slot.empty {

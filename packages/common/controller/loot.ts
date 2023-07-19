@@ -116,7 +116,7 @@ class LootController {
         .sort((a, b) => a.position - b.position)
       // console.log(this)
       const equipment = new Equipment(values)
-      // equipment.name = tierName + 'BUG'
+      equipment.name = tierName + '无名装备'
       return equipment
     }
   }
