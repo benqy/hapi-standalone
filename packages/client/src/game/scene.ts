@@ -14,7 +14,7 @@ export class Scene {
   enemys: Enemy[] = []
   player = ref(new Player())
   level = 1
-  inCombat = false
+  inCombat = ref(false)
   room: Room<RoomState.Game>
   // #combatTimer = null
 

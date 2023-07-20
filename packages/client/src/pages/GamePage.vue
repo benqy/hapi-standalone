@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="game" v-if="player.character">
-    <CombantRoom v-if="game.scene.inCombat"></CombantRoom>
+    <CombantRoom v-if="game.scene.inCombat.value"></CombantRoom>
     <CharacterPad v-if="ui.state.characterShow.value"></CharacterPad>
     <CharacterInvertory
       v-if="ui.state.inventoryShow.value"

@@ -1,26 +1,21 @@
 <script setup lang="ts">
 import type { IActor } from '@hapi/common/entities/interface'
 import ActorAvator from './ActorAvator.vue'
-import { IMG_DIR } from '@hapi/common/constants';
+import { IMG_DIR } from '@hapi/common/constants'
 
 interface IProps {
-  size: string
   actor: IActor
+  size: string
 }
 
 withDefaults(defineProps<IProps>(), {
-  size: 'small',
-  src: {
-    media: `${IMG_DIR}/enemy/11.webp`,
-    maxHealth: 100,
-    currentHealth: 90
-  }
+  size: 'small'
 })
 </script>
 
 <template>
-  <div class="actor animate__headShake">
-    <ActorAvator :src="actor.media"></ActorAvator>
+  <div class="actor">
+    <ActorAvator :src="actor.media" :size="size"></ActorAvator>
     <div class="info">
       <div class="actor-name">100级 大保健箱</div>
       <div class="actor-hp">

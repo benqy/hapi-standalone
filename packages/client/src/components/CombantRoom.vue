@@ -10,50 +10,12 @@ import { game } from '@/game'
         <div class="battle-row boss">
           <ActorInfo :actor="game.scene.mainEnemy"></ActorInfo>
         </div>
-        <div class="battle-row common">
-          <!-- <ActorInfo
-            :actor="{
-              media: '/static/game/enemy/12.webp',
-              maxHealth: 100,
-              currentHealth: 90
-            }"
-          ></ActorInfo>
-          >
-          <ActorInfo
-            :actor="{
-              media: '/static/game/enemy/12.webp',
-              maxHealth: 100,
-              currentHealth: 90
-            }"
-          ></ActorInfo>
-          >
-          <ActorInfo
-            :unit="{
-              media: '/static/game/enemy/12.webp',
-              maxHealth: 100,
-              currentHealth: 90
-            }"
-          ></ActorInfo> -->
+        <div class="battle-row common">       
         </div>
       </div>
       <div class="arena"></div>
       <div class="player">
-        <div class="battle-row summon">
-          <!-- <ActorInfo
-            :unit="{
-              media: '/static/game/enemy/101.webp',
-              maxHealth: 100,
-              currentHealth: 90
-            }"
-          ></ActorInfo>
-          >
-          <ActorInfo
-            :unit="{
-              media: '/static/game/enemy/102.webp',
-              maxHealth: 100,
-              currentHealth: 90
-            }"
-          ></ActorInfo> -->
+        <div class="battle-row summon">         
         </div>
         <div class="battle-row player">
           <ActorInfo :actor="game.character"></ActorInfo>

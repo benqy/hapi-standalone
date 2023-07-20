@@ -25,13 +25,9 @@ export class GameRoom extends Room<RoomState.Game> {
     this.setState(new RoomState.Game())
     // this.state.cards.push(new RoomState.Card())
     this.onMessage(F.G_Start_Combat, (client, message) => {
-      gameController.start()
-
-      console.log(gameController, 1)
-      client.send(F.G_Start_Combat, {
-        mainEnemy: gameController.mainEnemy,
-        enemys: gameController.enemys,
-      })
+      gameController.stop()
+      const res = gameController.start()
+      client.send(res.action, res)
     })
   }
 

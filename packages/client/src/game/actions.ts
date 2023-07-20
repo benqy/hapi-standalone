@@ -1,7 +1,7 @@
 import { F } from '@hapi/common/constants'
-import { Character } from '@hapi/common/entities'
+import { Character, Userinfo } from '@hapi/common/entities'
+import type { IRes } from '@hapi/common/interfaces'
 import { game } from './game'
-import { Userinfo } from '@hapi/common/entities'
 import { Room } from 'colyseus.js'
 // import { Intenvory } from '@hapi/common/entities/inventory'
 // import { PlayerController } from '@hapi/common/controller'
@@ -18,11 +18,17 @@ export const actions = {
     console.log(character, 111)
     game.player.character = character
   },
-  [F.G_Start_Combat]: (data:any) => {
-    game.scene.mainEnemy = data.mainEnemy
-    game.scene.enemys = data.enemys
-    game.scene.inCombat = true
-    console.log(game.scene.mainEnemy,game.scene.enemys,5)
+  [F.G_Start_Combat]: (res:IRes) => {
+    console.log(res,4)
+    if(res.code !== 200) {
+      console.log(res.msg)
+    }
+    else {
+      game.scene.mainEnemy = res.actionData.mainEnemy
+      game.scene.enemys = res.actionData.enemys
+      game.scene.inCombat.value = true
+      console.log(game.scene.mainEnemy,game.scene.enemys,5)
+    }
   }
 }
 

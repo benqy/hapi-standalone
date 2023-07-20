@@ -54,6 +54,10 @@ export const game = {
     // console.log('game', room)
   },
   startCombat() {
-    this.room?.send(F.G_Start_Combat)
+    this.room?.send(F.G_Start_Combat, {
+      map: '01',
+      stage: '03',
+      xx: '04'
+    })
   }
 }
