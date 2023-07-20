@@ -5,7 +5,7 @@ import { IMG_DIR } from '@hapi/common/constants'
 
 interface IProps {
   actor: IActor
-  size: string
+  size?: string
 }
 
 withDefaults(defineProps<IProps>(), {

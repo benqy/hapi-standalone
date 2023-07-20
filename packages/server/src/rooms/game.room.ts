@@ -8,8 +8,8 @@ import { Player } from '@hapi/common/entities'
 import { CombatController } from '../controllers/combat.controller'
 
 const F = CONSTANTS.F
-
-const gameController = new CombatController()
+let gameController:CombatController = new CombatController()
+let firstTick = true
 export class GameRoom extends Room<RoomState.Game> {
   maxClients = 1
 
@@ -26,7 +26,10 @@ export class GameRoom extends Room<RoomState.Game> {
     // this.state.cards.push(new RoomState.Card())
     this.onMessage(F.G_Start_Combat, (client, message) => {
       gameController.stop()
-      const res = gameController.start()
+      const res = gameController.start(this.state.player.character)
+      if(res.code === 200) {
+        this.setSimulationInterval((deltaTime) => this.update(deltaTime),1500)
+      }
       client.send(res.action, res)
     })
   }
@@ -54,8 +57,32 @@ export class GameRoom extends Room<RoomState.Game> {
     console.log('room', this.roomId, 'disposing... game')
   }
 
-  // handleTick = () => {
-  //   console.log('tick')
-  //   this.state.update()
-  // }
+
+  update(deltaTime: number) {
+    if(firstTick) {
+      firstTick = false
+      this.firstTick(deltaTime)
+    }
+    this.beforeTick(deltaTime)
+    this.doTick(deltaTime)
+    this.afterTick(deltaTime)
+  }
+
+  firstTick(deltaTime: number){
+    console.log('game loop start')
+    gameController.doTick(deltaTime)
+    // console.log('firstTick',deltaTime)
+  }
+
+  beforeTick(deltaTime: number){
+    // console.log('beforeTick',deltaTime)
+  }
+
+  doTick(deltaTime: number){
+    // console.log('doTick',deltaTime)
+  }
+
+  afterTick(deltaTime: number){
+    // console.log('afterTick',deltaTime)
+  }
 }
