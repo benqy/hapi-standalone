@@ -2,7 +2,7 @@
 import { IMG_DIR } from '@/game'
 
 interface IProps {
-  size: string
+  size?: string
   src: string
 }
 

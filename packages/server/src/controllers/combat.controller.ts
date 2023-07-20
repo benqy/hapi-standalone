@@ -53,8 +53,14 @@ export class CombatController implements TickAble{
   }
 
   doTick(deltaTime: number) {
-    getController().character.doTick(deltaTime)
+    const c = getController()
+    c.character.doTick(deltaTime)
     console.log('doTick', this.char)
+    this.char.currentSkills.forEach(skill=>{
+      // console.log(typeof skill, skill)
+      c.skill.add(skill)
+      c.skill.doTick(deltaTime)
+    })
   }
 
   doAction(deltaTime: number) {

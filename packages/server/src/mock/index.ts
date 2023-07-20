@@ -2,6 +2,7 @@ import { Entity, Controller } from '@hapi/common'
 import { LootTable } from '@hapi/common/components/loot-table'
 import { getController } from '@hapi/common/core'
 import { equipmentFromCategorys2, itemCategorys2 } from '@hapi/common/data'
+import { FireBallSkill } from '@hapi/common/entities'
 
 export const getCharacter = () => {
   const character = new Entity.Character()
@@ -22,5 +23,6 @@ export const getCharacter = () => {
     )
     getController().inventory.addItem(character.inventory, equipment[0])
   })
+  character.currentSkills.push(new FireBallSkill())
   return character
 }

@@ -15,7 +15,7 @@ withDefaults(defineProps<IProps>(), {
 
 <template>
   <div class="actor">
-    <ActorAvator :src="actor.media" :size="size"></ActorAvator>
+    <ActorAvator :src="actor.media"></ActorAvator>
     <div class="info">
       <div class="actor-name">100级 大保健箱</div>
       <div class="actor-hp">
