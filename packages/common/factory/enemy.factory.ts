@@ -1,6 +1,7 @@
 import { Enemy } from '../entities/enemy/enemy'
 import { Rarity } from '../enum'
-import { Breed, Orc } from '../components'
+import { Orc } from '../components'
+import { FireBallSkill } from '../entities'
 
 export class EnemyFactory {
   constructor(public config = {}) {}
@@ -16,6 +17,7 @@ export class EnemyFactory {
     enemy.attack *= Math.floor(Math.pow(level, Math.pow(level, 0.2) - 1.23))
     enemy.experience *= Math.floor(Math.pow(level, Math.pow(level, 0.1) - 0.1))
     enemy.armour *= Math.floor(Math.pow(level, Math.pow(level, 0.235) - 1.3))
+    enemy.currentSkills.push(new FireBallSkill())
     return enemy
   }
 }

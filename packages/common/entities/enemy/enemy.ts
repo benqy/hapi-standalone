@@ -4,26 +4,26 @@ import { Rarity } from '../../enum'
 import { Breed } from '../../components/breed'
 import { AffixProertys } from '../modifiers/affix-property'
 import { IMG_DIR } from '../../constants'
+import { Skill } from '../skill'
 
 export class Enemy extends O implements IActor {
   constructor() {
     super()
   }
-  public rarity: Rarity = Rarity.common
-  public attack: number = 5
-  public evasion = 67
-  public maxHealth: number = 22
-  public experience = 20
-  public armour = 22
-  public level: number = 1
+  rarity: Rarity = Rarity.common
+  attack: number = 5
+  evasion = 67
+  maxHealth: number = 22
+  experience = 20
+  armour = 22
+  level: number = 1
   name: string = 'BUG'
   currentHealth: number
   breed: Breed
   affixProertys = new AffixProertys()
-
-
   media = `${IMG_DIR}/enemy/${this.name}.webp`
-
+  currentSkills: Skill[] = []
+  
   //掉落稀有度倍率
   get iir() {
     switch (this.rarity) {

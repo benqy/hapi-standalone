@@ -1,8 +1,9 @@
-import { Character, Enemy } from "@hapi/common/entities"
+import { Character, Enemy, Skill } from "@hapi/common/entities"
 import { CONSTANTS, factory } from "@hapi/common"
 import { Rarity } from "@hapi/common/enum"
 import { IRes,TickAble } from "@hapi/common/interfaces"
 import { getController } from "@hapi/common/core"
+import { IActor } from "@hapi/common/entities/interface"
 const F = CONSTANTS.F
 export class CombatController implements TickAble{
   constructor(){
@@ -30,9 +31,9 @@ export class CombatController implements TickAble{
       this.inCombat = true
       this.char = character
       this.mainEnemy =  this.enemyFactory.create({level: 5, baseName: '无名', rarity: Rarity.unique})
-      this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
-      this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
-      this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))
+      // this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
+      // this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
+      // this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))
       return {
         code: 200,
         msg: 'ok',
@@ -52,15 +53,21 @@ export class CombatController implements TickAble{
     }
   }
 
+  excute(caster:IActor, skill: Skill, target?: IActor) {
+    console.log(`${caster.name} 对 ${target.name} 释放 ${skill.name}`)
+  }
+
   doTick(deltaTime: number) {
     const c = getController()
     c.character.doTick(deltaTime)
-    console.log('doTick', this.char)
+    console.log('combat:doTick')
     this.char.currentSkills.forEach(skill=>{
-      // console.log(typeof skill, skill)
-      c.skill.add(skill)
-      c.skill.doTick(deltaTime)
+      this.excute(this.char,skill,this.mainEnemy)
     })
+    this.mainEnemy.currentSkills.forEach(skill=>{
+      this.excute(this.mainEnemy,skill,this.char)
+    })
+    // c.skill.doTick(deltaTime,this.mainEnemy)
   }
 
   doAction(deltaTime: number) {

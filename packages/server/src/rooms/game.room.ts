@@ -44,7 +44,7 @@ export class GameRoom extends Room<RoomState.Game> {
       this.state.player.userinfo = userinfo
       this.state.player.character = character
       this.state.playerId = character.id
-      console.log(this, userinfo.nickname)
+      console.log(userinfo.nickname)
       client.send(F.G_Character_Data, character)
     }
   }
