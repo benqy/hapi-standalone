@@ -28,7 +28,7 @@ export class GameRoom extends Room<RoomState.Game> {
       gameController.stop()
       const res = gameController.start(this.state.player.character)
       if(res.code === 200) {
-        this.setSimulationInterval((deltaTime) => this.update(deltaTime),1500)
+        this.setSimulationInterval((deltaTime) => this.update(deltaTime),300)
       }
       client.send(res.action, res)
     })
@@ -70,7 +70,6 @@ export class GameRoom extends Room<RoomState.Game> {
 
   firstTick(deltaTime: number){
     console.log('game loop start')
-    gameController.doTick(deltaTime)
     // console.log('firstTick',deltaTime)
   }
 
@@ -79,6 +78,7 @@ export class GameRoom extends Room<RoomState.Game> {
   }
 
   doTick(deltaTime: number){
+    gameController.doTick(deltaTime)
     // console.log('doTick',deltaTime)
   }
 

@@ -15,10 +15,10 @@ export class CharacterController implements IController, TickAble {
   }
 
   doTick(deltaTime: number) {
-    console.log('char doTick')
+    // console.log('char doTick')
   }
 
   doAction(deltaTime: number) {
-    console.log('doAction')
+    // console.log('doAction')
   }
 }
