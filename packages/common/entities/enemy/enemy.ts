@@ -18,7 +18,7 @@ export class Enemy extends O implements IActor {
   armour = 22
   level: number = 1
   name: string = 'BUG'
-  currentHealth: number
+  currentHealth: number = 22
   breed: Breed
   affixProertys = new AffixProertys()
   media = `${IMG_DIR}/enemy/${this.name}.webp`

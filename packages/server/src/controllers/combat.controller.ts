@@ -31,9 +31,10 @@ export class CombatController implements TickAble {
       this.char = character
       this.mainEnemy = this.enemyFactory.create({
         level: 5,
-        baseName: '无名',
+        baseName: '首领',
         rarity: Rarity.unique,
       })
+      console.log(this.mainEnemy)
       // this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
       // this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
       // this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))

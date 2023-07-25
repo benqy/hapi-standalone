@@ -5,6 +5,7 @@ import { AffixProertys } from '../modifiers/affix-property'
 import { Intenvory } from '../inventory'
 import { IMG_DIR } from '../../constants'
 import { Skill } from '../skill'
+import { Breed, PlayerBreed } from '../../components'
 
 export class Character extends O implements IActor {
   constructor() {
@@ -13,8 +14,8 @@ export class Character extends O implements IActor {
 
   name = 'BUG'
   maxHealth = 100
-  health = 100
-  currentHealth: number
+  breed: Breed = new PlayerBreed()
+  currentHealth: number = 100
   media: string = `${IMG_DIR}/enemy/100.webp`
   inventory = new Intenvory(168)
 
