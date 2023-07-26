@@ -23,6 +23,8 @@ export const actions = {
   },
   [F.G_Start_Combat]: (data: any) => {
     console.log(data)
+  },
+  [F.G_Add_Item]:(data: any) => {
   }
 }
 

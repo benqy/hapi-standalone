@@ -1,7 +1,7 @@
 import { getController } from '../core'
 import { Enemy, Skill } from '../entities'
 import { IActor } from '../entities/interface'
-import { IController, TickAble } from '../interfaces'
+import { IController } from '../interfaces'
 import { getArmourDR } from '../util'
 export class SkillController implements IController {
   calcDamage(caster: IActor, skill: Skill, target?: IActor) {
@@ -9,7 +9,8 @@ export class SkillController implements IController {
     const attack =
       c.affix.getProerty(caster.affixProertys, 'damage.add') *
       (1 + c.affix.getProerty(caster.affixProertys, 'damage.increase')) *
-      (1 + c.affix.getProerty(caster.affixProertys, 'damage.more'))
+      (1 + c.affix.getProerty(caster.affixProertys, 'damage.more')) * 
+      skill.percent
     return attack
   }
 
@@ -29,7 +30,7 @@ export class SkillController implements IController {
     const armourDR = getArmourDR(attack, this.calcArmour(target))
     // console.log(attack, this.calcArmour(target), armourDR)
     const damage = Math.max(Math.floor(attack * (1 - armourDR)),0)
-    target.currentHealth -= Math.max(damage, 0)
+    target.currentHealth = Math.max(target.currentHealth - damage, 0)
 
     console.log(`${caster.name} 对 ${target.name} 释放 ${skill.name}, 造成了${damage}点伤害, 剩余血量${target.currentHealth}`)
     if(target.currentHealth <= 0) {

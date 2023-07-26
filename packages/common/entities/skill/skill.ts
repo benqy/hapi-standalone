@@ -9,6 +9,6 @@ export abstract class Skill {
   currentAttackTime:number = 0
   actionRequired:boolean = false
   maxLevel:number = 5
-  coefficient = 0.1
+  percent = 1
   // caster: IActor
 }

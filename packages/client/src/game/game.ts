@@ -47,6 +47,7 @@ export const game = {
       actions.G_Character_Data(character)
     )
     room.onMessage(F.G_Start_Combat, (data) => actions.G_Start_Combat(data))
+    room.onMessage(F.G_Add_Item, (data) => actions.G_Add_Item(data))
     // room.onMessage<Userinfo>(F.G_JOIN, (userinfo) => {
     //   console.log('加入游戏房间成功', userinfo)
     //   // userinfo.doAction()

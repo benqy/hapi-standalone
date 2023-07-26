@@ -1,5 +1,6 @@
 import { RoomState } from '@hapi/common'
 import { LRUCache } from 'lru-cache'
+import { GameRoom } from '../rooms/game.room'
 const options = {
   max: 500,
 
@@ -31,12 +32,12 @@ const options = {
 const lruCache = new LRUCache(options)
 const CACHE_KEY = 'CACHE_KEY'
 
-export type GameRoomStates = {
-  [x: string]: RoomState.Game
-}
+// export type Rooms = {
+//   [x: string]: GameRoom
+// }
 
 //根据房间用户id缓存房间
-// export const roomCache: Map<string, RoomState.Game> = new Map()
+export const rooms: Map<string, GameRoom> = new Map()
 
 export const cache = {
   get<T>(key: string): T | undefined {
@@ -50,4 +51,13 @@ export const cache = {
   set(key: string, value: any) {
     return lruCache.set(`${CACHE_KEY}:${key}`, value)
   },
+  addGameRoom(gameRoom:GameRoom){
+    rooms.set(gameRoom.roomId,gameRoom)
+  },
+  getGameRoom(roomId:string){
+    return rooms.get(roomId)
+  },
+  deleteGameRoom(roomId:string){
+    return rooms.delete(roomId)
+  }
 }

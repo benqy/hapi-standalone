@@ -1,5 +1,5 @@
 import { F } from '@hapi/common/constants'
-import { Character, Userinfo } from '@hapi/common/entities'
+import { Character, Item, Userinfo } from '@hapi/common/entities'
 import type { IRes } from '@hapi/common/interfaces'
 import { game } from './game'
 import { Room } from 'colyseus.js'
@@ -29,6 +29,10 @@ export const actions = {
       game.scene.inCombat.value = true
       console.log(game.scene.mainEnemy,game.scene.enemys,5)
     }
+  },
+  [F.G_Add_Item]:(items: Item[]) => {
+    console.log('add', items)
+    game.c.inventory.addItem(game.character.inventory, items[0])
   }
 }
 

@@ -6,13 +6,14 @@ import { getCharacter } from '../mock'
 import { actions } from '../action'
 import { Player } from '@hapi/common/entities'
 import { CombatController } from '../controllers/combat.controller'
+import { cache } from '../db/cache'
+
 
 const F = CONSTANTS.F
-let gameController:CombatController = new CombatController()
-let firstTick = true
 export class GameRoom extends Room<RoomState.Game> {
   maxClients = 1
-
+  firstTickExcuted = false
+  gameController: CombatController
   async onAuth(client: Client, options: any) {
     if (this.clients.length <= 1) {
       return checkAuth(options.accessToken)
@@ -23,10 +24,12 @@ export class GameRoom extends Room<RoomState.Game> {
 
   onCreate(options: any) {
     this.setState(new RoomState.Game())
+    this.gameController = new CombatController(this.roomId)
+    cache.addGameRoom(this)
     // this.state.cards.push(new RoomState.Card())
     this.onMessage(F.G_Start_Combat, (client, message) => {
-      gameController.stop()
-      const res = gameController.start(this.state.player.character)
+      this.gameController.stop()
+      const res = this.gameController.start(this.state.player.character)
       if(res.code === 200) {
         this.setSimulationInterval((deltaTime) => this.update(deltaTime),300)
       }
@@ -54,13 +57,14 @@ export class GameRoom extends Room<RoomState.Game> {
   }
 
   onDispose() {
-    console.log('room', this.roomId, 'disposing... game')
+    console.log(this.roomId, '游戏房间关闭')
+    cache.deleteGameRoom(this.roomId)
   }
 
 
   update(deltaTime: number) {
-    if(firstTick) {
-      firstTick = false
+    if(this.firstTickExcuted) {
+      this.firstTickExcuted = true
       this.firstTick(deltaTime)
     }
     this.beforeTick(deltaTime)
@@ -78,7 +82,7 @@ export class GameRoom extends Room<RoomState.Game> {
   }
 
   doTick(deltaTime: number){
-    gameController.doTick(deltaTime)
+    this.gameController.doTick(deltaTime)
     // console.log('doTick',deltaTime)
   }
 

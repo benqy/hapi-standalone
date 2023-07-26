@@ -3,12 +3,13 @@ import { CONSTANTS, factory } from '@hapi/common'
 import { Rarity } from '@hapi/common/enum'
 import { IRes, TickAble } from '@hapi/common/interfaces'
 import { getController } from '@hapi/common/core'
-import { IActor } from '@hapi/common/entities/interface'
+import { lootController } from '@hapi/common/controller'
+import { cache } from '../db/cache'
 const F = CONSTANTS.F
 export class CombatController implements TickAble {
-  constructor() {
+  constructor(public gameRoomId: string) {
     this.enemyFactory = new factory.EnemyFactory()
-  }
+  }  
 
   enemyFactory: factory.EnemyFactory
 
@@ -17,6 +18,10 @@ export class CombatController implements TickAble {
   inCombat = false
   actionRequired = false
   char: Character
+
+  get gameRoom() {
+    return cache.getGameRoom(this.gameRoomId)
+  }
 
   stop() {
     this.inCombat = false
@@ -79,6 +84,7 @@ export class CombatController implements TickAble {
       if (skill.actionRequired) {
         if(this.mainEnemy.currentHealth > 0){
           c.skill.excute(this.char, skill, this.mainEnemy)
+            
         }
       }
     })
@@ -94,6 +100,10 @@ export class CombatController implements TickAble {
   }
 
   loot(enemy:Enemy) {
+    const items = lootController.loot(this.mainEnemy)
+    console.log(items)
+    this.gameRoom.broadcast(F.G_Add_Item, items)
+    getController().inventory.addItem(this.char.inventory, items[0])
     console.log(`${this.mainEnemy.breed.name} ${this.mainEnemy.name} 已死亡, 获取战利品`)
   }
 
