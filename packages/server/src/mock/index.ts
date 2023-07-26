@@ -26,7 +26,7 @@ export const getCharacter = () => {
   character.currentSkills.push(new FireBallSkill())
   character.maxHealth = 1000
   character.currentHealth = 1000
-  character.affixProertys.properties.set('damage.add', 5)
+  character.affixProertys.properties.set('damage.add', 10)
 
   console.log(character.equipped.affixProertys,character.affixProertys)
   return character

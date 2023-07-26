@@ -59,15 +59,15 @@ export class CombatController implements TickAble {
 
   doTick(deltaTime: number) {
     const c = getController()
+    if(!this.inCombat) return
     c.character.doTick(deltaTime)
     this.char.currentSkills.forEach((skill) => {
       c.skill.doTick(deltaTime, skill)
-      // c.skill.excute(this.char,skill,this.mainEnemy)
     })
-    this.mainEnemy.currentSkills.forEach((skill) => {
-      c.skill.doTick(deltaTime, skill)
-      // c.skill.excute(this.mainEnemy,skill,this.char)
-    })
+    // this.mainEnemy.currentSkills.forEach((skill) => {
+    //   c.skill.doTick(deltaTime, skill)
+    //   // c.skill.excute(this.mainEnemy,skill,this.char)
+    // })
     this.doAction(deltaTime)
     // c.skill.doTick(deltaTime,this.mainEnemy)
   }
@@ -77,7 +77,9 @@ export class CombatController implements TickAble {
     c.character.doTick(deltaTime)
     this.char.currentSkills.forEach((skill) => {
       if (skill.actionRequired) {
-        c.skill.excute(this.char, skill, this.mainEnemy)
+        if(this.mainEnemy.currentHealth > 0){
+          c.skill.excute(this.char, skill, this.mainEnemy)
+        }
       }
     })
     this.mainEnemy.currentSkills.forEach((skill) => {
@@ -85,6 +87,25 @@ export class CombatController implements TickAble {
         c.skill.excute(this.mainEnemy, skill, this.char)
       }
     })
+    if(this.mainEnemy.currentHealth <= 0) {
+      this.loot(this.mainEnemy)
+      this.stopCombat()
+    }
+  }
+
+  loot(enemy:Enemy) {
+    console.log(`${this.mainEnemy.breed.name} ${this.mainEnemy.name} 已死亡, 获取战利品`)
+  }
+
+  stopCombat() {
+    this.inCombat = false
+    this.mainEnemy = null
+    this.enemys = []
+    this.char = null
+  }
+
+  spawnEnemy() {
+    console.log('spawn')
   }
 
   // doCombatTick(){
