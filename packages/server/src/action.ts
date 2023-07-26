@@ -1,6 +1,5 @@
 import { F } from '@hapi/common/constants'
 import { Character } from '@hapi/common/entities'
-import { game } from './game'
 import { Userinfo } from '@hapi/common/entities'
 import { Room } from 'colyseus.js'
 // import { Intenvory } from '@hapi/common/entities/inventory'
@@ -25,6 +24,7 @@ export const actions = {
     console.log(data)
   },
   [F.G_Add_Item]:(data: any) => {
+    
   }
 }
 

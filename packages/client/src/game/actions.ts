@@ -33,6 +33,11 @@ export const actions = {
   [F.G_Add_Item]:(items: Item[]) => {
     console.log('add', items)
     game.c.inventory.addItem(game.character.inventory, items[0])
+  },
+  [F.G_EXCUTE_SKILL]: (data: any) => {
+    console.log(data)
+    const enemyHpBar:any = document.querySelector('.inner')
+    enemyHpBar.style.width = data.target.currentHealth / data.target.maxHealth * 100 + '%'
   }
 }
 

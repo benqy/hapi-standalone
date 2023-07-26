@@ -17,6 +17,7 @@ export enum F {
   G_Do_Tick = 'G_Do_Tick',
   G_Do_Action = 'G_Do_Action',
   G_Add_Item = 'G_Add_Item',
+  G_EXCUTE_SKILL = 'G_EXCUTE_SKILL',
 }
 
 // export const EQUIP_TYPES = {

@@ -84,7 +84,8 @@ export class CombatController implements TickAble {
       if (skill.actionRequired) {
         if(this.mainEnemy.currentHealth > 0){
           c.skill.excute(this.char, skill, this.mainEnemy)
-            
+          this.gameRoom.broadcast(F.G_EXCUTE_SKILL, {skill,target:this.mainEnemy})
+          
         }
       }
     })

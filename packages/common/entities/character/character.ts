@@ -18,6 +18,7 @@ export class Character extends O implements IActor {
   currentHealth: number = 100
   media: string = `${IMG_DIR}/enemy/100.webp`
   inventory = new Intenvory(168)
+  level: 1
   isDeath = false
   //角色基础战斗数据
   affixProertys = new AffixProertys()

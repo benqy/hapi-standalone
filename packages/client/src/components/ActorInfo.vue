@@ -17,7 +17,7 @@ withDefaults(defineProps<IProps>(), {
   <div class="actor">
     <ActorAvator :src="actor.media"></ActorAvator>
     <div class="info">
-      <div class="actor-name">100级 大保健箱</div>
+      <div class="actor-name">{{actor.level}}级 {{ actor.breed.name }} {{ actor.name }}</div>
       <div class="actor-hp">
         <div
           class="inner"
