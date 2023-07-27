@@ -46,8 +46,8 @@ export class CombatController implements TickAble {
         msg: 'ok',
         action: F.G_Start_Combat,
         actionData: {
-          mainEnemy: this.mainEnemy,
-          enemys: this.enemys,
+          // mainEnemy: this.mainEnemy,
+          // enemys: this.enemys,
         },
       }
     }
@@ -106,18 +106,11 @@ export class CombatController implements TickAble {
   }
 
   loot(enemy:Enemy) {
-    const items = lootController.loot(this.mainEnemy)
+    const items = lootController.loot(enemy)
     console.log(items)
     this.gameRoom.broadcast(F.G_Add_Item, items)
     getController().inventory.addItem(this.char.inventory, items[0])
     console.log(`${this.mainEnemy.breed.name} ${this.mainEnemy.name} 已死亡, 获取战利品`)
-  }
-
-  stopCombat() {
-    this.inCombat = false
-    this.mainEnemy = null
-    this.enemys = []
-    this.char = null
   }
 
   spawnEnemy() {
@@ -127,7 +120,7 @@ export class CombatController implements TickAble {
       baseName: '首领',
       rarity: Rarity.unique,
     })
-    console.log('生成怪物:',this.mainEnemy)
+    this.gameRoom.broadcast(F.G_SPANW_ENEMY, this.mainEnemy)
   }
 
   // doCombatTick(){

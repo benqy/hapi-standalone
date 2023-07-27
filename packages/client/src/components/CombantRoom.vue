@@ -8,7 +8,7 @@ import { game } from '@/game'
     <div class="battle-area">
       <div class="enemy">
         <div class="battle-row boss">
-          <ActorInfo :actor="game.scene.mainEnemy"></ActorInfo>
+          <ActorInfo v-if="game.scene.mainEnemy.value" :actor="game.scene.mainEnemy.value"></ActorInfo>
         </div>
         <div class="battle-row common">       
         </div>

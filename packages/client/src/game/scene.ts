@@ -10,7 +10,7 @@ export class Scene {
   owner: Player
   players: Player[] = []
   characters: Character[] = []
-  mainEnemy: Enemy
+  mainEnemy:any = ref(null)
   enemys: Enemy[] = []
   player = ref(new Player())
   level = 1

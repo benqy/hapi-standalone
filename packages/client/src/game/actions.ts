@@ -15,17 +15,15 @@ export const actions = {
     // game.c.play.userDoAction(userinfo)
   },
   [F.G_Character_Data]: (character: Character) => {
-    console.log(character, 111)
     game.player.character = character
   },
   [F.G_Start_Combat]: (res:IRes) => {
-    console.log(res,4)
     if(res.code !== 200) {
       console.log(res.msg)
     }
     else {
-      game.scene.mainEnemy = res.actionData.mainEnemy
-      game.scene.enemys = res.actionData.enemys
+      // game.scene.mainEnemy = res.actionData.mainEnemy
+      // game.scene.enemys = res.actionData.enemys
       game.scene.inCombat.value = true
       // console.log(game.scene.mainEnemy,game.scene.enemys,5)
     }
@@ -36,7 +34,14 @@ export const actions = {
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
     const enemyHpBar = document.querySelector<HTMLElement>('.inner')
-    enemyHpBar.style.width = data.target.currentHealth / data.target.maxHealth * 100 + '%'
+    const damage = game.scene.mainEnemy.value.currentHealth - data.target.currentHealth
+    console.log(`伤害：${damage}`)
+    game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
+    // enemyHpBar.style.width = (data.target.currentHealth / data.target.maxHealth) * 100 + '%'
+  },
+  [F.G_SPANW_ENEMY]: (data: any) => {
+    console.log(data,'spawn')
+    game.scene.mainEnemy.value = data
   }
 }
 

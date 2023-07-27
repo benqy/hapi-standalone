@@ -11,18 +11,18 @@ export const getCharacter = () => {
     const equipment = Controller.lootController.lootFromTable(
       new LootTable([item]),
       1,
-      100
+      1
     )
     getController().equipment.addEquipment(character.equipped, equipment[0])
   })
-  equipmentFromCategorys2.forEach((item) => {
-    const equipment = Controller.lootController.lootFromTable(
-      new LootTable([item]),
-      1,
-      100
-    )
-    getController().inventory.addItem(character.inventory, equipment[0])
-  })
+  // equipmentFromCategorys2.forEach((item) => {
+  //   const equipment = Controller.lootController.lootFromTable(
+  //     new LootTable([item]),
+  //     1,
+  //     100
+  //   )
+  //   getController().inventory.addItem(character.inventory, equipment[0])
+  // })
   character.currentSkills.push(new FireBallSkill())
   character.maxHealth = 1000
   character.currentHealth = 1000

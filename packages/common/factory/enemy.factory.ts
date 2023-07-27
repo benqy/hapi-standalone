@@ -14,9 +14,10 @@ export class EnemyFactory {
     enemy.rarity = rarity
     enemy.breed = new Orc()
     enemy.maxHealth = Math.floor(Math.pow(level, Math.pow(level, 0.235) - 1.3) * enemy.maxHealth)
+    enemy.currentHealth = enemy.maxHealth
     enemy.attack = Math.floor(Math.pow(level, Math.pow(level, 0.2) - 1.23) * enemy.attack)
     enemy.experience = Math.floor(Math.pow(level, Math.pow(level, 0.1) - 0.1) * enemy.experience)
-    enemy.armour = Math.floor(Math.pow(level, Math.pow(level, 0.235) - 1.3) * enemy.armour) + 2000
+    enemy.armour = Math.floor(Math.pow(level, Math.pow(level, 0.235) - 1.3) * enemy.armour)
     enemy.currentSkills.push(new FireBallSkill())
     return enemy
   }

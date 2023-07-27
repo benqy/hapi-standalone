@@ -33,6 +33,7 @@ export class SkillController implements IController {
   }
 
   excute(caster: IActor, skill: Skill, target?: IActor) {
+    skill.currentAttackTime = Math.max(0, skill.currentAttackTime - skill.attackTime)
     const attack = this.calcDamage(caster, skill, target)
     const armourDR = getArmourDR(attack, this.calcArmour(target))
     console.log(attack, this.calcArmour(target), armourDR)
@@ -50,9 +51,7 @@ export class SkillController implements IController {
     // console.log('skill controller: doTick')
     skill.currentAttackTime += deltaTime
     if (skill.currentAttackTime >= skill.attackTime) {
-      skill.currentAttackTime = skill.currentAttackTime - skill.attackTime
       skill.actionRequired = true
-      skill.currentAttackTime = 0
       // console.log(`${skill.name} 可以释放了`)
     }
   }

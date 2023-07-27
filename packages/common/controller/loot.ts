@@ -42,24 +42,26 @@ class LootController {
   }
 
   private calcMaxTier(dropLevel) {
-    for (let i = 1; i <= modifiersTierByLevel.length; i++) {
+    // 从t1遍历到t10,找到第一个小于等于dropLevel的tier
+    for (let i = 1; i < modifiersTierByLevel.length; i++) {
       if (dropLevel >= modifiersTierByLevel[i]) {
-        return modifiersTierByLevel[i]
+        return [modifiersTierByLevel[i],i]
       }
     }
-    return 10
+    return [100,10]
   }
 
-  private generateModifilerTier = (category: Category, tiers) => {
+  private generateModifilerTier = (category: Category, tiers,tier:number) => {
     if (!tiers || tiers.length === 0) return null
-    const tierByLimit = tiers.data.filter((t) => t.tierLimit[category.name])
+    const tierByLimit = tiers.data.filter((t) => t.tierLimit[category.name] && t.tier >= tier)
+    // console.log(tierByLimit,1)
     return randomFromArrayNRemove(tierByLimit)
   }
 
   /**
    * 根据参数生成装备的随机词缀. 选取词缀类型->选取词缀tier->选取词缀范围->返回词缀列表
    */
-  private generateModifilers(category: Category, rarity) {
+  private generateModifilers(category: Category, rarity,tier: number) {
     const equipModifiers = []
     const tiers = modifiersByGroupId.filter((t) => t.tierLimit[category.name])
     const prefixTiers = [...tiers.filter((t) => t.position === 0)]
@@ -68,30 +70,36 @@ class LootController {
     if (rarity === Rarity.magic) {
       const p1 = this.generateModifilerTier(
         category,
-        randomFromArrayNRemove(prefixTiers)
+        randomFromArrayNRemove(prefixTiers),
+        tier
       )
       const s1 = this.generateModifilerTier(
         category,
-        randomFromArrayNRemove(suffixTiers)
+        randomFromArrayNRemove(suffixTiers),
+        tier
       )
       p1 && equipModifiers.push(p1)
       s1 && equipModifiers.push(s1)
     } else if (rarity === Rarity.rare || rarity === Rarity.unique) {
       const p1 = this.generateModifilerTier(
         category,
-        randomFromArrayNRemove(prefixTiers)
+        randomFromArrayNRemove(prefixTiers),
+        tier
       )
       const p2 = this.generateModifilerTier(
         category,
-        randomFromArrayNRemove(prefixTiers)
+        randomFromArrayNRemove(prefixTiers),
+        tier
       )
       const s1 = this.generateModifilerTier(
         category,
-        randomFromArrayNRemove(suffixTiers)
+        randomFromArrayNRemove(suffixTiers),
+        tier
       )
       const s2 = this.generateModifilerTier(
         category,
-        randomFromArrayNRemove(suffixTiers)
+        randomFromArrayNRemove(suffixTiers),
+        tier
       )
       p1 && equipModifiers.push(p1)
       p2 && equipModifiers.push(p2)
@@ -126,8 +134,8 @@ class LootController {
     category = category || choice(equipmentFromCategorys2)
     //暂时未设定基底类型
     const rarity = this.calcRarity(iir)
-    const reqLevel = this.calcMaxTier(dropLevel)
-    const modifiers = this.generateModifilers(category, rarity)
+    const [reqLevel,tier] = this.calcMaxTier(dropLevel)
+    const modifiers = this.generateModifilers(category, rarity,tier)
     const equipment = this.affixSchemaToValue(modifiers)
     equipment.category1 = itemCategorys1.equipment
     equipment.category2 = category
