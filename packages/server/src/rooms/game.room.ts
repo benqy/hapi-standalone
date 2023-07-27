@@ -27,8 +27,8 @@ export class GameRoom extends Room<RoomState.Game> {
     this.gameController = new CombatController(this.roomId)
     const map = new GameMap()
     map.name = '森林'
-    map.minLv = 20
-    map.maxLv = 30
+    map.minLv = 1
+    map.maxLv = 10
 
     this.gameController.map = map
     cache.addGameRoom(this)
