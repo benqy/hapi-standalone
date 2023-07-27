@@ -27,7 +27,7 @@ export const actions = {
       game.scene.mainEnemy = res.actionData.mainEnemy
       game.scene.enemys = res.actionData.enemys
       game.scene.inCombat.value = true
-      console.log(game.scene.mainEnemy,game.scene.enemys,5)
+      // console.log(game.scene.mainEnemy,game.scene.enemys,5)
     }
   },
   [F.G_Add_Item]:(items: Item[]) => {
@@ -35,8 +35,7 @@ export const actions = {
     game.c.inventory.addItem(game.character.inventory, items[0])
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
-    console.log(data)
-    const enemyHpBar:any = document.querySelector('.inner')
+    const enemyHpBar = document.querySelector<HTMLElement>('.inner')
     enemyHpBar.style.width = data.target.currentHealth / data.target.maxHealth * 100 + '%'
   }
 }

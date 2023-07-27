@@ -5,6 +5,7 @@ import { IRes, TickAble } from '@hapi/common/interfaces'
 import { getController } from '@hapi/common/core'
 import { lootController } from '@hapi/common/controller'
 import { cache } from '../db/cache'
+import { randomBetween } from '@hapi/common/util'
 const F = CONSTANTS.F
 export class CombatController implements TickAble {
   constructor(public gameRoomId: string) {
@@ -16,6 +17,8 @@ export class CombatController implements TickAble {
   mainEnemy: Enemy
   enemys: Enemy[] = []
   inCombat = false
+  spawnTime = 5000
+  spawnTimer = 0
   actionRequired = false
   char: Character
 
@@ -34,12 +37,7 @@ export class CombatController implements TickAble {
     if (!this.inCombat) {
       this.inCombat = true
       this.char = character
-      this.mainEnemy = this.enemyFactory.create({
-        level: 5,
-        baseName: '首领',
-        rarity: Rarity.unique,
-      })
-      console.log(this.mainEnemy)
+      this.spawnEnemy()
       // this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
       // this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
       // this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))
@@ -64,16 +62,23 @@ export class CombatController implements TickAble {
 
   doTick(deltaTime: number) {
     const c = getController()
-    if(!this.inCombat) return
-    c.character.doTick(deltaTime)
-    this.char.currentSkills.forEach((skill) => {
-      c.skill.doTick(deltaTime, skill)
-    })
-    // this.mainEnemy.currentSkills.forEach((skill) => {
-    //   c.skill.doTick(deltaTime, skill)
-    //   // c.skill.excute(this.mainEnemy,skill,this.char)
-    // })
-    this.doAction(deltaTime)
+    if(this.mainEnemy) {
+      c.character.doTick(deltaTime)
+      this.char.currentSkills.forEach((skill) => {
+        c.skill.doTick(deltaTime, skill)
+      })
+      // this.mainEnemy.currentSkills.forEach((skill) => {
+      //   c.skill.doTick(deltaTime, skill)
+      //   // c.skill.excute(this.mainEnemy,skill,this.char)
+      // })
+      this.doAction(deltaTime)
+    }
+    else {
+      this.spawnTimer += deltaTime
+      if(this.spawnTimer >= this.spawnTime) {
+        this.spawnEnemy()
+      }
+    }
     // c.skill.doTick(deltaTime,this.mainEnemy)
   }
 
@@ -96,7 +101,7 @@ export class CombatController implements TickAble {
     })
     if(this.mainEnemy.currentHealth <= 0) {
       this.loot(this.mainEnemy)
-      this.stopCombat()
+      this.mainEnemy = null
     }
   }
 
@@ -116,7 +121,13 @@ export class CombatController implements TickAble {
   }
 
   spawnEnemy() {
-    console.log('spawn')
+    this.spawnTimer = 0
+    this.mainEnemy = this.enemyFactory.create({
+      level: randomBetween(1,20),
+      baseName: '首领',
+      rarity: Rarity.unique,
+    })
+    console.log('生成怪物:',this.mainEnemy)
   }
 
   // doCombatTick(){
