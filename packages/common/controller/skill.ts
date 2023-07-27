@@ -1,15 +1,22 @@
 import { getController } from '../core'
-import { Enemy, Skill } from '../entities'
+import { Character, Enemy, Skill } from '../entities'
 import { IActor } from '../entities/interface'
+import { AffixProertys } from '../entities/modifiers/affix-property'
 import { IController } from '../interfaces'
 import { getArmourDR } from '../util'
 export class SkillController implements IController {
   calcDamage(caster: IActor, skill: Skill, target?: IActor) {
     const c = getController()
+    let ap:AffixProertys
+    if(caster instanceof Character){
+      ap = c.character.getProperties(caster)
+    }else {
+      ap = caster.affixProertys
+    }
     const attack =
-      c.affix.getProerty(caster.affixProertys, 'damage.add') *
-      (1 + c.affix.getProerty(caster.affixProertys, 'damage.increase')) *
-      (1 + c.affix.getProerty(caster.affixProertys, 'damage.more')) * 
+      c.affix.getProerty(ap, 'damage.add') *
+      (1 + c.affix.getProerty(ap, 'damage.increase')/100) *
+      (1 + c.affix.getProerty(ap, 'damage.more')/100) * 
       skill.percent
     return attack
   }
@@ -28,7 +35,7 @@ export class SkillController implements IController {
   excute(caster: IActor, skill: Skill, target?: IActor) {
     const attack = this.calcDamage(caster, skill, target)
     const armourDR = getArmourDR(attack, this.calcArmour(target))
-    // console.log(attack, this.calcArmour(target), armourDR)
+    console.log(attack, this.calcArmour(target), armourDR)
     const damage = Math.max(Math.floor(attack * (1 - armourDR)),0)
     target.currentHealth = Math.max(target.currentHealth - damage, 0)
 
