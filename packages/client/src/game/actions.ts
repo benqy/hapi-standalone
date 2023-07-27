@@ -33,7 +33,7 @@ export const actions = {
     game.c.inventory.addItem(game.character.inventory, items[0])
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
-    const enemyHpBar = document.querySelector<HTMLElement>('.inner')
+    // const enemyHpBar = document.querySelector<HTMLElement>('.inner')
     const damage = game.scene.mainEnemy.value.currentHealth - data.target.currentHealth
     console.log(`伤害：${damage}`)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth

@@ -4,7 +4,7 @@ import { checkAuth, getUser } from '../auth'
 import { util } from '@hapi/common'
 import { getCharacter } from '../mock'
 import { actions } from '../action'
-import { Player } from '@hapi/common/entities'
+import { Player,GameMap } from '@hapi/common/entities'
 import { CombatController } from '../controllers/combat.controller'
 import { cache } from '../db/cache'
 
@@ -25,6 +25,12 @@ export class GameRoom extends Room<RoomState.Game> {
   onCreate(options: any) {
     this.setState(new RoomState.Game())
     this.gameController = new CombatController(this.roomId)
+    const map = new GameMap()
+    map.name = '森林'
+    map.minLv = 20
+    map.maxLv = 30
+
+    this.gameController.map = map
     cache.addGameRoom(this)
     // this.state.cards.push(new RoomState.Card())
     this.onMessage(F.G_Start_Combat, (client, message) => {

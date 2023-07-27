@@ -1,4 +1,4 @@
-import { Character, Enemy, Skill } from '@hapi/common/entities'
+import { Character, Enemy, GameMap, Skill } from '@hapi/common/entities'
 import { CONSTANTS, factory } from '@hapi/common'
 import { Rarity } from '@hapi/common/enum'
 import { IRes, TickAble } from '@hapi/common/interfaces'
@@ -21,6 +21,7 @@ export class CombatController implements TickAble {
   spawnTimer = 0
   actionRequired = false
   char: Character
+  map:GameMap
 
   get gameRoom() {
     return cache.getGameRoom(this.gameRoomId)
@@ -116,7 +117,7 @@ export class CombatController implements TickAble {
   spawnEnemy() {
     this.spawnTimer = 0
     this.mainEnemy = this.enemyFactory.create({
-      level: randomBetween(1,20),
+      level: randomBetween(this.map.minLv,this.map.maxLv),
       baseName: '首领',
       rarity: Rarity.unique,
     })
