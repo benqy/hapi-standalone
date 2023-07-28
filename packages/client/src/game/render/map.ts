@@ -34,7 +34,7 @@ export class MapRender {
     this.app.ticker.add(() => {
       // Randomize the vertice positions a bit to create movement.
       for (let i = 0; i < buffer.data.length; i++) {
-        buffer.data[i] += Math.sin(timer / 10 + i) * 0.5
+        buffer.data[i] += Math.sin(timer / 15 + i) * 0.2
       }
       buffer.update()
       timer++
