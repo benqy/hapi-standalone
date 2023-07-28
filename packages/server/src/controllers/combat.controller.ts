@@ -131,7 +131,7 @@ export class CombatController implements TickAble {
     this.spawnTimer = 0
     this.mainEnemy = this.enemyFactory.create({
       level: randomBetween(this.map.minLv, this.map.maxLv),
-      baseName: '首领',
+      baseName: 'sharkoctopus',
       rarity: Rarity.unique,
     })
     this.gameRoom.broadcast(F.G_SPANW_ENEMY, this.mainEnemy)

@@ -22,7 +22,7 @@ export class Enemy extends O implements IActor {
   isDeath = false
   breed: Breed
   affixProertys = new AffixProertys()
-  media = `${IMG_DIR}/enemy/${this.name}.webp`
+  media = `${IMG_DIR}/enemy/bug.webp`
   currentSkills: Skill[] = []
   
   //掉落稀有度倍率

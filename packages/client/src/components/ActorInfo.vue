@@ -15,22 +15,16 @@ withDefaults(defineProps<IProps>(), {
 
 <template>
   <div class="actor">
+    <div class="actor-name">{{actor.level}}级 {{ actor.breed.name }}{{ actor.name }}  {{actor.currentHealth == 0 ? `(DEATH)`:''}}</div>
     <ActorAvator :src="actor.media"></ActorAvator>
     <div class="info">
-      <div class="actor-name">{{actor.level}}级 {{ actor.breed.name }} {{ actor.name }}  {{actor.currentHealth == 0 ? `(DEATH)`:''}}</div>
       <div class="actor-hp">
         <div
           class="inner"
           :style="{ width: (actor.currentHealth / actor.maxHealth) * 100 + '%' }"
         ></div>
       </div>
-      <div class="actor-action">
-        <div
-          class="inner"
-          :style="{ width: (actor.currentHealth / actor.maxHealth) * 100 + '%' }"
-        ></div>
-      </div>
-      <div class="status">
+      <!-- <div class="status">
         <div class="buff">
           <img :src="`${IMG_DIR}/status/poison.jpg`" alt="" />
         </div>
@@ -61,7 +55,7 @@ withDefaults(defineProps<IProps>(), {
         <div class="buff">
           <img :src="`${IMG_DIR}/status/cold.jpg`" alt="" />
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -69,42 +63,30 @@ withDefaults(defineProps<IProps>(), {
 <style lang="scss">
 .actor {
   display: flex;
-  scale: 72%;
+  flex-direction:column;
+  align-items: center;
+  .actor-name{
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+  }
+  // scale: 72%;
   .info {
-    margin-top: -25px;
-    font-weight: bold;
+    // margin-top: -25px;
+    // font-weight: bold;
     color: #eee;
     text-align: left;
   }
   .actor-hp {
-    width: 200px;
-    height: 18px;
-    margin-top: 9px;
-    margin-left: -33px;
+    width: 90px;
+    height: 10px;
     text-align: center;
     color: #a1a3cc;
     background-color: rgba(0, 0, 0, 0.4);
     // opacity: 0.6;
-    border: 3px solid rgb(161, 163, 204);
     .inner {
-      height: 18px;
+      height: 100%;
       background: rgba(154, 0, 74, 1);
-    }
-  }
-
-  .actor-action {
-    width: 160px;
-    height: 18px;
-    margin-top: 14px;
-    margin-left: 7px;
-    text-align: center;
-    color: #a1a3cc;
-    background-color: rgba(0, 0, 0, 0.4);
-    // opacity: 0.6;
-    border: 3px solid rgb(161, 163, 204);
-    .inner {
-      height: 18px;
-      background: rgba(0, 101, 139);
     }
   }
   .status {

@@ -19,17 +19,20 @@ withDefaults(defineProps<IProps>(), {
 
 <style lang="scss">
 .actor-avator {
-  transform: rotate(45deg);
-  background: #eee;
+  // transform: rotate(45deg);
+  // background: transparent;
   height: v-bind(size);
   width: v-bind(size);
-  border: 5px solid rgb(161, 163, 204);
+  background:transparent url("/src/assets/img/ui/enemy-rare.png") no-repeat;  
+  background-size: 100%;
+  // border: 5px solid rgb(161, 163, 204);
   text-align: center;
   // opacity: 0.9;
   img {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-45deg);
+    width: 95%;
+    height: 95%;
+    margin-top: -5px;
+    // transform: rotate(-45deg);
   }
 }
 </style>
