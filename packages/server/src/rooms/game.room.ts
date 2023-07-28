@@ -3,11 +3,9 @@ import { RoomState, CONSTANTS } from '@hapi/common'
 import { checkAuth, getUser } from '../auth'
 import { util } from '@hapi/common'
 import { getCharacter, getMaps } from '../mock'
-import { actions } from '../action'
 import { Player,GameMap } from '@hapi/common/entities'
 import { CombatController } from '../controllers/combat.controller'
 import { cache } from '../db/cache'
-import { MapGroup } from '@hapi/common/enum'
 
 
 const F = CONSTANTS.F

@@ -61,8 +61,7 @@ export enum EquipSlot {
   // hand4 = 'hand4',
 }
 
-export enum MapGroup {
-  world1 = 'world1',
+export enum MapType {
   forest = 'forest',
   desert = 'desert',
   sea = 'sea',

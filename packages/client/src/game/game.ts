@@ -2,16 +2,27 @@ import { Scene } from './scene'
 
 import { RoomState, CONSTANTS } from '@hapi/common'
 import { getAccessToken } from '@/utils'
-import { Character, GameMap } from '@hapi/common/entities'
+import { Character } from '@hapi/common/entities'
 import { actions } from './actions'
 import { client } from './client'
 import { Room } from 'colyseus.js'
 import { core } from '@hapi/common'
+import { SceneRender } from './render'
 export * from './game'
 const F = CONSTANTS.F
 
 export const game = {
   scene: new Scene(),
+  startRender() {
+    if(this.render){
+      this.render.clear()
+    }
+    else{
+      this.render = new SceneRender()
+    }
+    this.render.renderMap(this.scene.combatMap.mapType)
+  },
+  render: null as SceneRender | null,
   //引用的scene.player.value
   get player() {
     return this.scene.player.value
@@ -56,9 +67,9 @@ export const game = {
     // })
     // console.log('game', room)
   },
-  startCombat(mapId:string) {
+  startCombat(mapId: string) {
     // if(!game.scene.inCombat.value) {
-      this.room?.send(F.G_Start_Combat, mapId)
+    this.room?.send(F.G_Start_Combat, mapId)
     // }
   }
 }

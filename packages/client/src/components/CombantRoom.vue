@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import ActorInfo from './ActorInfo.vue'
 import { game } from '@/game'
+import { IMG_DIR } from '@/game'
+
 </script>
 <template>
   <div class="battle-wrap">
     <div class="battle-bg" ref="battleBG"></div>
     <div class="battle-area">
-      <div class="enemy">
+      <!-- <div class="enemy">
         <div class="battle-row boss">
           <ActorInfo v-if="game.scene.mainEnemy.value" :actor="game.scene.mainEnemy.value"></ActorInfo>
         </div>
@@ -20,7 +22,7 @@ import { game } from '@/game'
         <div class="battle-row player">
           <ActorInfo :actor="game.character"></ActorInfo>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
