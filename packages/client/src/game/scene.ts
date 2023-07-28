@@ -1,5 +1,5 @@
-import type { RoomState } from '@hapi/common'
-import { Character, Enemy, Player } from '@hapi/common/entities'
+import { data, type RoomState } from '@hapi/common'
+import { Character, Enemy, GameMap, Player } from '@hapi/common/entities'
 import type { Room } from 'colyseus.js'
 import { ref } from 'vue'
 // import { SYSTEM_CONFIG } from './constant'
@@ -15,7 +15,8 @@ export class Scene {
   player = ref(new Player())
   level = 1
   inCombat = ref(false)
-  room: Room<RoomState.Game>
+  room: Room<RoomState.Game> 
+  maps = data.world1Data.maps as GameMap[]
   // #combatTimer = null
 
   // #isPause = false

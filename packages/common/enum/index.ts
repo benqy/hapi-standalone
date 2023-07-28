@@ -62,6 +62,7 @@ export enum EquipSlot {
 }
 
 export enum MapGroup {
+  world1 = 'world1',
   forest = 'forest',
   desert = 'desert',
   sea = 'sea',

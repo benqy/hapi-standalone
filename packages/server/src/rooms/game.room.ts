@@ -2,11 +2,12 @@ import { Room, Client } from '@colyseus/core'
 import { RoomState, CONSTANTS } from '@hapi/common'
 import { checkAuth, getUser } from '../auth'
 import { util } from '@hapi/common'
-import { getCharacter } from '../mock'
+import { getCharacter, getMaps } from '../mock'
 import { actions } from '../action'
 import { Player,GameMap } from '@hapi/common/entities'
 import { CombatController } from '../controllers/combat.controller'
 import { cache } from '../db/cache'
+import { MapGroup } from '@hapi/common/enum'
 
 
 const F = CONSTANTS.F
@@ -25,16 +26,19 @@ export class GameRoom extends Room<RoomState.Game> {
   onCreate(options: any) {
     this.setState(new RoomState.Game())
     this.gameController = new CombatController(this.roomId)
-    const map = new GameMap()
-    map.name = '森林'
-    map.minLv = 1
-    map.maxLv = 10
+    // const map = new GameMap()
+    // map.group = MapGroup.sea
+    // map.name = '旺比森林'
+    // map.minLv = 70
+    // map.maxLv = 80
 
-    this.gameController.map = map
+    this.gameController.map = getMaps()[0]
     cache.addGameRoom(this)
     // this.state.cards.push(new RoomState.Card())
-    this.onMessage(F.G_Start_Combat, (client, message) => {
+    this.onMessage<GameMap>(F.G_Start_Combat, (client, map) => {
       this.gameController.stop()
+      this.gameController.map = map
+      console.log(map)
       const res = this.gameController.start(this.state.player.character)
       if(res.code === 200) {
         this.setSimulationInterval((deltaTime) => this.update(deltaTime),300)

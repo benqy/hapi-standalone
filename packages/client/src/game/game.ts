@@ -2,7 +2,7 @@ import { Scene } from './scene'
 
 import { RoomState, CONSTANTS } from '@hapi/common'
 import { getAccessToken } from '@/utils'
-import { Character } from '@hapi/common/entities'
+import { Character, GameMap } from '@hapi/common/entities'
 import { actions } from './actions'
 import { client } from './client'
 import { Room } from 'colyseus.js'
@@ -36,7 +36,7 @@ export const game = {
     } catch (ex) {
       console.log('创建游戏失败,请重试')
     }
-    this.startCombat()
+    // this.startCombat()
   },
   bindMessage(room: Room<RoomState.Game>) {
     room.onStateChange(() => {
@@ -56,11 +56,9 @@ export const game = {
     // })
     // console.log('game', room)
   },
-  startCombat() {
-    this.room?.send(F.G_Start_Combat, {
-      map: '01',
-      stage: '03',
-      xx: '04'
-    })
+  startCombat(map:GameMap) {
+    // if(!game.scene.inCombat.value) {
+      this.room?.send(F.G_Start_Combat, map)
+    // }
   }
 }

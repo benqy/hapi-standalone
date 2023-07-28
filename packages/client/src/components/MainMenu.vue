@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ui } from '@/game';
+import {game, ui } from '@/game';
 const toggleCharacterPad = () => {
   ui.togglePad('characterShow')
 }
@@ -7,6 +7,10 @@ const toggleCharacterPad = () => {
 const toggleInventoryPad = () => {
   ui.togglePad('inventoryShow')
 }
+const toggleMapPad = () => {
+  ui.togglePad('mapShow')
+}
+
 
 const temp = () => {
   alert('没呢')
@@ -18,8 +22,8 @@ const temp = () => {
     <div class="game-options-selector">
       <a class="btn-tab" :class="{'btn-tab-active': ui.state.characterShow.value}" @click="toggleCharacterPad"> 装备(C) </a>
       <a class="btn-tab" :class="{'btn-tab-active': ui.state.inventoryShow.value}" @click="toggleInventoryPad">物品栏(B)</a>
-      <a class="btn-tab">战斗(M)</a>
-      <a class="btn-tab"  @click="temp">地图(M)</a>
+      <a class="btn-tab" :class="{'btn-tab-active': game.scene.inCombat.value}" @click="temp">战斗</a>
+      <a class="btn-tab" :class="{'btn-tab-active': ui.state.mapShow.value}"  @click="toggleMapPad">地图(M)</a>
       <a class="btn-tab"  @click="temp">资源(L)</a>
       <a class="btn-go-hunt" @click="temp">垃圾场(T)</a>
     </div>

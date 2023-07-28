@@ -1,14 +1,10 @@
-import { O } from "../../core";
-import { MapGroup } from "../../enum";
+import { MapGroup } from '../../enum'
 
-export class GameMap extends O {
-  constructor() {
-    super()
-  }
-  
+export class GameMap {
+  id: string
   name: string
   media: string = ''
-  group:MapGroup
+  group: string = MapGroup.sea
   minLv: number
   maxLv: number
   desc: string

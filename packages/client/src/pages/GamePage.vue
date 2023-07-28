@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import WorldMap from '@/components/map/WorldMap.vue'
 import CombantRoom from '@/components/CombantRoom.vue'
 import CharacterPad from '@/components/CharacterPad.vue'
 import CharacterInvertory from '../components/inventory/CharacterInvertory.vue'
@@ -14,6 +15,7 @@ onMounted(() => {
 <template>
   <div class="game" v-if="player.character">
     <CombantRoom v-if="game.scene.inCombat.value"></CombantRoom>
+    <WorldMap v-if="ui.state.mapShow.value"></WorldMap>
     <CharacterPad v-if="ui.state.characterShow.value"></CharacterPad>
     <CharacterInvertory
       v-if="ui.state.inventoryShow.value"

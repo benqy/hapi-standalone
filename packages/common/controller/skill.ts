@@ -37,7 +37,7 @@ export class SkillController implements IController {
     const attack = this.calcDamage(caster, skill, target)
     const armourDR = getArmourDR(attack, this.calcArmour(target))
     console.log(attack, this.calcArmour(target), armourDR)
-    const damage = Math.max(Math.floor(attack * (1 - armourDR)),0)
+    const damage = Math.max(Math.floor(attack * (1 - armourDR)),1)
     target.currentHealth = Math.max(target.currentHealth - damage, 0)
 
     console.log(`${caster.name} 对 ${target.name} 释放 ${skill.name}, 造成了${damage}点伤害, 剩余血量${target.currentHealth}`)

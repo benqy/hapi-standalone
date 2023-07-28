@@ -13,5 +13,8 @@ new Keybind('keyboard', {
   },
   c: () => {
     ui.togglePad('characterShow')
+  },
+  m:() => {
+    ui.togglePad('mapShow')
   }
 })
