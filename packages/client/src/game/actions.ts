@@ -24,6 +24,7 @@ export const actions = {
     else {
       // game.scene.mainEnemy = res.actionData.mainEnemy
       // game.scene.enemys = res.actionData.enemys
+      game.scene.combatMap = res.actionData.map
       game.scene.inCombat.value = true
       // console.log(game.scene.mainEnemy,game.scene.enemys,5)
     }

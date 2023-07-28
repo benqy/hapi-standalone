@@ -32,18 +32,20 @@ export class GameRoom extends Room<RoomState.Game> {
     // map.minLv = 70
     // map.maxLv = 80
 
-    this.gameController.map = getMaps()[0]
     cache.addGameRoom(this)
     // this.state.cards.push(new RoomState.Card())
-    this.onMessage<GameMap>(F.G_Start_Combat, (client, map) => {
+    this.onMessage<GameMap>(F.G_Start_Combat, (client, mapId) => {
       this.gameController.stop()
-      this.gameController.map = map
-      console.log(map)
-      const res = this.gameController.start(this.state.player.character)
-      if(res.code === 200) {
-        this.setSimulationInterval((deltaTime) => this.update(deltaTime),300)
+      const map = getMaps().find((m) => m.id === mapId.toString())
+      console.log(map,4)
+      if(map != null) {
+        this.gameController.map = map
+        const res = this.gameController.start(this.state.player.character)
+        if(res.code === 200) {
+          this.setSimulationInterval((deltaTime) => this.update(deltaTime),50)
+        }
+        client.send(res.action, res)
       }
-      client.send(res.action, res)
     })
   }
 

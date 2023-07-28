@@ -3,7 +3,7 @@ import { ref } from 'vue'
 const state: { [x: string]: any } = {
   inventoryShow: ref(false),
   characterShow: ref(false),
-  mapShow:ref(true)
+  mapShow:ref(false)
 }
 export const ui = {
   state,

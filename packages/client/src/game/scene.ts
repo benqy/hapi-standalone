@@ -16,6 +16,7 @@ export class Scene {
   level = 1
   inCombat = ref(false)
   room: Room<RoomState.Game> 
+  combatMap: GameMap
   maps = data.world1Data.maps as GameMap[]
   // #combatTimer = null
 

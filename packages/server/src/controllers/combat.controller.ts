@@ -10,7 +10,7 @@ const F = CONSTANTS.F
 export class CombatController implements TickAble {
   constructor(public gameRoomId: string) {
     this.enemyFactory = new factory.EnemyFactory()
-  }  
+  }
 
   enemyFactory: factory.EnemyFactory
 
@@ -21,7 +21,7 @@ export class CombatController implements TickAble {
   spawnTimer = 0
   actionRequired = false
   char: Character
-  map:GameMap
+  map: GameMap
 
   get gameRoom() {
     return cache.getGameRoom(this.gameRoomId)
@@ -36,20 +36,30 @@ export class CombatController implements TickAble {
 
   start(character: Character): IRes {
     if (!this.inCombat) {
-      this.inCombat = true
-      this.char = character
-      this.spawnEnemy()
-      // this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
-      // this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
-      // this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))
-      return {
-        code: 200,
-        msg: 'ok',
-        action: F.G_Start_Combat,
-        actionData: {
-          // mainEnemy: this.mainEnemy,
-          // enemys: this.enemys,
-        },
+      if (!this.map) {
+        return {
+          code: 40800,
+          msg: '请选择地图',
+          action: F.G_Start_Combat,
+          actionData: { a: 2 },
+        }
+      } else {
+        this.inCombat = true
+        this.char = character
+        this.spawnEnemy()
+        // this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
+        // this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
+        // this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))
+        return {
+          code: 200,
+          msg: 'ok',
+          action: F.G_Start_Combat,
+          actionData: {
+            // mainEnemy: this.mainEnemy,
+            // enemys: this.enemys,
+            map: this.map,
+          },
+        }
       }
     }
 
@@ -63,7 +73,7 @@ export class CombatController implements TickAble {
 
   doTick(deltaTime: number) {
     const c = getController()
-    if(this.mainEnemy) {
+    if (this.mainEnemy) {
       c.character.doTick(deltaTime)
       this.char.currentSkills.forEach((skill) => {
         c.skill.doTick(deltaTime, skill)
@@ -73,10 +83,9 @@ export class CombatController implements TickAble {
       //   // c.skill.excute(this.mainEnemy,skill,this.char)
       // })
       this.doAction(deltaTime)
-    }
-    else {
+    } else {
       this.spawnTimer += deltaTime
-      if(this.spawnTimer >= this.spawnTime) {
+      if (this.spawnTimer >= this.spawnTime) {
         this.spawnEnemy()
       }
     }
@@ -88,10 +97,12 @@ export class CombatController implements TickAble {
     c.character.doTick(deltaTime)
     this.char.currentSkills.forEach((skill) => {
       if (skill.actionRequired) {
-        if(this.mainEnemy.currentHealth > 0){
+        if (this.mainEnemy.currentHealth > 0) {
           c.skill.excute(this.char, skill, this.mainEnemy)
-          this.gameRoom.broadcast(F.G_EXCUTE_SKILL, {skill,target:this.mainEnemy})
-          
+          this.gameRoom.broadcast(F.G_EXCUTE_SKILL, {
+            skill,
+            target: this.mainEnemy,
+          })
         }
       }
     })
@@ -100,24 +111,26 @@ export class CombatController implements TickAble {
         c.skill.excute(this.mainEnemy, skill, this.char)
       }
     })
-    if(this.mainEnemy.currentHealth <= 0) {
+    if (this.mainEnemy.currentHealth <= 0) {
       this.loot(this.mainEnemy)
       this.mainEnemy = null
     }
   }
 
-  loot(enemy:Enemy) {
+  loot(enemy: Enemy) {
     const items = lootController.loot(enemy)
     console.log(items)
     this.gameRoom.broadcast(F.G_Add_Item, items)
     getController().inventory.addItem(this.char.inventory, items[0])
-    console.log(`${this.mainEnemy.breed.name} ${this.mainEnemy.name} 已死亡, 获取战利品`)
+    console.log(
+      `${this.mainEnemy.breed.name} ${this.mainEnemy.name} 已死亡, 获取战利品`
+    )
   }
 
   spawnEnemy() {
     this.spawnTimer = 0
     this.mainEnemy = this.enemyFactory.create({
-      level: randomBetween(this.map.minLv,this.map.maxLv),
+      level: randomBetween(this.map.minLv, this.map.maxLv),
       baseName: '首领',
       rarity: Rarity.unique,
     })

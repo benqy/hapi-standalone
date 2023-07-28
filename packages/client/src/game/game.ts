@@ -36,7 +36,7 @@ export const game = {
     } catch (ex) {
       console.log('创建游戏失败,请重试')
     }
-    // this.startCombat()
+    this.startCombat('2')
   },
   bindMessage(room: Room<RoomState.Game>) {
     room.onStateChange(() => {
@@ -56,9 +56,9 @@ export const game = {
     // })
     // console.log('game', room)
   },
-  startCombat(map:GameMap) {
+  startCombat(mapId:string) {
     // if(!game.scene.inCombat.value) {
-      this.room?.send(F.G_Start_Combat, map)
+      this.room?.send(F.G_Start_Combat, mapId)
     // }
   }
 }

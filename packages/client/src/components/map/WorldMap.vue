@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { GameMap } from '@hapi/common/entities'
 import { game } from '@/game'
-const startCombat = (map: GameMap) => {
-  game.startCombat(map)
-}
+
 </script>
 <template>
   <div class="worldmap">
@@ -13,7 +11,7 @@ const startCombat = (map: GameMap) => {
       :style="{ 'grid-row-start': map.x, 'grid-column-start': map.y }"
       v-for="(map, i) in game.scene.maps"
       :key="map.id"
-      @click="startCombat(map)"
+      @click="game.startCombat(map.id)"
     ></div>
   </div>
 </template>
