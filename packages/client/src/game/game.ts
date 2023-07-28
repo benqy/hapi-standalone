@@ -13,7 +13,7 @@ const F = CONSTANTS.F
 
 export const game = {
   scene: new Scene(),
-  startRender() {
+  startCombatRender() {
     if(this.render){
       this.render.clear()
     }
@@ -21,6 +21,7 @@ export const game = {
       this.render = new SceneRender()
     }
     this.render.renderMap(this.scene.combatMap.mapType)
+    this.render.entityRender.renderCharacter(this.character)
   },
   render: null as SceneRender | null,
   //引用的scene.player.value
@@ -47,7 +48,6 @@ export const game = {
     } catch (ex) {
       console.log('创建游戏失败,请重试')
     }
-    this.startCombat('2')
   },
   bindMessage(room: Room<RoomState.Game>) {
     room.onStateChange(() => {

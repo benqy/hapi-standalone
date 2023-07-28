@@ -16,6 +16,7 @@ export const actions = {
   },
   [F.G_Character_Data]: (character: Character) => {
     game.player.character = character
+    game.startCombat('1')
   },
   [F.G_Start_Combat]: (res:IRes) => {
     if(res.code !== 200) {
@@ -25,7 +26,8 @@ export const actions = {
       // game.scene.mainEnemy = res.actionData.mainEnemy
       // game.scene.enemys = res.actionData.enemys
       game.scene.combatMap = res.actionData.map
-      game.startRender()
+      console.log('start combat',res.actionData)
+      game.startCombatRender()    
       game.scene.inCombat.value = true
       // console.log(game.scene.mainEnemy,game.scene.enemys,5)
     }
@@ -43,6 +45,7 @@ export const actions = {
   },
   [F.G_SPANW_ENEMY]: (data: any) => {
     console.log(data,'spawn')
+    game.render.entityRender.renderMainEnemy(data)
     game.scene.mainEnemy.value = data
   }
 }

@@ -2,6 +2,7 @@ import { Application, Container, Sprite, Assets, Graphics, SimplePlane } from 'p
 import { MapType } from '@hapi/common/enum'
 import { MapRender } from './map'
 import { IMG_DIR } from '@hapi/common/constants'
+import { entityRender } from './entities'
 
 export class SceneRender {
   constructor() {
@@ -12,10 +13,11 @@ export class SceneRender {
       resizeTo: this.htmlContainer
     })
     this.htmlContainer.appendChild(this.app.view)
+    this.entityRender = new entityRender(this.app)
   }
   htmlContainer: HTMLElement
   private mapRender: MapRender
-
+  entityRender: entityRender
   private app: Application<HTMLCanvasElement>
 
   renderMap(mapType: string) {

@@ -46,7 +46,7 @@ export class CombatController implements TickAble {
       } else {
         this.inCombat = true
         this.char = character
-        this.spawnEnemy()
+        // this.spawnEnemy()
         // this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
         // this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
         // this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))
