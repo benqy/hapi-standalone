@@ -15,6 +15,8 @@ export class SceneRender {
       antialias: true,
       resolution: window.devicePixelRatio || 1,
     })
+    
+    this.app.ticker.maxFPS = 60
     this.htmlContainer.appendChild(this.app.view)
     this.entityRender = new EntityRender(this.app)
     this.skillRender = new SkillRender(this.app)

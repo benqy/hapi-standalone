@@ -57,7 +57,7 @@ export const game = {
       // console.log(JSON.stringify(state), 123)
     })
     room.onMessage('*', () => {})
-    room.onMessage<Character>(F.G_Character_Data, (character) =>
+    room.onMessage(F.G_Character_Data, (character) =>
       actions.G_Character_Data(character)
     )
     room.onMessage(F.G_Start_Combat, (data) => actions.G_Start_Combat(data))

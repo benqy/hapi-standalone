@@ -39,18 +39,21 @@ export const actions = {
     game.c.inventory.addItem(game.character.inventory, items[0])
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
-    const damage = Math.floor(game.scene.mainEnemy.value.currentHealth - data.target.currentHealth)
-    game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
-    game.scene.mainEnemy.value.renderData.takeDamage = damage
-    if(game.scene.mainEnemy.value.currentHealth <= 0) {
-      // game.render.entityRender.death(game.render.entityRender.mainEnemy)
-      game.scene.mainEnemy.value = null
-      game.sound.play('death')
-    }
-    else {
-      game.render.skillRender.exceute(data.skill)
-      game.sound.play(data.skill.name)
-    }
+    console.log(data,'excute')
+    game.render.skillRender.exceute(data.skill)
+    game.sound.play(data.skill.name)
+    // const damage = Math.floor(game.scene.mainEnemy.value.currentHealth - data.target.currentHealth)
+    // game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
+    // game.scene.mainEnemy.value.renderData.takeDamage = damage
+    // if(game.scene.mainEnemy.value.currentHealth <= 0) {
+    //   // game.render.entityRender.death(game.render.entityRender.mainEnemy)
+    //   game.scene.mainEnemy.value = null
+    //   game.sound.play('death')
+    // }
+    // else {
+    //   game.render.skillRender.exceute(data.skill)
+    //   game.sound.play(data.skill.name)
+    // }
     // enemyHpBar.style.width = (data.target.currentHealth / data.target.maxHealth) * 100 + '%'
   },
   [F.G_SPANW_ENEMY]: (data: any) => {

@@ -82,6 +82,9 @@ export class CombatController implements TickAble {
       //   c.skill.doTick(deltaTime, skill)
       //   // c.skill.excute(this.mainEnemy,skill,this.char)
       // })
+      this.actions.forEach((action) => {
+        action.doTick(deltaTime)
+      })
       this.doAction(deltaTime)
     } else {
       this.spawnTimer += deltaTime
@@ -92,17 +95,22 @@ export class CombatController implements TickAble {
     // c.skill.doTick(deltaTime,this.mainEnemy)
   }
 
+  actions: TickAble[] = []
+
   doAction(deltaTime: number) {
     const c = getController()
     c.character.doTick(deltaTime)
     this.char.currentSkills.forEach((skill) => {
       if (skill.actionRequired) {
         if (this.mainEnemy.currentHealth > 0) {
-          c.skill.excute(this.char, skill, this.mainEnemy)
-          this.gameRoom.broadcast(F.G_EXCUTE_SKILL, {
-            skill,
-            target: this.mainEnemy,
+          const action = c.skill.excute(this.char, skill, this.mainEnemy)
+          action.ownerCharacterId = this.char.id
+          this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
+            caster: action.caster.id,
+            target: action.target.id,
+            skill: action.skill,
           })
+          this.actions.push(action)
         }
       }
     })
@@ -110,6 +118,19 @@ export class CombatController implements TickAble {
       if (skill.actionRequired) {
         c.skill.excute(this.mainEnemy, skill, this.char)
       }
+    })
+    const requiredActons: TickAble[] = []
+    const actions: TickAble[] = []
+    this.actions.forEach((action) => {
+      if (action.actionRequired) {
+        requiredActons.push(action)
+      } else {
+        actions.push(action)
+      }
+    })
+    this.actions = actions
+    requiredActons.forEach((action) => {
+      action.doAction(deltaTime)
     })
     if (this.mainEnemy.currentHealth <= 0) {
       this.loot(this.mainEnemy)
@@ -131,7 +152,7 @@ export class CombatController implements TickAble {
     this.spawnTimer = 0
     this.mainEnemy = this.enemyFactory.create({
       level: randomBetween(this.map.minLv, this.map.maxLv),
-      baseName: randomBetween(0,16).toString(),
+      baseName: randomBetween(0, 16).toString(),
       rarity: Rarity.unique,
     })
     this.gameRoom.broadcast(F.G_SPANW_ENEMY, this.mainEnemy)

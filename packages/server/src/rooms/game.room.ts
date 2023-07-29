@@ -13,6 +13,21 @@ export class GameRoom extends Room<RoomState.Game> {
   maxClients = 1
   firstTickExcuted = false
   gameController: CombatController
+  token:string
+  ownerCharacterId:string
+
+  static sendToOwner<T>(characterId:string,type:string,data:T){
+    const room = cache.getRoomByCharacterId(characterId)
+    room.sendToOwner(type,data)
+  }
+
+  sendToOwner<T>(type:string,data:T){
+    const client = this.clients[0]
+    if(client) {
+      client.send(type, data)
+    }
+  }
+
   async onAuth(client: Client, options: any) {
     if (this.clients.length <= 1) {
       return checkAuth(options.accessToken)
@@ -35,7 +50,6 @@ export class GameRoom extends Room<RoomState.Game> {
     this.onMessage<GameMap>(F.G_Start_Combat, (client, mapId) => {
       this.gameController.stop()
       const map = getMaps().find((m) => m.id === mapId.toString())
-      console.log(map,4)
       if(map != null) {
         this.gameController.map = map
         const res = this.gameController.start(this.state.player.character)
@@ -50,8 +64,10 @@ export class GameRoom extends Room<RoomState.Game> {
   onJoin(client: Client, options: any) {
     const userinfo = getUser(options.accessToken)
     if (userinfo) {
+      this.token = options.accessToken
       userinfo.nickname = util.randomName()
       const character = getCharacter()
+      this.ownerCharacterId = character.id
       character.name = userinfo.nickname
       this.state.player = new Player()
       this.state.player.userinfo = userinfo

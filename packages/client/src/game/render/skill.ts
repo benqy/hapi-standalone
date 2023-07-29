@@ -3,22 +3,12 @@ import { Skill } from '@hapi/common/entities'
 
 import {
   Application,
-  Container,
-  Sprite,
-  Assets,
-  Graphics,
-  Text,
   Spritesheet,
   BaseTexture,
   AnimatedSprite
-  // Mesh,
-  // Shader,
-  // Geometry,
-  // Texture,
-  // RenderTexture
 } from 'pixi.js'
 import { game } from '../game'
-import { fire16 } from './sheet/fire16'
+// import { fire16 } from './sheet/fire16'
 import { boltBlue } from './sheet/bolt-blue'
 
 export class SkillRender {
@@ -42,16 +32,22 @@ export class SkillRender {
     anim.animationSpeed = 0.5
     anim.play()
     this.app.stage.addChild(anim)
-    const speed = 10
     const enemyRenderData = game.scene.mainEnemy.value.renderData
-    const listener = (deltaTime: number) => {
-      anim.y -= speed * deltaTime
-      if (anim.y <enemyRenderData.y + 120) {
+    const y1 = enemyRenderData.y + 120
+    const distance = Math.abs(y1 - anim.y)
+    const speed = distance / skill.actionTime
+    console.log('fire')
+    // const speed = (1000/this.app.ticker.speed)
+    const listener = () => {
+      anim.y -= speed * this.app.ticker.deltaMS
+      if (anim.y < y1) {
         this.app.ticker.remove(listener)
         anim.destroy()
         enemyRenderData.takeHit = true
+        console.log('hit')
       }
     }
+    
     this.app.ticker.add(listener)
     // const bullet = Sprite.from('https://pixijs.com/assets/bunny.png')
   }

@@ -10,4 +10,5 @@ export class FireBallSkill extends Skill {
     this.percent = 0.8
   }
   name: string = 'FireBall'
+  actionTime = 800
 }

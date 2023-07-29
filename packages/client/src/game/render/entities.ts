@@ -107,7 +107,7 @@ export class EntityRender {
     this.app.stage.addChild(container)
     let time = 0
     let shockTime = 0
-    this.app.ticker.add(() => {
+    this.app.ticker.add((deltaTime) => {
       // actorSprite.x = spriteOffset + offset
       // actorSprite.y = spriteOffset + offset
         //计算血量
