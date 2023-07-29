@@ -8,11 +8,13 @@ import { client } from './client'
 import { Room } from 'colyseus.js'
 import { core } from '@hapi/common'
 import { SceneRender } from './render'
+import { GameSound } from './sound'
 export * from './game'
 const F = CONSTANTS.F
 
 export const game = {
   scene: new Scene(),
+  sound:new GameSound(),
   startCombatRender() {
     if(this.render){
       this.render.clear()

@@ -1,16 +1,4 @@
-import {
-  Application,
-  Container,
-  Sprite,
-  Assets,
-  Graphics,
-  Text,
-  Mesh,
-  Shader,
-  Geometry,
-  Texture,
-  RenderTexture
-} from 'pixi.js'
+import { Mesh, Shader, Geometry, Texture } from 'pixi.js'
 
 export const fadeOutShader = (src: string) => {
   const geometry = new Geometry()

@@ -16,7 +16,7 @@ export const actions = {
   },
   [F.G_Character_Data]: (character: Character) => {
     game.player.character = character
-    game.startCombat('1')
+    game.startCombat('2')
   },
   [F.G_Start_Combat]: (res:IRes) => {
     if(res.code !== 200) {
@@ -42,8 +42,13 @@ export const actions = {
     // console.log(`伤害：${damage}`)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
     if(game.scene.mainEnemy.value.currentHealth <= 0) {
-      game.render.entityRender.death(game.render.entityRender.mainEnemy)
+      // game.render.entityRender.death(game.render.entityRender.mainEnemy)
       game.scene.mainEnemy.value = null
+      game.sound.play('death')
+    }
+    else {
+      game.render.skillRender.exceute(data.skill)
+      game.sound.play(data.skill.name)
     }
     // enemyHpBar.style.width = (data.target.currentHealth / data.target.maxHealth) * 100 + '%'
   },

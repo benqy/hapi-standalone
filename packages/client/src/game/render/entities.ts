@@ -1,22 +1,22 @@
-import { IMG_DIR } from '@hapi/common/constants'
+// import { IMG_DIR } from '@hapi/common/constants'
 import type { Character, Enemy } from '@hapi/common/entities'
 import type { IActor } from '@hapi/common/entities/interface'
 import {
   Application,
   Container,
   Sprite,
-  Assets,
+  // Assets,
   Graphics,
   Text,
-  Mesh,
-  Shader,
-  Geometry,
-  Texture,
-  RenderTexture
+  // Mesh,
+  // Shader,
+  // Geometry,
+  // Texture,
+  // RenderTexture
 } from 'pixi.js'
 import { waterShader } from './shader'
 
-export class entityRender {
+export class EntityRender {
   constructor(public app: Application<HTMLCanvasElement>) {
   }
 
@@ -33,11 +33,6 @@ export class entityRender {
     this.mainEnemy = this.renderActor(enemy, x, y)
   }
 
-  death(actorSprite: Container) {
-    // actorSprite.destroy()
-  }
-
-  deathGeometry: Geometry
 
   renderCharacter(character: Character) {
     if (this.characterSprite) {
@@ -67,8 +62,6 @@ export class entityRender {
     // actorBG.height = 120
     // actorBG.anchor.set(0.5)
     // container.addChild(actorBG)
-    // container.height = containerSize
-    // container.width = containerSize
     container.x = x
     container.y = y
     // container.pivot.x = this.app.screen.width / 2
