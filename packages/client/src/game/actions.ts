@@ -38,8 +38,8 @@ export const actions = {
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
     // const enemyHpBar = document.querySelector<HTMLElement>('.inner')
-    const damage = game.scene.mainEnemy.value.currentHealth - data.target.currentHealth
-    console.log(`伤害：${damage}`)
+    // const damage = game.scene.mainEnemy.value.currentHealth - data.target.currentHealth
+    // console.log(`伤害：${damage}`)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
     if(game.scene.mainEnemy.value.currentHealth <= 0) {
       game.render.entityRender.death(game.render.entityRender.mainEnemy)
