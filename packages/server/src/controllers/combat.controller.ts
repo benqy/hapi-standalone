@@ -17,7 +17,7 @@ export class CombatController implements TickAble {
   mainEnemy: Enemy
   enemys: Enemy[] = []
   inCombat = false
-  spawnTime = 5000
+  spawnTime = 2000
   spawnTimer = 0
   actionRequired = false
   char: Character
