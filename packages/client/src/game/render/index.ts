@@ -1,4 +1,4 @@
-import { Application, Container, Sprite, Assets, Graphics, SimplePlane } from 'pixi.js'
+import { Application, Container, Sprite, Assets, Graphics, SimplePlane,Mesh,Shader,Geometry } from 'pixi.js'
 import { MapType } from '@hapi/common/enum'
 import { MapRender } from './map'
 import { IMG_DIR } from '@hapi/common/constants'

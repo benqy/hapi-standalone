@@ -1,10 +1,24 @@
 import { IMG_DIR } from '@hapi/common/constants'
 import type { Character, Enemy } from '@hapi/common/entities'
 import type { IActor } from '@hapi/common/entities/interface'
-import { Application, Container, Sprite, Assets, Graphics, Text } from 'pixi.js'
+import {
+  Application,
+  Container,
+  Sprite,
+  Assets,
+  Graphics,
+  Text,
+  Mesh,
+  Shader,
+  Geometry,
+  Texture,
+  RenderTexture
+} from 'pixi.js'
+import { waterShader } from './shader'
 
 export class entityRender {
-  constructor(public app: Application<HTMLCanvasElement>) {}
+  constructor(public app: Application<HTMLCanvasElement>) {
+  }
 
   mainEnemy: Container
   characterSprite: Container
@@ -20,8 +34,10 @@ export class entityRender {
   }
 
   death(actorSprite: Container) {
-    actorSprite.destroy()
+    // actorSprite.destroy()
   }
+
+  deathGeometry: Geometry
 
   renderCharacter(character: Character) {
     if (this.characterSprite) {
@@ -74,12 +90,11 @@ export class entityRender {
 
     //血条
     const healthBar = new Graphics()
-    // healthBar.beginFill(0xde3249)
-    // healthBar.drawRect(healthBarX, healthBarY, 70, 14)
-    // healthBar.endFill()
     container.addChild(healthBar)
-
+    
+    const noiseQuad = waterShader(actor.media)
     container.addChild(actorSprite)
+    // const noiseTexture = RenderTexture.create({ width: 120, height: 120 })
     // 名称
     if (showName) {
       const text = new Text(`${actor.level}级 一二三四五六七八九十`, {
@@ -93,13 +108,27 @@ export class entityRender {
       container.addChild(text)
     }
     this.app.stage.addChild(container)
-    console.log(container.getLocalBounds(), 4)
+    let time = 0
     this.app.ticker.add(() => {
+      //计算血量
       const currentHealth = Math.floor((actor.currentHealth / actor.maxHealth) * 120)
       healthBar.clear()
       healthBar.beginFill(0xde3249)
       healthBar.drawRect(healthBarX, healthBarY, currentHealth, 8)
       healthBar.endFill()
+      if (currentHealth <= 0) {
+        if(time === 0) {
+          actorSprite.destroy()
+          container.addChild(noiseQuad)
+        }
+        if (time <= 4) {
+          time += 1 / 60
+          noiseQuad.shader.uniforms.limit = Math.sin(time * 0.5) * 0.35 + 0.5
+          this.app.renderer.render(noiseQuad)
+        } else {
+          container.destroy()
+        }
+      }
     })
 
     return container
