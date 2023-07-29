@@ -19,7 +19,10 @@ export class EntityRender {
     }
     const x = this.app.screen.width / 2
     const y = 100
-    this.mainEnemy = this.renderActor(enemy, x, y,{ showName: true,name: game.lang('enemy.' + enemy.name)})
+    this.mainEnemy = this.renderActor(enemy, x, y, {
+      showName: true,
+      name: game.lang('enemy.' + enemy.name)
+    })
   }
 
   renderCharacter(character: Character) {
@@ -29,10 +32,13 @@ export class EntityRender {
     }
     const x = this.app.screen.width / 2
     const y = this.app.screen.height - 100
-    this.characterSprite = this.renderActor(character, x, y, { showName: true,name:character.name })
+    this.characterSprite = this.renderActor(character, x, y, {
+      showName: true,
+      name: character.name
+    })
   }
 
-  renderActor(actor: IActor, x: number, y: number, { showName = true,name='' } = {}) {
+  renderActor(actor: IActor, x: number, y: number, { showName = true, name = '' } = {}) {
     // const containerSize = 160
 
     if (!actor.renderData) {
@@ -67,6 +73,9 @@ export class EntityRender {
 
     //血条
     const healthBar = new Graphics()
+    healthBar.beginFill(0xde3249)
+    healthBar.drawRect(healthBarX, healthBarY, 120, 8)
+    healthBar.endFill()
     container.addChild(healthBar)
 
     const noiseQuad = waterShader(actor.media)
@@ -99,30 +108,16 @@ export class EntityRender {
     let time = 0
     let shockTime = 0
     this.app.ticker.add(() => {
-      //计算血量
-      const currentHealth = Math.floor((actor.currentHealth / actor.maxHealth) * 120)
-      healthBar.clear()
-      healthBar.beginFill(0xde3249)
-      healthBar.drawRect(healthBarX, healthBarY, currentHealth, 8)
-      healthBar.endFill()
-
       // actorSprite.x = spriteOffset + offset
       // actorSprite.y = spriteOffset + offset
-      if (currentHealth <= 0) {
-        if (time === 0) {
-          actorSprite.destroy()
-          container.addChild(noiseQuad)
-        }
-        if (time <= 4) {
-          time += 1 / 60
-          noiseQuad.shader.uniforms.limit = Math.cos(time * 0.5) * 0.35 + 0.5
-          this.app.renderer.render(noiseQuad)
-        } else {
-          container.destroy()
-        }
-      }
+        //计算血量
+      const currentHealth = Math.floor((actor.currentHealth / actor.maxHealth) * 120)
       //被击中抖动
-      else if (actor.renderData && actor.renderData.takeHit) {
+      if (actor.renderData.takeHit) {
+        healthBar.clear()
+        healthBar.beginFill(0xde3249)
+        healthBar.drawRect(healthBarX, healthBarY, currentHealth, 8)
+        healthBar.endFill()
         damageText.text = `- ${actor.renderData.takeDamage}`
         //1秒动画后重置
         if (shockTime >= 1) {
@@ -138,6 +133,20 @@ export class EntityRender {
           actorSprite.transform.position.y = spriteOffset + offset
           damageText.transform.position.x = spriteOffset + offset * 2
           damageText.transform.position.y = spriteOffset + offset * 2
+        }
+      }
+      
+      if (currentHealth <= 0) {
+        if (time === 0) {
+          actorSprite.destroy()
+          container.addChild(noiseQuad)
+        }
+        if (time <= 4) {
+          time += 1 / 60
+          noiseQuad.shader.uniforms.limit = Math.cos(time * 0.5) * 0.35 + 0.5
+          this.app.renderer.render(noiseQuad)
+        } else {
+          container.destroy()
         }
       }
     })

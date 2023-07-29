@@ -1,5 +1,4 @@
 import { Tag } from '../../components'
-import { IActor } from '../interface'
 
 export abstract class Skill {
   name: string = 'Skill_BUG'

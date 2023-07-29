@@ -18,7 +18,7 @@ export const actions = {
   [F.G_Character_Data]: (character: Character) => {
     game.player.character = character
     game.player.character.renderData = new RenderData()
-    game.startCombat('2')
+    game.startCombat('1')
   },
   [F.G_Start_Combat]: (res:IRes) => {
     if(res.code !== 200) {
@@ -41,7 +41,6 @@ export const actions = {
   [F.G_EXCUTE_SKILL]: (data: any) => {
     const damage = Math.floor(game.scene.mainEnemy.value.currentHealth - data.target.currentHealth)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
-    game.scene.mainEnemy.value.renderData.takeHit = true
     game.scene.mainEnemy.value.renderData.takeDamage = damage
     if(game.scene.mainEnemy.value.currentHealth <= 0) {
       // game.render.entityRender.death(game.render.entityRender.mainEnemy)
