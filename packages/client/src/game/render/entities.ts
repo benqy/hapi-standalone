@@ -56,18 +56,8 @@ export class EntityRender {
     // container.addChild(actorBG)
     container.x = x
     container.y = y
-    // container.pivot.x = this.app.screen.width / 2
-    // container.pivot.y = this.app.screen.height - 100
-    const mask = new Graphics()
-    // Add the rectangular area to show
-    mask.beginFill(0xffffff)
-    mask.drawRect(-80, -80, 160, 160)
-    mask.endFill()
-    // container.addChild(mask)
-    // container.mask = mask
     //血条背景
     const healthBG = new Graphics()
-    // healthBar.beginFill(0xde3249)
     healthBG.beginFill(0x000000)
     healthBG.drawRect(healthBarX, healthBarY, spriteSize, 8)
     healthBG.endFill()
@@ -92,6 +82,17 @@ export class EntityRender {
       text.y = -72
       container.addChild(text)
     }
+
+    //伤害数字
+    const damageText = new Text('', {
+      fontSize: 18,
+      stroke: '#000',
+      strokeThickness: 3,
+      fill: 0xde3249
+    })
+    damageText.anchor.set(0.5)
+    container.addChild(damageText)
+
     this.app.stage.addChild(container)
     let time = 0
     let shockTime = 0
@@ -120,18 +121,24 @@ export class EntityRender {
 
       } 
       //被击中抖动
-      else if(actor.renderData && actor.renderData.getHit){
+      else if(actor.renderData && actor.renderData.takeHit){
+        damageText.text = `- ${actor.renderData.takeDamage}`
         //1秒动画后重置
         if(shockTime >= 1){
-          actor.renderData.getHit = false
+          actor.renderData.takeHit = false
           shockTime = 0
+          damageText.text = ''
         }
-        //计算震动
-        shockTime += 1 / 60
-        const offset = Math.cos(shockTime * 6) * 4
-        // console.log(offset,shockTime)
-        actorSprite.transform.position.x = spriteOffset + offset
-        actorSprite.transform.position.y = spriteOffset + offset
+        else{
+          //计算震动
+          shockTime += 1 / 60
+          const offset = Math.cos(shockTime * 6) * 4
+          //伤害数字
+          actorSprite.transform.position.x = spriteOffset + offset
+          actorSprite.transform.position.y = spriteOffset + offset
+          damageText.transform.position.x = spriteOffset - offset*2
+          damageText.transform.position.y = spriteOffset + offset*2
+        }
       }
     })
 

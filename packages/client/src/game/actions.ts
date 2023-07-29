@@ -39,10 +39,11 @@ export const actions = {
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
     // const enemyHpBar = document.querySelector<HTMLElement>('.inner')
-    // const damage = game.scene.mainEnemy.value.currentHealth - data.target.currentHealth
+    const damage = Math.floor(game.scene.mainEnemy.value.currentHealth - data.target.currentHealth)
     // console.log(`伤害：${damage}`)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
-    game.scene.mainEnemy.value.renderData.getHit = true
+    game.scene.mainEnemy.value.renderData.takeHit = true
+    game.scene.mainEnemy.value.renderData.takeDamage = damage
     if(game.scene.mainEnemy.value.currentHealth <= 0) {
       // game.render.entityRender.death(game.render.entityRender.mainEnemy)
       game.scene.mainEnemy.value = null

@@ -1,4 +1,4 @@
 export class RenderData {
-  getHit = false
-  
+  takeHit = false
+  takeDamage = 0
 }
