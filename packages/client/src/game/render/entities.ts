@@ -5,20 +5,13 @@ import {
   Application,
   Container,
   Sprite,
-  // Assets,
   Graphics,
-  Text,
-  // Mesh,
-  // Shader,
-  // Geometry,
-  // Texture,
-  // RenderTexture
+  Text
 } from 'pixi.js'
 import { waterShader } from './shader'
 
 export class EntityRender {
-  constructor(public app: Application<HTMLCanvasElement>) {
-  }
+  constructor(public app: Application<HTMLCanvasElement>) {}
 
   mainEnemy: Container
   characterSprite: Container
@@ -32,7 +25,6 @@ export class EntityRender {
     const y = 100
     this.mainEnemy = this.renderActor(enemy, x, y)
   }
-
 
   renderCharacter(character: Character) {
     if (this.characterSprite) {
@@ -84,7 +76,7 @@ export class EntityRender {
     //血条
     const healthBar = new Graphics()
     container.addChild(healthBar)
-    
+
     const noiseQuad = waterShader(actor.media)
     container.addChild(actorSprite)
     // const noiseTexture = RenderTexture.create({ width: 120, height: 120 })
@@ -102,6 +94,7 @@ export class EntityRender {
     }
     this.app.stage.addChild(container)
     let time = 0
+    let shockTime = 0
     this.app.ticker.add(() => {
       //计算血量
       const currentHealth = Math.floor((actor.currentHealth / actor.maxHealth) * 120)
@@ -109,8 +102,11 @@ export class EntityRender {
       healthBar.beginFill(0xde3249)
       healthBar.drawRect(healthBarX, healthBarY, currentHealth, 8)
       healthBar.endFill()
+
+      // actorSprite.x = spriteOffset + offset
+      // actorSprite.y = spriteOffset + offset
       if (currentHealth <= 0) {
-        if(time === 0) {
+        if (time === 0) {
           actorSprite.destroy()
           container.addChild(noiseQuad)
         }
@@ -121,6 +117,21 @@ export class EntityRender {
         } else {
           container.destroy()
         }
+
+      } 
+      //被击中抖动
+      else if(actor.renderData && actor.renderData.getHit){
+        //1秒动画后重置
+        if(shockTime >= 1){
+          actor.renderData.getHit = false
+          shockTime = 0
+        }
+        //计算震动
+        shockTime += 1 / 60
+        const offset = Math.cos(shockTime * 6) * 4
+        // console.log(offset,shockTime)
+        actorSprite.transform.position.x = spriteOffset + offset
+        actorSprite.transform.position.y = spriteOffset + offset
       }
     })
 

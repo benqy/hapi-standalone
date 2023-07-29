@@ -1,4 +1,4 @@
-import { Application, Container, Sprite, Assets, Graphics, SimplePlane,Mesh,Shader,Geometry } from 'pixi.js'
+import { Application } from 'pixi.js'
 import { MapType } from '@hapi/common/enum'
 import { MapRender } from './map'
 import { IMG_DIR } from '@hapi/common/constants'
@@ -11,7 +11,9 @@ export class SceneRender {
     this.mapRender = new MapRender(this.htmlContainer)
     this.app = new Application<HTMLCanvasElement>({
       backgroundAlpha: 0,
-      resizeTo: this.htmlContainer
+      resizeTo: this.htmlContainer,
+      antialias: true,
+      resolution: window.devicePixelRatio || 1,
     })
     this.htmlContainer.appendChild(this.app.view)
     this.entityRender = new EntityRender(this.app)

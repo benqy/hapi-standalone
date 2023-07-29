@@ -1,5 +1,6 @@
 import { data, type RoomState } from '@hapi/common'
 import { Character, Enemy, GameMap, Player } from '@hapi/common/entities'
+import type { IActor } from '@hapi/common/entities/interface'
 import type { Room } from 'colyseus.js'
 import { ref } from 'vue'
 // import { SYSTEM_CONFIG } from './constant'
@@ -10,7 +11,7 @@ export class Scene {
   owner: Player
   players: Player[] = []
   characters: Character[] = []
-  mainEnemy:any = ref(null)
+  mainEnemy = ref(null as IActor)
   enemys: Enemy[] = []
   player = ref(new Player())
   level = 1

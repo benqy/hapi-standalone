@@ -1,4 +1,5 @@
 import { Breed } from "../components";
+import { RenderData } from "../data/render-data";
 import { Category } from "../types"
 import { AffixProertys } from "./modifiers/affix-property";
 
@@ -12,6 +13,7 @@ export interface IActor {
   media: string,
   breed:Breed,
   isDeath: boolean,
+  renderData?:RenderData,
   // doTick(): void
   // doAction(): void
 }

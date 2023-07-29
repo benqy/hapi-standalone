@@ -3,6 +3,7 @@ import { Character, Item, Userinfo } from '@hapi/common/entities'
 import type { IRes } from '@hapi/common/interfaces'
 import { game } from './game'
 import { Room } from 'colyseus.js'
+import { RenderData } from '@hapi/common/data/render-data'
 // import { Intenvory } from '@hapi/common/entities/inventory'
 // import { PlayerController } from '@hapi/common/controller'
 
@@ -41,6 +42,7 @@ export const actions = {
     // const damage = game.scene.mainEnemy.value.currentHealth - data.target.currentHealth
     // console.log(`伤害：${damage}`)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
+    game.scene.mainEnemy.value.renderData.getHit = true
     if(game.scene.mainEnemy.value.currentHealth <= 0) {
       // game.render.entityRender.death(game.render.entityRender.mainEnemy)
       game.scene.mainEnemy.value = null
@@ -56,6 +58,7 @@ export const actions = {
     console.log(data,'spawn')
     game.render.entityRender.renderMainEnemy(data)
     game.scene.mainEnemy.value = data
+    game.scene.mainEnemy.value.renderData = new RenderData()
   }
 }
 

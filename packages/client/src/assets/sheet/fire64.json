@@ -1,0 +1,36 @@
+{
+	"frames": {
+		"fire64x64.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 896,
+				"h": 768
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 7,
+				"w": 893,
+				"h": 754
+			},
+			"sourceSize": {
+				"w": 896,
+				"h": 768
+			}
+		}
+	},
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.1",
+		"image": "fire64.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 895,
+			"h": 756
+		},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:3e05569d4f423512812313066c31bc41:0b55b215d831dd9d5b19da2fdbf14ed9:dd666c5773d2831e554047229c115dbe$"
+	}
+}
