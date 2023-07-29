@@ -19,6 +19,10 @@ export class entityRender {
     this.mainEnemy = this.renderActor(enemy,x,y)
   }
 
+  death(actorSprite:Container){
+    actorSprite.destroy()
+  }
+
   renderCharacter(character:Character) {
     if(this.characterSprite) {
       console.log('remove characterSprite')
@@ -36,7 +40,7 @@ export class entityRender {
     actorSprite.height = 115
     actorSprite.anchor.set(0.5)
     actorSprite.y = -6
-    const actorBG = Sprite.from(`${IMG_DIR}/ui/enemy-rare.png`)
+    const actorBG = Sprite.from(`${IMG_DIR}/ui/enemy-unique.png`)
     actorBG.width = 120
     actorBG.height = 120
     actorBG.anchor.set(0.5)

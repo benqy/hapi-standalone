@@ -41,6 +41,10 @@ export const actions = {
     const damage = game.scene.mainEnemy.value.currentHealth - data.target.currentHealth
     console.log(`伤害：${damage}`)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
+    if(game.scene.mainEnemy.value.currentHealth <= 0) {
+      game.render.entityRender.death(game.render.entityRender.mainEnemy)
+      game.scene.mainEnemy.value = null
+    }
     // enemyHpBar.style.width = (data.target.currentHealth / data.target.maxHealth) * 100 + '%'
   },
   [F.G_SPANW_ENEMY]: (data: any) => {
