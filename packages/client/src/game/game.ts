@@ -10,6 +10,7 @@ import { core } from '@hapi/common'
 import { SceneRender } from './render'
 import { GameSound } from './sound'
 export * from './game'
+import { lang } from '../i18n'
 const F = CONSTANTS.F
 
 export const game = {
@@ -73,5 +74,14 @@ export const game = {
     // if(!game.scene.inCombat.value) {
     this.room?.send(F.G_Start_Combat, mapId)
     // }
+  },
+  lang(text:string):string{
+    const zhcn = lang.zhcn as any
+    const keys = text.split('.')
+    let word = zhcn
+    keys.forEach(key => {
+      word = word[key]
+    })
+    return word
   }
 }

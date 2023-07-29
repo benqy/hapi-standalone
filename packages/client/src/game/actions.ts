@@ -17,6 +17,7 @@ export const actions = {
   },
   [F.G_Character_Data]: (character: Character) => {
     game.player.character = character
+    game.player.character.renderData = new RenderData()
     game.startCombat('2')
   },
   [F.G_Start_Combat]: (res:IRes) => {
@@ -38,9 +39,7 @@ export const actions = {
     game.c.inventory.addItem(game.character.inventory, items[0])
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
-    // const enemyHpBar = document.querySelector<HTMLElement>('.inner')
     const damage = Math.floor(game.scene.mainEnemy.value.currentHealth - data.target.currentHealth)
-    // console.log(`伤害：${damage}`)
     game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
     game.scene.mainEnemy.value.renderData.takeHit = true
     game.scene.mainEnemy.value.renderData.takeDamage = damage
@@ -62,7 +61,3 @@ export const actions = {
     game.scene.mainEnemy.value.renderData = new RenderData()
   }
 }
-
-// export const actionTypes = {
-//   [F.AUTH_JOIN]: Userinfo
-// }
