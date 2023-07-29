@@ -6,6 +6,7 @@ import { getController } from '@hapi/common/core'
 import { lootController } from '@hapi/common/controller'
 import { cache } from '../db/cache'
 import { randomBetween } from '@hapi/common/util'
+import { SkillController } from './skill'
 const F = CONSTANTS.F
 export class CombatController implements TickAble {
   constructor(public gameRoomId: string) {
@@ -13,7 +14,7 @@ export class CombatController implements TickAble {
   }
 
   enemyFactory: factory.EnemyFactory
-
+  skillController = new SkillController()
   mainEnemy: Enemy
   enemys: Enemy[] = []
   inCombat = false
@@ -76,7 +77,7 @@ export class CombatController implements TickAble {
     if (this.mainEnemy) {
       c.character.doTick(deltaTime)
       this.char.currentSkills.forEach((skill) => {
-        c.skill.doTick(deltaTime, skill)
+        this.skillController.doTick(deltaTime, skill)
       })
       // this.mainEnemy.currentSkills.forEach((skill) => {
       //   c.skill.doTick(deltaTime, skill)
@@ -92,7 +93,6 @@ export class CombatController implements TickAble {
         this.spawnEnemy()
       }
     }
-    // c.skill.doTick(deltaTime,this.mainEnemy)
   }
 
   actions: TickAble[] = []
@@ -103,7 +103,7 @@ export class CombatController implements TickAble {
     this.char.currentSkills.forEach((skill) => {
       if (skill.actionRequired) {
         if (this.mainEnemy.currentHealth > 0) {
-          const action = c.skill.excute(this.char, skill, this.mainEnemy)
+          const action = this.skillController.excute(this.char, skill, this.mainEnemy)
           action.ownerCharacterId = this.char.id
           this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
             caster: action.caster.id,
@@ -116,7 +116,7 @@ export class CombatController implements TickAble {
     })
     this.mainEnemy.currentSkills.forEach((skill) => {
       if (skill.actionRequired) {
-        c.skill.excute(this.mainEnemy, skill, this.char)
+        this.skillController.excute(this.mainEnemy, skill, this.char)
       }
     })
     const requiredActons: TickAble[] = []

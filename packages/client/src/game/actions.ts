@@ -34,14 +34,22 @@ export const actions = {
       // console.log(game.scene.mainEnemy,game.scene.enemys,5)
     }
   },
+  [F.G_SPANW_ENEMY]: (data: any) => {
+    console.log(data,'spawn')
+    game.render.entityRender.renderMainEnemy(data)
+    game.scene.mainEnemy.value = data
+    game.scene.mainEnemy.value.renderData = new RenderData()
+  },
   [F.G_Add_Item]:(items: Item[]) => {
     console.log('add', items)
     game.c.inventory.addItem(game.character.inventory, items[0])
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
-    console.log(data,'excute')
-    game.render.skillRender.exceute(data.skill)
-    game.sound.play(data.skill.name)
+    if(game.scene.mainEnemy.value && game.scene.mainEnemy.value.currentHealth > 0) {
+      game.render.skillRender.exceute(data.skill)
+      game.sound.play(data.skill.name)
+      console.log('excute',data.skill.name)
+    }
     // const damage = Math.floor(game.scene.mainEnemy.value.currentHealth - data.target.currentHealth)
     // game.scene.mainEnemy.value.currentHealth = data.target.currentHealth
     // game.scene.mainEnemy.value.renderData.takeDamage = damage
@@ -56,10 +64,14 @@ export const actions = {
     // }
     // enemyHpBar.style.width = (data.target.currentHealth / data.target.maxHealth) * 100 + '%'
   },
-  [F.G_SPANW_ENEMY]: (data: any) => {
-    console.log(data,'spawn')
-    game.render.entityRender.renderMainEnemy(data)
-    game.scene.mainEnemy.value = data
-    game.scene.mainEnemy.value.renderData = new RenderData()
+  [F.G_Hit]: (data: any) => {
+    game.scene.mainEnemy.value.currentHealth -= data.damage
+    game.scene.mainEnemy.value.renderData.takeDamage = data.damage
+    console.log('hit',data.damage)
+    if(game.scene.mainEnemy.value.currentHealth <= 0) {
+      console.log('death')
+      game.scene.mainEnemy.value = null
+      game.sound.play('death')
+    }
   }
 }

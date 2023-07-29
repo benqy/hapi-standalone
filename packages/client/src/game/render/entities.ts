@@ -107,10 +107,10 @@ export class EntityRender {
     this.app.stage.addChild(container)
     let time = 0
     let shockTime = 0
-    this.app.ticker.add((deltaTime) => {
+    this.app.ticker.add(() => {
       // actorSprite.x = spriteOffset + offset
       // actorSprite.y = spriteOffset + offset
-        //计算血量
+      //计算血量
       const currentHealth = Math.floor((actor.currentHealth / actor.maxHealth) * 120)
       //被击中抖动
       if (actor.renderData.takeHit) {
@@ -129,21 +129,24 @@ export class EntityRender {
           shockTime += 1 / 60
           const offset = Math.cos(shockTime * 6) * 4
           //伤害数字
-          actorSprite.transform.position.x = spriteOffset + offset
-          actorSprite.transform.position.y = spriteOffset + offset
+          // console.log(actorSprite,actorSprite.transform)
+          if (actorSprite && actorSprite.transform) {
+            actorSprite.transform.position.x = spriteOffset + offset
+            actorSprite.transform.position.y = spriteOffset + offset
+          }
           damageText.transform.position.x = spriteOffset + offset * 2
           damageText.transform.position.y = spriteOffset + offset * 2
         }
       }
-      
+
       if (currentHealth <= 0) {
         if (time === 0) {
           actorSprite.destroy()
           container.addChild(noiseQuad)
         }
-        if (time <= 4) {
+        if (time <= 2) {
           time += 1 / 60
-          noiseQuad.shader.uniforms.limit = Math.cos(time * 0.5) * 0.35 + 0.5
+          noiseQuad.shader.uniforms.limit = Math.sin(time * 2) * 2
           this.app.renderer.render(noiseQuad)
         } else {
           container.destroy()

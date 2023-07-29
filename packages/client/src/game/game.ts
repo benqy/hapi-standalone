@@ -64,6 +64,7 @@ export const game = {
     room.onMessage(F.G_Add_Item, (data) => actions.G_Add_Item(data))
     room.onMessage(F.G_EXCUTE_SKILL, (data) => actions.G_EXCUTE_SKILL(data))
     room.onMessage(F.G_SPANW_ENEMY, (data) => actions.G_SPANW_ENEMY(data))
+    room.onMessage(F.G_Hit, (data) => actions.G_Hit(data))
     // room.onMessage<Userinfo>(F.G_JOIN, (userinfo) => {
     //   console.log('加入游戏房间成功', userinfo)
     //   // userinfo.doAction()

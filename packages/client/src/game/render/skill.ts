@@ -36,7 +36,6 @@ export class SkillRender {
     const y1 = enemyRenderData.y + 120
     const distance = Math.abs(y1 - anim.y)
     const speed = distance / skill.actionTime
-    console.log('fire')
     // const speed = (1000/this.app.ticker.speed)
     const listener = () => {
       anim.y -= speed * this.app.ticker.deltaMS
@@ -44,7 +43,6 @@ export class SkillRender {
         this.app.ticker.remove(listener)
         anim.destroy()
         enemyRenderData.takeHit = true
-        console.log('hit')
       }
     }
     

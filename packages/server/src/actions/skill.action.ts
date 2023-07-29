@@ -1,9 +1,11 @@
-import { getController } from '../core'
-import { Character, Enemy, Skill } from '../entities'
-import { IActor } from '../entities/interface'
-import { AffixProertys } from '../entities/modifiers/affix-property'
-import { TickAble } from '../interfaces'
-import { getArmourDR } from '../util'
+import { Character, Enemy, Skill } from '@hapi/common/entities'
+import { IActor } from '@hapi/common/entities/interface'
+import { AffixProertys } from '@hapi/common/entities/modifiers/affix-property'
+import { TickAble } from '@hapi/common/interfaces'
+import { getArmourDR } from '@hapi/common/util'
+import { getController } from '@hapi/common/core'
+import { GameRoom } from '../rooms/game.room'
+import { F } from '@hapi/common/constants'
 
 export class SkillAction implements TickAble {
   constructor(public skill: Skill) {}
@@ -61,7 +63,12 @@ export class SkillAction implements TickAble {
     // console.log(attack, this.calcArmour(target), armourDR)
     const damage = Math.max(Math.floor(attack * (1 - armourDR)), 1)
     this.target.currentHealth = Math.max(this.target.currentHealth - damage, 0)
-
+    GameRoom.sendToOwner(this.ownerCharacterId, F.G_Hit, {
+      caster: this.caster.id,
+      target: this.target.id,
+      damage,
+      skill: this.skill,
+    })
     console.log(
       `${this.caster.name} 对 ${this.target.name} 释放 ${this.skill.name}, 造成了${damage}点伤害, 剩余血量${this.target.currentHealth}`
     )
