@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GameMap } from '@hapi/common/entities'
+// import { GameMap } from '@hapi/common/entities'
 import { game } from '@/game'
 
 </script>

@@ -1,9 +1,11 @@
 import { Breed } from "../components";
+import { RenderData } from "../data/render-data";
 import { Category } from "../types"
 import { AffixProertys } from "./modifiers/affix-property";
 
 //每帧会进行行动的单位
 export interface IActor {
+  id: string,
   maxHealth: number,
   name: string,
   currentHealth: number,
@@ -12,6 +14,7 @@ export interface IActor {
   media: string,
   breed:Breed,
   isDeath: boolean,
+  renderData?:RenderData,
   // doTick(): void
   // doAction(): void
 }

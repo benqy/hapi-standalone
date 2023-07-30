@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { IActor } from '@hapi/common/entities/interface'
 import ActorAvator from './ActorAvator.vue'
-import { IMG_DIR } from '@hapi/common/constants'
 
 interface IProps {
   actor: IActor

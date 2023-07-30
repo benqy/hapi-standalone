@@ -19,6 +19,8 @@ export enum F {
   G_Add_Item = 'G_Add_Item',
   G_EXCUTE_SKILL = 'G_EXCUTE_SKILL',
   G_SPANW_ENEMY = 'G_SPANW_ENEMY',
+  G_Monster_Die = 'G_Monster_Die',
+  G_Hit = 'G_Hit',
 }
 
 // export const EQUIP_TYPES = {

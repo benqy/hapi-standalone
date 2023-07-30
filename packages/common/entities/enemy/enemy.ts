@@ -5,6 +5,7 @@ import { Breed } from '../../components/breed'
 import { AffixProertys } from '../modifiers/affix-property'
 import { IMG_DIR } from '../../constants'
 import { Skill } from '../skill'
+import { RenderData } from '../../data/render-data'
 
 export class Enemy extends O implements IActor {
   constructor() {
@@ -23,6 +24,7 @@ export class Enemy extends O implements IActor {
   breed: Breed
   affixProertys = new AffixProertys()
   media = `${IMG_DIR}/enemy/bug.webp`
+  renderData?:RenderData
   currentSkills: Skill[] = []
   
   //掉落稀有度倍率

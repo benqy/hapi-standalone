@@ -1,10 +1,10 @@
-import { MapGroup } from '../../enum'
+import { MapType } from '../../enum'
 
 export class GameMap {
   id: string
   name: string
   media: string = ''
-  group: string = MapGroup.sea
+  mapType: string = MapType.sea
   minLv: number
   maxLv: number
   desc: string

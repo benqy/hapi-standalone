@@ -57,6 +57,14 @@ export const cache = {
   getGameRoom(roomId:string){
     return rooms.get(roomId)
   },
+  getRoomByCharacterId(characterId:string){
+    for(let room of rooms.values()){
+      if(room.ownerCharacterId === characterId){
+        return room
+      }
+    }
+    return null
+  },
   deleteGameRoom(roomId:string){
     return rooms.delete(roomId)
   }
