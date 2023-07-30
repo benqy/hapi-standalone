@@ -117,14 +117,14 @@ export class EntityRender {
         healthBar.endFill()
         damageText.text = `- ${actor.renderData.takeDamage}`
         //1秒动画后重置
-        if (shockTime >= 1) {
+        if (shockTime >= 0.5) {
           actor.renderData.takeHit = false
           shockTime = 0
           damageText.text = ''
         } else {
           //计算震动
           shockTime += 1 / 60
-          const offset = Math.cos(shockTime * 5) * 4
+          const offset = Math.cos(shockTime * 15) * 3
           //伤害数字
           // console.log(actorSprite,actorSprite.transform)
           if (actorSprite && actorSprite.transform) {

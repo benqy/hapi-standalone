@@ -83,6 +83,6 @@ export const game = {
     keys.forEach(key => {
       word = word[key]
     })
-    return word
+    return word ?? text
   }
 }
