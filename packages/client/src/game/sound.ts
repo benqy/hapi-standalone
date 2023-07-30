@@ -7,7 +7,7 @@ export class GameSound {
     sound.add('death', 'src/assets/sound/death.aac')
   }
 
-  disable = false
+  disable = true
 
   register(name: string, fileName?: string) {
     sound.add(name,`src/assets/sound/${fileName??name}.aac`)

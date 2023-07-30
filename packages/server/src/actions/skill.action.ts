@@ -69,9 +69,9 @@ export class SkillAction implements TickAble {
       damage,
       skill: this.skill,
     })
-    console.log(
-      `${this.caster.name} 对 ${this.target.name} 释放 ${this.skill.name}, 造成了${damage}点伤害, 剩余血量${this.target.currentHealth}`
-    )
+    // console.log(
+    //   `${this.caster.name} 对 ${this.target.name} 释放 ${this.skill.name}, 造成了${damage}点伤害, 剩余血量${this.target.currentHealth}`
+    // )
     if (this.target.currentHealth <= 0) {
       console.log(`${this.target.name} 已死亡`)
     }

@@ -14,7 +14,6 @@ export class EntityRender {
 
   renderMainEnemy(enemy: Enemy) {
     if (this.mainEnemy) {
-      console.log('remove mainEnemy')
       this.mainEnemy.destroy()
     }
     const x = this.app.screen.width / 2
@@ -108,8 +107,6 @@ export class EntityRender {
     let time = 0
     let shockTime = 0
     this.app.ticker.add(() => {
-      // actorSprite.x = spriteOffset + offset
-      // actorSprite.y = spriteOffset + offset
       //计算血量
       const currentHealth = Math.floor((actor.currentHealth / actor.maxHealth) * 120)
       //被击中抖动
@@ -127,7 +124,7 @@ export class EntityRender {
         } else {
           //计算震动
           shockTime += 1 / 60
-          const offset = Math.cos(shockTime * 6) * 4
+          const offset = Math.cos(shockTime * 5) * 4
           //伤害数字
           // console.log(actorSprite,actorSprite.transform)
           if (actorSprite && actorSprite.transform) {
@@ -146,7 +143,7 @@ export class EntityRender {
         }
         if (time <= 2) {
           time += 1 / 60
-          noiseQuad.shader.uniforms.limit = Math.sin(time * 2) * 2
+          noiseQuad.shader.uniforms.limit = Math.sin(time * 2) * 3
           this.app.renderer.render(noiseQuad)
         } else {
           container.destroy()
