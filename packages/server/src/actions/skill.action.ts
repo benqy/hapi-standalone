@@ -64,8 +64,8 @@ export class SkillAction implements TickAble {
     const damage = Math.max(Math.floor(attack * (1 - armourDR)), 1)
     this.target.currentHealth = Math.max(this.target.currentHealth - damage, 0)
     GameRoom.sendToOwner(this.ownerCharacterId, F.G_Hit, {
-      caster: this.caster.id,
-      target: this.target.id,
+      casterId: this.caster.id,
+      targetId: this.target.id,
       damage,
       skill: this.skill,
     })

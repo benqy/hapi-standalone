@@ -18,7 +18,7 @@ export const actions = {
   [F.G_Character_Data]: (character: Character) => {
     game.player.character = character
     game.player.character.renderData = new RenderData()
-    game.startCombat('1')
+    game.startCombat('2')
   },
   [F.G_Start_Combat]: (res: IRes) => {
     if (res.code !== 200) {
@@ -41,16 +41,22 @@ export const actions = {
   },
   [F.G_EXCUTE_SKILL]: (data: any) => {
     if (game.scene.mainEnemy.value && game.scene.mainEnemy.value.currentHealth > 0) {
-      game.render.skillRender.exceute(data.skill)
+      const caster = game.getActor(data.casterId)
+      const target = game.getActor(data.targetId)
+      game.render.skillRender.exceute(data.skill, caster, target)
       game.sound.play(data.skill.name)
     }
   },
   [F.G_Hit]: (data: any) => {
-    game.scene.mainEnemy.value.currentHealth -= data.damage
-    game.scene.mainEnemy.value.renderData.takeDamage = data.damage
-    if (game.scene.mainEnemy.value.currentHealth <= 0) {
-      game.scene.mainEnemy.value = null
-      game.sound.play('death')
+    const caster = game.getActor(data.casterId)
+    const target = game.getActor(data.targetId)
+    if(caster && target && caster.currentHealth >0 && target.currentHealth >0){
+      target.currentHealth -= data.damage
+      target.renderData.takeDamage = data.damage
+      if (target.currentHealth <= 0) {
+        game.scene.mainEnemy.value = null
+        game.sound.play('death')
+      }
     }
   }
 }

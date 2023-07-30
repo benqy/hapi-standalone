@@ -79,10 +79,10 @@ export class CombatController implements TickAble {
       this.char.currentSkills.forEach((skill) => {
         this.skillController.doTick(deltaTime, skill)
       })
-      // this.mainEnemy.currentSkills.forEach((skill) => {
-      //   c.skill.doTick(deltaTime, skill)
-      //   // c.skill.excute(this.mainEnemy,skill,this.char)
-      // })
+      this.mainEnemy.currentSkills.forEach((skill) => {
+        this.skillController.doTick(deltaTime, skill)
+        // c.skill.excute(this.mainEnemy,skill,this.char)
+      })
       this.actions.forEach((action) => {
         action.doTick(deltaTime)
       })
@@ -101,22 +101,35 @@ export class CombatController implements TickAble {
     const c = getController()
     c.character.doTick(deltaTime)
     this.char.currentSkills.forEach((skill) => {
-      if (skill.actionRequired) {
-        if (this.mainEnemy.currentHealth > 0) {
-          const action = this.skillController.excute(this.char, skill, this.mainEnemy)
-          action.ownerCharacterId = this.char.id
-          this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
-            caster: action.caster.id,
-            target: action.target.id,
-            skill: action.skill,
-          })
-          this.actions.push(action)
-        }
+      if (skill.actionRequired && this.mainEnemy.currentHealth > 0) {
+        const action = this.skillController.excute(
+          this.char,
+          skill,
+          this.mainEnemy
+        )
+        action.ownerCharacterId = this.char.id
+        this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
+          casterId: action.caster.id,
+          targetId: action.target.id,
+          skill: action.skill,
+        })
+        this.actions.push(action)
       }
     })
     this.mainEnemy.currentSkills.forEach((skill) => {
-      if (skill.actionRequired) {
-        this.skillController.excute(this.mainEnemy, skill, this.char)
+      if (skill.actionRequired && this.char.currentHealth > 0) {
+        const action = this.skillController.excute(
+          this.mainEnemy,
+          skill,
+          this.char
+        )
+        action.ownerCharacterId = this.char.id
+        this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
+          casterId: action.caster.id,
+          targetId: action.target.id,
+          skill: action.skill,
+        })
+        this.actions.push(action)
       }
     })
     const requiredActons: TickAble[] = []

@@ -85,6 +85,7 @@ export const game = {
   },
   getActor(id: string): IActor | null {
     //目前实现只有1对1战斗,只有2个单位
+    // console.log(id,this.character.id)
     if (this.character && this.character.id === id) {
       return this.character
     } else if (this.scene.mainEnemy.value && this.scene.mainEnemy.value.id === id) {
