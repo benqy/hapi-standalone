@@ -11,16 +11,16 @@ import { SceneRender } from './render'
 import { GameSound } from './sound'
 export * from './game'
 import { lang } from '../i18n'
+import type { IActor } from '@hapi/common/entities/interface'
 const F = CONSTANTS.F
 
 export const game = {
   scene: new Scene(),
-  sound:new GameSound(),
+  sound: new GameSound(),
   startCombatRender() {
-    if(this.render){
+    if (this.render) {
       this.render.clear()
-    }
-    else{
+    } else {
       this.render = new SceneRender()
     }
     this.render.renderMap(this.scene.combatMap.mapType)
@@ -57,9 +57,7 @@ export const game = {
       // console.log(JSON.stringify(state), 123)
     })
     room.onMessage('*', () => {})
-    room.onMessage(F.G_Character_Data, (character) =>
-      actions.G_Character_Data(character)
-    )
+    room.onMessage(F.G_Character_Data, (character) => actions.G_Character_Data(character))
     room.onMessage(F.G_Start_Combat, (data) => actions.G_Start_Combat(data))
     room.onMessage(F.G_Add_Item, (data) => actions.G_Add_Item(data))
     room.onMessage(F.G_EXCUTE_SKILL, (data) => actions.G_EXCUTE_SKILL(data))
@@ -76,13 +74,22 @@ export const game = {
     this.room?.send(F.G_Start_Combat, mapId)
     // }
   },
-  lang(text:string):string{
+  lang(text: string): string {
     const zhcn = lang.zhcn as any
     const keys = text.split('.')
     let word = zhcn
-    keys.forEach(key => {
+    keys.forEach((key) => {
       word = word[key]
     })
     return word ?? text
+  },
+  getActor(id: string): IActor | null {
+    //目前实现只有1对1战斗,只有2个单位
+    if (this.character && this.character.id === id) {
+      return this.character
+    } else if (this.scene.mainEnemy.value && this.scene.mainEnemy.value.id === id) {
+      return this.scene.mainEnemy.value
+    }
+    return null
   }
 }

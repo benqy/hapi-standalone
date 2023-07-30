@@ -28,12 +28,13 @@ export const actions = {
       console.log('start combat', res.actionData)
       game.startCombatRender()
       game.scene.inCombat.value = true
+      game.sound.play('combat')
     }
   },
   [F.G_SPANW_ENEMY]: (data: any) => {
-    game.render.entityRender.renderMainEnemy(data)
     game.scene.mainEnemy.value = data
     game.scene.mainEnemy.value.renderData = new RenderData()
+    game.render.entityRender.renderMainEnemy(data)
   },
   [F.G_Add_Item]: (items: Item[]) => {
     game.c.inventory.addItem(game.character.inventory, items[0])
