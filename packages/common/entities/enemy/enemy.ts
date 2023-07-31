@@ -20,12 +20,12 @@ export class Enemy extends O implements IActor {
   currentSkills: Skill[] = []
   renderData?:RenderData
   affixProertys = new AffixProertys()
-  
+
   rarity: Rarity = Rarity.common
-  attack: number = 5
-  evasion = 67
+  // attack: number = 5
+  // evasion = 67
   experience = 20
-  armour = 22
+  // armour = 22
   
   //掉落稀有度倍率
   get iir() {

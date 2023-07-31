@@ -17,22 +17,21 @@ export function calcDamage(skill: Skill, source: IActor) {
   } else if (source instanceof Enemy) {
     ap = c.enemy.getProperties(source)
   }
-  const attack =
+  let attack =
     c.affix.getProerty(ap, PathKey.damage_add) *
     (1 + c.affix.getProerty(ap, PathKey.damage_increase) / 100) *
     (1 + c.affix.getProerty(ap, PathKey.damage_more) / 100) *
     skill.percent
+  attack = Math.floor(attack)
   return attack
 }
 
 export function calcArmour(source: IActor) {
   const c = getController()
   let armour = 0
-  if (source instanceof Enemy) {
-    armour = source.armour
-  }
   armour += c.affix.getProerty(source.affixProertys, PathKey.armour_add)
   armour *=
     1 + c.affix.getProerty(source.affixProertys, PathKey.armour_increase)
+  // console.log(source, armour)
   return armour
 }

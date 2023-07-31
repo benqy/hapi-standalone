@@ -3,6 +3,7 @@ import { AffixSchema } from '../types'
 import { randomBetween } from '../util'
 import { IController } from '../interfaces'
 import { AffixProertys } from '../entities/modifiers/affix-property'
+import { PathKey } from '../enum'
 
 export class AffixController implements IController {
   constructor() {}
@@ -24,6 +25,10 @@ export class AffixController implements IController {
 
   getProerty(affixProertys: AffixProertys, key: string) {
     return affixProertys.properties.get(key) ?? 0
+  }
+
+  setProerty(affixProertys: AffixProertys, key: PathKey, value: number) {
+    affixProertys.properties.set(key, value)
   }
 
   add(bp: AffixProertys, affixValue: AffixValue): AffixProertys
