@@ -1,4 +1,4 @@
-import { Application, Container, Sprite, Assets, Graphics, SimplePlane } from 'pixi.js'
+import { Application, Sprite, Assets, SimplePlane } from 'pixi.js'
 import { GodrayFilter } from '@pixi/filter-godray'
 
 export class MapRender {

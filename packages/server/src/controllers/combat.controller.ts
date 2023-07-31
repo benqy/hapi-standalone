@@ -7,6 +7,7 @@ import { lootController } from '@hapi/common/controller'
 import { cache } from '../db/cache'
 import { randomBetween } from '@hapi/common/util'
 import { SkillController } from './skill'
+import { IActor } from '@hapi/common/entities/interface'
 const F = CONSTANTS.F
 export class CombatController implements TickAble {
   constructor(public gameRoomId: string) {
@@ -23,9 +24,15 @@ export class CombatController implements TickAble {
   actionRequired = false
   char: Character
   map: GameMap
+  
+  actions: TickAble[] = []
 
   get gameRoom() {
     return cache.getGameRoom(this.gameRoomId)
+  }
+
+  get isCharDeath(){
+    return this.char.currentHealth <=0
   }
 
   stop() {
@@ -47,17 +54,11 @@ export class CombatController implements TickAble {
       } else {
         this.inCombat = true
         this.char = character
-        // this.spawnEnemy()
-        // this.enemys.push(this.enemyFactory.create({level: 1, baseName: '无名1', rarity: Rarity.common}))
-        // this.enemys.push(this.enemyFactory.create({level: 2, baseName: '无名2', rarity: Rarity.common}))
-        // this.enemys.push(this.enemyFactory.create({level: 3, baseName: '无名3', rarity: Rarity.common}))
         return {
           code: 200,
           msg: 'ok',
           action: F.G_Start_Combat,
           actionData: {
-            // mainEnemy: this.mainEnemy,
-            // enemys: this.enemys,
             map: this.map,
           },
         }
@@ -74,14 +75,14 @@ export class CombatController implements TickAble {
 
   doTick(deltaTime: number) {
     const c = getController()
-    if (this.mainEnemy) {
+    if (this.mainEnemy || this.isCharDeath) {
       c.character.doTick(deltaTime)
-      this.char.currentSkills.forEach((skill) => {
+      const skills = [].concat(
+        this.char.currentSkills,
+        this.mainEnemy.currentSkills
+      )
+      skills.forEach((skill) => {
         this.skillController.doTick(deltaTime, skill)
-      })
-      this.mainEnemy.currentSkills.forEach((skill) => {
-        this.skillController.doTick(deltaTime, skill)
-        // c.skill.excute(this.mainEnemy,skill,this.char)
       })
       this.actions.forEach((action) => {
         action.doTick(deltaTime)
@@ -95,41 +96,37 @@ export class CombatController implements TickAble {
     }
   }
 
-  actions: TickAble[] = []
+  excuteSkill(caster: IActor, skill: Skill, target: IActor) {
+    const action = this.skillController.excute(
+      caster,
+      skill,
+      target,
+    )
+    action.ownerCharacterId = this.char.id
+    this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
+      casterId: action.caster.id,
+      targetId: action.target.id,
+      skill: action.skill,
+    })
+    this.actions.push(action)
+  }
 
   doAction(deltaTime: number) {
     const c = getController()
     c.character.doTick(deltaTime)
     this.char.currentSkills.forEach((skill) => {
       if (skill.actionRequired && this.mainEnemy.currentHealth > 0) {
-        const action = this.skillController.excute(
-          this.char,
-          skill,
-          this.mainEnemy
-        )
-        action.ownerCharacterId = this.char.id
-        this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
-          casterId: action.caster.id,
-          targetId: action.target.id,
-          skill: action.skill,
-        })
-        this.actions.push(action)
+        this.excuteSkill(this.char, skill, this.mainEnemy)
+      }else {
+        skill.actionRequired = false
       }
     })
     this.mainEnemy.currentSkills.forEach((skill) => {
-      if (skill.actionRequired && this.char.currentHealth > 0) {
-        const action = this.skillController.excute(
-          this.mainEnemy,
-          skill,
-          this.char
-        )
-        action.ownerCharacterId = this.char.id
-        this.gameRoom.sendToOwner(F.G_EXCUTE_SKILL, {
-          casterId: action.caster.id,
-          targetId: action.target.id,
-          skill: action.skill,
-        })
-        this.actions.push(action)
+      if (skill.actionRequired && !this.isCharDeath) {
+        this.excuteSkill(this.mainEnemy, skill, this.char)
+      }
+      else {
+        skill.actionRequired = false
       }
     })
     const requiredActons: TickAble[] = []
@@ -147,6 +144,8 @@ export class CombatController implements TickAble {
     })
     if (this.mainEnemy.currentHealth <= 0) {
       this.loot(this.mainEnemy)
+      this.mainEnemy = null
+    } else if(this.isCharDeath){
       this.mainEnemy = null
     }
   }
