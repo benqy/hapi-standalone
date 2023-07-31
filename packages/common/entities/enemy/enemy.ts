@@ -11,21 +11,21 @@ export class Enemy extends O implements IActor {
   constructor() {
     super()
   }
+  name: string = 'BUG'
+  breed: Breed
+  maxHealth: number = 22
+  currentHealth: number = 22
+  level: number = 1
+  media = `${IMG_DIR}/enemy/bug.webp`
+  currentSkills: Skill[] = []
+  renderData?:RenderData
+  affixProertys = new AffixProertys()
+  
   rarity: Rarity = Rarity.common
   attack: number = 5
   evasion = 67
-  maxHealth: number = 22
   experience = 20
   armour = 22
-  level: number = 1
-  name: string = 'BUG'
-  currentHealth: number = 22
-  isDeath = false
-  breed: Breed
-  affixProertys = new AffixProertys()
-  media = `${IMG_DIR}/enemy/bug.webp`
-  renderData?:RenderData
-  currentSkills: Skill[] = []
   
   //掉落稀有度倍率
   get iir() {

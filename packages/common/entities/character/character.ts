@@ -14,17 +14,16 @@ export class Character extends O implements IActor {
   }
 
   name = 'BUG'
-  maxHealth = 100
   breed: Breed = new PlayerBreed()
+  maxHealth = 100
   currentHealth: number = 100
-  media: string = `${IMG_DIR}/enemy/100.webp`
-  inventory = new Intenvory(168)
   level = 1
-  renderData?:RenderData
-  isDeath = false
-  //角色基础战斗数据
-  affixProertys = new AffixProertys()
-  equipped: Equipped = new Equipped()
-
+  media: string = `${IMG_DIR}/enemy/100.webp`
   currentSkills: Skill[] = []
+  renderData?:RenderData
+  affixProertys = new AffixProertys()
+  
+  inventory = new Intenvory(168)
+  //角色基础战斗数据
+  equipped: Equipped = new Equipped()
 }

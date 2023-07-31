@@ -2,19 +2,20 @@ import { Breed } from "../components";
 import { RenderData } from "../data/render-data";
 import { Category } from "../types"
 import { AffixProertys } from "./modifiers/affix-property";
+import { Skill } from "./skill";
 
 //每帧会进行行动的单位
 export interface IActor {
   id: string,
-  maxHealth: number,
   name: string,
+  breed:Breed,
+  maxHealth: number,
   currentHealth: number,
   level:number,
-  affixProertys: AffixProertys,
   media: string,
-  breed:Breed,
-  isDeath: boolean,
+  currentSkills: Skill[]
   renderData?:RenderData,
+  affixProertys: AffixProertys,
   // doTick(): void
   // doAction(): void
 }
