@@ -18,7 +18,7 @@ export const actions = {
   [F.G_Character_Data]: (character: Character) => {
     game.player.character = character
     game.player.character.renderData = new RenderData()
-    game.startCombat('2')
+    game.startCombat('1')
   },
   [F.G_Start_Combat]: (res: IRes) => {
     if (res.code !== 200) {

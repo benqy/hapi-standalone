@@ -6,6 +6,7 @@ import { getArmourDR } from '@hapi/common/util'
 import { getController } from '@hapi/common/core'
 import { GameRoom } from '../rooms/game.room'
 import { F } from '@hapi/common/constants'
+import { PathKey } from '@hapi/common/enum'
 
 export class SkillAction implements TickAble {
   constructor(public skill: Skill) {}
@@ -26,9 +27,9 @@ export class SkillAction implements TickAble {
       ap = this.caster.affixProertys
     }
     const attack =
-      c.affix.getProerty(ap, 'damage.add') *
-      (1 + c.affix.getProerty(ap, 'damage.increase') / 100) *
-      (1 + c.affix.getProerty(ap, 'damage.more') / 100) *
+      c.affix.getProerty(ap, PathKey.damage_add) *
+      (1 + c.affix.getProerty(ap, PathKey.damage_increase) / 100) *
+      (1 + c.affix.getProerty(ap, PathKey.damage_more) / 100) *
       this.skill.percent
     return attack
   }
