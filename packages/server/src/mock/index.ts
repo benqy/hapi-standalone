@@ -24,8 +24,8 @@ export const getCharacter = () => {
   //   getController().inventory.addItem(character.inventory, equipment[0])
   // })
   character.currentSkills.push(new FireBallSkill())
-  character.maxHealth = 1000
-  character.currentHealth = 1000
+  character.maxHealth = 50
+  character.currentHealth = 50
   character.affixProertys.properties.set('damage.add', 10)
 
   // console.log(character.equipped.affixProertys,character.affixProertys)

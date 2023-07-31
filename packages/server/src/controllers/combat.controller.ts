@@ -39,7 +39,6 @@ export class CombatController implements TickAble {
     this.inCombat = false
     this.mainEnemy = null
     this.enemys = []
-    this.char = null
   }
 
   start(character: Character): IRes {
@@ -75,7 +74,10 @@ export class CombatController implements TickAble {
 
   doTick(deltaTime: number) {
     const c = getController()
-    if (this.mainEnemy || this.isCharDeath) {
+    if(this.isCharDeath){
+      this.reStart()
+    }
+    else if (this.mainEnemy) {
       c.character.doTick(deltaTime)
       const skills = [].concat(
         this.char.currentSkills,
@@ -91,6 +93,7 @@ export class CombatController implements TickAble {
     } else {
       this.spawnTimer += deltaTime
       if (this.spawnTimer >= this.spawnTime) {
+        console.log('respawn')
         this.spawnEnemy()
       }
     }
@@ -158,6 +161,12 @@ export class CombatController implements TickAble {
     console.log(
       `${this.mainEnemy.breed.name} ${this.mainEnemy.name} 已死亡, 获取战利品`
     )
+  }
+
+  reStart(){
+    this.char.currentHealth = this.char.maxHealth
+    this.stop()
+    this.start(this.char)
   }
 
   spawnEnemy() {
