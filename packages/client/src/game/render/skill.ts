@@ -3,7 +3,6 @@ import { Skill } from '@hapi/common/entities'
 import type { IActor } from '@hapi/common/entities/interface'
 
 import { Application, Spritesheet, BaseTexture, AnimatedSprite } from 'pixi.js'
-import { game } from '../game'
 // import { fire16 } from './sheet/fire16'
 import { boltBlue } from './sheet/bolt-blue'
 
@@ -35,7 +34,7 @@ export class SkillRender {
     this.app.stage.addChild(anim)
     const distance = target.renderData.y - caster.renderData.y
     const speed = distance / skill.actionTime
-    console.log(distance, speed)
+    // console.log(distance, speed)
     const listener = () => {
       anim.y += speed * this.app.ticker.deltaMS
       if (Math.abs(target.renderData.y - anim.y) <= 60) {

@@ -4,6 +4,7 @@ import type { IActor } from '@hapi/common/entities/interface'
 import { Application, Container, Sprite, Graphics, Text } from 'pixi.js'
 import { waterShader } from './shader'
 import { RenderData } from '@hapi/common/data/render-data'
+import {ShockwaveFilter} from '@pixi/filter-shockwave'
 import { game } from '../game'
 
 export class EntityRender {
@@ -106,6 +107,15 @@ export class EntityRender {
     this.app.stage.addChild(container)
     let time = 0
     let shockTime = 0
+    const hitFilter = new ShockwaveFilter(
+      [spriteSize / 2, spriteSize / 2],
+      {
+        radius:5,
+        speed: 20,
+        amplitude :5
+      },
+      0
+    )
     this.app.ticker.add(() => {
       //计算血量
       const currentHealth = Math.floor((actor.currentHealth / actor.maxHealth) * 120)
@@ -121,18 +131,23 @@ export class EntityRender {
           actor.renderData.takeHit = false
           shockTime = 0
           damageText.text = ''
+          actorSprite.filters= null
+          hitFilter.time = 0
         } else {
           //计算震动
           shockTime += 1 / 60
-          const offset = Math.cos(shockTime * 15) * 3
-          //伤害数字
-          // console.log(actorSprite,actorSprite.transform)
-          if (actorSprite && actorSprite.transform) {
-            actorSprite.transform.position.x = spriteOffset + offset
-            actorSprite.transform.position.y = spriteOffset + offset
-          }
-          damageText.transform.position.x = spriteOffset + offset * 2
-          damageText.transform.position.y = spriteOffset + offset * 2
+          if(!actorSprite.filters)
+            actorSprite.filters= [hitFilter]
+          hitFilter.time += 0.01
+          // const offset = Math.cos(shockTime * 15) * 3
+          // //伤害数字
+          // // console.log(actorSprite,actorSprite.transform)
+          // if (actorSprite && actorSprite.transform) {
+          //   actorSprite.transform.position.x = spriteOffset + offset
+          //   actorSprite.transform.position.y = spriteOffset + offset
+          // }
+          damageText.transform.position.x = spriteOffset - shockTime * 25
+          damageText.transform.position.y = spriteOffset - shockTime * 25
         }
       }
 
